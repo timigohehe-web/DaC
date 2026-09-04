@@ -1,0 +1,51 @@
+name: Build LaTeX PDFs
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "latex/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find all .tex files
+        id: find_tex
+        run: |
+          # 找到 latex/ 下所有 .tex 文件
+          TEX_FILES=$(find latex/ -name '*.tex' -type f)
+          echo "Found .tex files:"
+          echo "$TEX_FILES"
+          echo "tex_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$TEX_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Compile all LaTeX documents
+        uses: xu-cheng/latex-action@v3
+        with:
+          # 用 glob 一次找到所有 tex 文件
+          root_file: "latex/**/*.tex"
+          glob_root_file: true
+          compiler: xelatex
+          args: -pdf -file-line-error -interaction=nonstopmode -shell-escape
+          # 编译两次以解决交叉引用
+          extra_system_packages: "fontspec ctex"
+
+      - name: Collect PDFs
+        run: |
+          mkdir -p output
+          find latex/ -name '*.pdf' -exec cp {} output/ \;
+          echo "=== Compiled PDFs ==="
+          ls -lh output/
+
+      - name: Upload PDFs as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdfs
+          path: output/*.pdf
+          retention-days: 90

@@ -1,0 +1,26 @@
+# LaTeX 编译产物
+*.aux
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+
+# 本地编译的 PDF（线上编译的走 Artifacts）
+# 如果你想本地 PDF 也提交，注释掉下面这行
+# *.pdf
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
