@@ -1,0 +1,195 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\newcommand{\cnum}[1]{\ding{\numexpr171+#1\relax}}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[R]{\thepage}%
+}
+
+\setlist[enumerate]{itemsep=1.1em, parsep=0pt, topsep=0.5em, leftmargin=2.4em}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\linespread{1.15}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\extrarowheight}{2pt}
+\setlength{\lineskiplimit}{3pt}
+\setlength{\lineskip}{4pt plus 2pt}
+
+% 选项排版：ABCD 固定列位，按内容长度选 4 列 / 2 列 / 1 列
+\newcommand{\optfour}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{\quad}X@{\quad}X@{\quad}X@{}}#1&#2&#3&#4\end{tabularx}}
+\newcommand{\opttwo}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{\quad}X@{}}#1&#2\\#3&#4\end{tabularx}}
+\newcommand{\optone}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{}}#1\\#2\\#3\\#4\end{tabularx}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries 概统第二讲《一维随机变量及其分布》基础诊断卷（30 题）}
+\end{center}
+
+\subsection*{一、客观题（1--20 题）}
+
+\begin{enumerate}[label=\arabic*.]
+
+\item（帕概-B-1.b-T7 / 2010 数一三）设随机变量 $X$ 的分布函数为：
+\[
+F(x) = \begin{cases} 0, & x < 0, \\ \dfrac{1}{2}, & 0 \leqslant x < 1, \\ 1 - \mathrm{e}^{-x}, & x \geqslant 1, \end{cases}
+\]
+则单点概率 $P\{X = 1\} = (\quad)$
+\optfour{(A) $0$}{(B) $\dfrac{1}{2}$}{(C) $\dfrac{1}{2} - \mathrm{e}^{-1}$}{(D) $1 - \mathrm{e}^{-1}$}
+
+\item（帕概-B-3.a(1)-T5 / 1998 数三）设 $F_{1}(x)$ 与 $F_{2}(x)$ 分别为随机变量 $X_{1}$ 与 $X_{2}$ 的分布函数。为使函数 $F(x) = aF_{1}(x) - bF_{2}(x)$ 是某一随机变量的分布函数，在下列给定的各组数值中应取（\quad）
+\opttwo{(A) $a = \dfrac{3}{5},\ b = -\dfrac{2}{5}$}{(B) $a = \dfrac{2}{3},\ b = \dfrac{2}{3}$}{(C) $a = -\dfrac{1}{2},\ b = \dfrac{3}{2}$}{(D) $a = \dfrac{1}{2},\ b = -\dfrac{3}{2}$}
+
+\item（李林880-基-17-选3）设 $X$ 是随机变量，对任意实数 $x$，单点概率 $P\{X = x\} = 0$ 的充分必要条件是（\quad）
+\opttwo{(A) $X$ 的概率密度 $f(x)$ 是连续函数}{(B) $X$ 的分布函数 $F(x)$ 是连续函数}{(C) $X$ 为连续型随机变量}{(D) $X$ 是非离散型随机变量}
+
+\item（帕概-B-3.a(3)-T7 / 2011 数一三）设 $F_{1}(x)$ 与 $F_{2}(x)$ 为两个分布函数，其相应的概率密度 $f_{1}(x)$ 与 $f_{2}(x)$ 是连续函数，则必为概率密度的是（\quad）
+\opttwo{(A) $f_{1}(x) f_{2}(x)$}{(B) $2 f_{2}(x) F_{1}(x)$}{(C) $f_{1}(x) F_{2}(x)$}{(D) $f_{1}(x) F_{2}(x) + f_{2}(x) F_{1}(x)$}
+
+\item（帕概-B-3.a(2)-例2.1 / 姜强化）设随机变量 $X$ 的分布函数为 $F(x)$，$a, b$ 为任意非零常数，则下列函数中\textbf{一定不是}分布函数的是（\quad）
+\optfour{(A) $F(ax + b)$}{(B) $F(ax^{2} + b)$}{(C) $F(ax^{3} + b)$}{(D) $1 - F(-x)$}
+
+\item（张千-基-概2-T2）设随机变量 $X \sim B\left(n, \dfrac{1}{3}\right)$，$Y \sim B\left(2n, \dfrac{1}{3}\right)$。若 $P\{X \geqslant 1\} = \dfrac{5}{9}$，则 $P\{Y \geqslant 1\} = (\quad)$
+\optfour{(A) $\dfrac{5}{27}$}{(B) $\dfrac{16}{81}$}{(C) $\dfrac{64}{81}$}{(D) $\dfrac{65}{81}$}
+
+\item（帕概-B-3.c-T9 / 2025 数一三）设 $X_{1}, X_{2}, \dots, X_{20}$ 是来自两点分布总体 $B(1, 0.1)$ 的简单随机样本，令统计量 $T = \sum\limits_{i=1}^{20} X_{i}$。利用泊松分布近似表示二项分布的方法，可得概率 $P\{T \leqslant 1\} \approx (\quad)$
+\optfour{(A) $\dfrac{1}{\mathrm{e}^{2}}$}{(B) $\dfrac{2}{\mathrm{e}^{2}}$}{(C) $\dfrac{3}{\mathrm{e}^{2}}$}{(D) $\dfrac{4}{\mathrm{e}^{2}}$}
+
+\item（帕概-B-3.e-例2.14 / 姜强化）设随机变量 $X$ 服从几何分布 $X \sim G(p)\ (0 < p < 1)$，$m, n$ 为任意正整数，则条件概率 $P\{X > m + n \mid X > m\}$（\quad）
+\opttwo{(A) 与 $m$ 无关，与 $n$ 有关，且随 $n$ 的增大而减少}{(B) 与 $m$ 无关，与 $n$ 有关，且随 $n$ 的增大而增大}{(C) 与 $n$ 无关，与 $m$ 有关，且随 $m$ 的增大而减少}{(D) 与 $n$ 无关，与 $m$ 有关，且随 $m$ 的增大而增大}
+
+\item（张千-强-概2-T1）设 $X$ 是随机变量，$s, t$ 是正数，$m, n$ 是正整数。考察下列命题：\\
+\cnum{1} 若 $X \sim G(p)$，则 $P\{X > m + n \mid X > m\}$ 与 $m$ 无关；\\
+\cnum{2} 若 $X$ 的分布律为 $P\{X = k\} = \dfrac{1}{k(k + 1)}\ (k = 1, 2, \dots)$，则 $P\{X \geqslant 2n \mid X \geqslant n\}$ 与 $n$ 无关；\\
+\cnum{3} 若 $X \sim E(\lambda)$，则 $P\{X > s + t \mid X > s\}$ 与 $s$ 无关；\\
+\cnum{4} 若 $X$ 的概率密度为 $f(x) = \begin{cases} \dfrac{1}{x^{2}}, & x > 1, \\ 0, & \text{其他}, \end{cases}$ 则当 $t > 1$ 时，$P\{X \geqslant 2t \mid X \geqslant t\}$ 与 $t$ 无关。\\
+上述结论中正确的个数为（\quad）
+\optfour{(A) 1}{(B) 2}{(C) 3}{(D) 4}
+
+\item（帕概-B-2.b-T14 / 2006 数一三）设随机变量 $X$ 服从正态分布 $N(\mu_{1}, \sigma_{1}^{2})$，随机变量 $Y$ 服从正态分布 $N(\mu_{2}, \sigma_{2}^{2})$，且满足：
+\[
+P\{|X - \mu_{1}| < 1\} > P\{|Y - \mu_{2}| < 1\},
+\]
+则必有（\quad）
+\optfour{(A) $\sigma_{1} < \sigma_{2}$}{(B) $\sigma_{1} > \sigma_{2}$}{(C) $\mu_{1} < \mu_{2}$}{(D) $\mu_{1} > \mu_{2}$}
+
+\item（帕概-B-2.b-T7 / 2013 数一三）设 $X_{1}, X_{2}, X_{3}$ 是随机变量，且 $X_{1} \sim N(0, 1)$，$X_{2} \sim N(0, 2^{2})$，$X_{3} \sim N(5, 3^{2})$。记概率 $p_{i} = P\{-2 \leqslant X_{i} \leqslant 2\}\ (i = 1, 2, 3)$，则（\quad）
+\optfour{(A) $p_{1} > p_{2} > p_{3}$}{(B) $p_{2} > p_{1} > p_{3}$}{(C) $p_{3} > p_{1} > p_{2}$}{(D) $p_{1} > p_{3} > p_{2}$}
+
+\item（帕概-B-2.b-T7 / 2016 数一）设随机变量 $X \sim N(\mu, \sigma^{2})\ (\sigma > 0)$，记概率 $p = P\{X \leqslant \mu + \sigma^{2}\}$，则（\quad）
+\opttwo{(A) $p$ 随着 $\mu$ 的增加而增加}{(B) $p$ 随着 $\sigma$ 的增加而增加}{(C) $p$ 随着 $\mu$ 的增加而减少}{(D) $p$ 随着 $\sigma$ 的增加而减少}
+
+\item（帕概-B-2.b-例2.10 / 姜强化）设随机变量 $X \sim N(\mu, \sigma^{2})$，已知 $\mu < 0$，$F(x)$ 为其分布函数，$a$ 为任意常数，则必有（\quad）
+\opttwo{(A) $F(a) + F(-a) > 1$}{(B) $F(a) + F(-a) = 1$}{(C) $F(a) + F(-a) < 1$}{(D) $F(\mu + a) + F(\mu - a) = \dfrac{1}{2}$}
+
+\item（帕概-B-2.c-T14 / 2004 数一三）设随机变量 $X$ 服从标准正态分布 $N(0, 1)$，对给定的 $\alpha \in (0, 1)$，数 $u_{\alpha}$ 满足 $P\{X > u_{\alpha}\} = \alpha$。若 $P\{|X| < x\} = \alpha$，则 $x$ 等于（\quad）
+\optfour{(A) $u_{\frac{\alpha}{2}}$}{(B) $u_{1 - \frac{\alpha}{2}}$}{(C) $u_{\frac{1-\alpha}{2}}$}{(D) $u_{1 - \alpha}$}
+
+\item（帕概-B-4.b-例2.15 / 姜强化）设随机变量 $X \sim E(\lambda)\ (\lambda > 0)$，令截断变量 $Y = \min\{X, 2\}$，则 $Y$ 的分布函数 $F_{Y}(y)$（\quad）
+\opttwo{(A) 为连续函数}{(B) 为阶梯函数}{(C) 至少有两个间断点}{(D) 恰好有一个间断点}
+
+\item（李林880-综-17-填1）设随机变量 $X \sim N(\mu, \sigma^{2})\ (\sigma > 0)$，记 $(x_{0}, y_{0})$ 为其分布函数曲线 $y = F(x)$ 的拐点坐标，则 $x_{0} = $ \underline{\hspace{5em}}，$y_{0} = $ \underline{\hspace{5em}}。
+
+\item（帕概-B-2.c-T5 / 2002 数一）设随机变量 $X$ 服从正态分布 $N(\mu, \sigma^{2})\ (\sigma > 0)$，且关于 $y$ 的二次方程 $y^{2} + 4y + X = 0$ 无实根的概率为 $\dfrac{1}{2}$，则均值参数 $\mu = $ \underline{\hspace{5em}}。
+
+\item（帕概-B-2.c-T7 / 2018 数一三）设随机变量 $X$ 的概率密度 $f(x)$ 满足 $f(1 + x) = f(1 - x)$，且已知 $\int_{0}^{2} f(x)\,\mathrm{d}x = 0.6$，则概率 $P\{X < 0\} = $ \underline{\hspace{5em}}。
+
+\item（李林880-综-17-填6）设随机变量 $X \sim N(0, \sigma^{2})$，若 $X$ 在区间 $(a, b)$ 内取值的概率最大，其中 $0 < a < b$，则方差参数 $\sigma^{2} = $ \underline{\hspace{5em}}。
+
+\item（帕概-B-4.c-T14 / 2019 数一三）设随机变量 $X$ 的概率密度为：
+\[
+f(x) = \begin{cases} \dfrac{x}{2}, & 0 < x < 2, \\ 0, & \text{其他}, \end{cases}
+\]
+$F(x)$ 为 $X$ 的分布函数，$E(X)$ 为 $X$ 的数学期望，则概率 $P\{F(X) > E(X) - 1\} = $ \underline{\hspace{5em}}。
+
+\end{enumerate}
+
+\subsection*{二、解答题（21--30 题）}
+
+\setlist[enumerate]{itemsep=1.8em, parsep=0pt, topsep=0.5em, leftmargin=2.4em}
+
+\begin{enumerate}[label=\arabic*.,resume]
+
+\item（帕概-B-1.a(1)-1990 数一）已知随机变量 $X$ 的概率密度为拉普拉斯分布：
+\[
+f(x) = \frac{1}{2} \mathrm{e}^{-|x|}, \quad -\infty < x < +\infty.
+\]
+(1) 求随机变量 $X$ 的分布函数 $F(x)$；\\
+(2) 验证 $F(x)$ 在 $x = 0$ 处的连续性，并验证 $\lim\limits_{x \to -\infty} F(x) = 0$ 与 $\lim\limits_{x \to +\infty} F(x) = 1$。
+
+\item（李林880-基-17-大7）设随机变量 $X$ 服从参数为 $\lambda\ (\lambda > 0)$ 的指数分布 $X \sim E(\lambda)$，记随机变量：
+\[
+Y = \max\left(X, \frac{1}{X}\right).
+\]
+(1) 分析随机变量 $Y$ 的可能取值范围；\\
+(2) 求 $Y$ 的分布函数 $F_{Y}(y)$（写出完整的全分段解析式）；\\
+(3) 判定 $F_{Y}(y)$ 在全实数轴上的连续性，并说明 $Y$ 是否为连续型随机变量。
+
+\item（帕概-B-1.a(2)-1997 数三 / 张千-强-概2-T8）假设随机变量 $X$ 的绝对值不大于 $1$；已知：
+\[
+P\{X = -1\} = \frac{1}{8}, \quad P\{X = 1\} = \frac{1}{4};
+\]
+在事件 $\{-1 < X < 1\}$ 出现的条件下，$X$ 在 $(-1, 1)$ 内的任一子区间上取值的条件概率与该子区间长度成正比。\\
+(1) 试求随机变量 $X$ 的分布函数 $F(x) = P\{X \leqslant x\}\ (-\infty < x < +\infty)$；\\
+(2) 指出 $F(x)$ 的所有间断点，并计算每个间断点处的跳跃度。
+
+\item（李林880-综-17-大2）设随机变量 $X$ 的概率密度为半正态半指数分段形式：
+\[
+f(x) = \begin{cases} \dfrac{1}{\sqrt{2\pi}} \mathrm{e}^{-\frac{x^{2}}{2}}, & x \leqslant 0, \\ \mathrm{e}^{-2x}, & x > 0. \end{cases}
+\]
+求随机变量 $Y = X^{2}$ 的分布函数 $F_{Y}(y)$ 和概率密度 $f_{Y}(y)$（可用标准正态分布密度 $\varphi(x)$ 和分布函数 $\Phi(x)$ 表示）。
+
+\item（帕概-B-2.b-2024 数一）设随机变量 $X, Y$ 相互独立，且 $X$ 服从正态分布 $N(0, 2)$，$Y$ 服从正态分布 $N(-2, 2)$。\\
+(1) 求随机变量 $U = 2X + Y$ 与 $V = X - Y$ 各自服从的概率分布；\\
+(2) 若 $P\{2X + Y < a\} = P\{X > Y\}$，求常数 $a$ 的值。
+
+\item（帕概-B-4.a-2006 数一三）设随机变量 $X$ 的概率密度为：
+\[
+f_{X}(x) = \begin{cases} \dfrac{1}{2}, & -1 < x < 0, \\ \dfrac{1}{4}, & 0 \leqslant x < 2, \\ 0, & \text{其他}. \end{cases}
+\]
+令 $Y = X^{2}$，$F(x, y)$ 为二维随机变量 $(X, Y)$ 的联合分布函数。\\
+(1) 求 $Y$ 的概率密度 $f_{Y}(y)$；\\
+(2) 求联合分布函数值 $F\left(-\dfrac{1}{2}, 4\right) = P\left\{X \leqslant -\dfrac{1}{2}, Y \leqslant 4\right\}$。
+
+\item（帕概-B-4.b-2013 数一）设随机变量 $X$ 的概率密度为：
+\[
+f(x) = \begin{cases} \dfrac{1}{9} x^{2}, & 0 < x < 3, \\ 0, & \text{其他}. \end{cases}
+\]
+令随机变量
+\[
+Y = \begin{cases} 2, & X \leqslant 1, \\ X, & 1 < X < 2, \\ 1, & X \geqslant 2. \end{cases}
+\]
+(1) 求随机变量 $Y$ 的分布函数 $F_{Y}(y)$；\\
+(2) 求概率 $P\{X \leqslant Y\}$。
+
+\item（帕概-B-4.a-2021 数一三）在区间 $(0, 2)$ 上随机取一点，将该区间分成两段，较短一段的长度记为 $X$，较长一段的长度记为 $Y$，令随机变量 $Z = \dfrac{Y}{X}$。\\
+(1) 求随机变量 $X$ 的概率密度 $f_{X}(x)$；\\
+(2) 求随机变量 $Z$ 的概率密度 $f_{Z}(z)$；\\
+(3) 求数学期望 $E\left(\dfrac{X}{Y}\right)$。
+
+\item（张千-强-概3-T1）设随机变量 $X$ 服从参数为 $1$ 的指数分布 $X \sim E(1)$，记 $[x]$ 为不超过 $x$ 的最大整数（高斯取整函数）。令随机变量 $Y = [X + 1]$。\\
+(1) 明确写出随机变量 $Y$ 的可能取值集合；\\
+(2) 求 $Y$ 的分布律 $P\{Y = k\}\ (k = 1, 2, \dots)$；\\
+(3) 指出随机变量 $Y$ 服从哪一种常见离散型概率分布，并写出该分布的具体参数。
+
+\item（张千-强-概2-T9）某人在超市里买了 $10$ 节甲厂生产的电池，又买了 $5$ 节乙厂生产的电池。这两种电池的寿命（以小时计）分别服从参数为 $\dfrac{1}{20}$ 和 $\dfrac{1}{40}$ 的指数分布。他任取一节电池装在相机里。\\
+(1) 求这节被取出的电池寿命 $X$ 的概率密度 $f(x)$；\\
+(2) 若已知该电池已经使用了 $40$ 小时仍有电，求它还可以继续使用 $20$ 小时以上的条件概率 $P\{X > 60 \mid X > 40\}$。
+
+\end{enumerate}
+
+\end{document}
