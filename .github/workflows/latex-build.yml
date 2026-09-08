@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "latex/**"
+      - ".github/workflows/latex-build.yml"
   workflow_dispatch:
 
 jobs:
@@ -28,13 +29,11 @@ jobs:
       - name: Compile all LaTeX documents
         uses: xu-cheng/latex-action@v3
         with:
-          # 用 glob 一次找到所有 tex 文件
           root_file: "latex/**/*.tex"
-          glob_root_file: true
-          compiler: xelatex
-          args: -pdf -file-line-error -interaction=nonstopmode -shell-escape
-          # 编译两次以解决交叉引用
-          extra_system_packages: "fontspec ctex"
+          compiler: latexmk
+          latexmk_use_xelatex: true
+          latexmk_shell_escape: true
+          work_in_root_file_dir: true
 
       - name: Collect PDFs
         run: |
