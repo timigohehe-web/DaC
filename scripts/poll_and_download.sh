@@ -6,19 +6,27 @@ TOKEN="$GITHUB_TOKEN_TIMIGOHEHE"
 API="https://api.github.com/repos/$REPO"
 HEADERS=(-H "Authorization: token $TOKEN" -H "Accept: application/vnd.github+json")
 
-echo "[1/4] 等待 Actions run 出现..."
+HEAD_SHA=$(git rev-parse HEAD)
+echo "当前 commit: $HEAD_SHA"
+
+echo "[1/4] 等待当前 commit 的 Actions run 出现..."
 RUN_ID=""
-for i in $(seq 1 12); do
-  LATEST=$(curl -s "${HEADERS[@]}" "$API/actions/runs?per_page=1&branch=main" \
-    | jq -r '.workflow_runs[0] | "\(.id) \(.status) \(.conclusion) \(.created_at)"')
-  RUN_ID=$(echo "$LATEST" | awk '{print $1}')
-  STATUS=$(echo "$LATEST" | awk '{print $2}')
-  echo "  run=$RUN_ID status=$STATUS"
-  if [ -n "$RUN_ID" ] && [ "$RUN_ID" != "null" ]; then
+for i in $(seq 1 20); do
+  RUN_DATA=$(curl -s "${HEADERS[@]}" "$API/actions/runs?branch=main&per_page=10" \
+    | jq -r --arg sha "$HEAD_SHA" '.workflow_runs[] | select(.head_sha == $sha) | "\(.id) \(.status) \(.conclusion)"' | head -n 1)
+  if [ -n "$RUN_DATA" ]; then
+    RUN_ID=$(echo "$RUN_DATA" | awk '{print $1}')
+    STATUS=$(echo "$RUN_DATA" | awk '{print $2}')
+    echo "  找到 run=$RUN_ID status=$STATUS"
     break
   fi
   sleep 5
 done
+
+if [ -z "$RUN_ID" ]; then
+  echo "❌ 超时未找到 commit $HEAD_SHA 对应的 run"
+  exit 1
+fi
 
 echo "[2/4] 等待 run $RUN_ID 完成..."
 for i in $(seq 1 60); do
