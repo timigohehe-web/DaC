@@ -31,8 +31,8 @@
 
 % 选项排版：ABCD 固定列位，按内容长度选 4 列 / 2 列 / 1 列
 \newcommand{\optfour}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{\quad}X@{\quad}X@{\quad}X@{}}#1&#2&#3&#4\end{tabularx}}
-\newcommand{\opttwo}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{\quad}X@{}}#1&#2\\#3&#4\end{tabularx}}
-\newcommand{\optone}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{}}#1\\#2\\#3\\#4\end{tabularx}}
+\newcommand{\opttwo}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{\quad}X@{}}#1&#2\\[0.8em]#3&#4\end{tabularx}}
+\newcommand{\optone}[4]{\par\begin{tabularx}{\linewidth}{@{}X@{}}#1\\[0.8em]#2\\[0.8em]#3\\[0.8em]#4\end{tabularx}}
 
 \begin{document}
 
@@ -45,7 +45,10 @@
 \begin{enumerate}[label=\arabic*.]
 
 \item（帕概-C-1-例3.1 / 姜基础）下列四个函数中，\textbf{不能}作为二维随机变量联合分布函数的是（\quad）
-\opttwo{(A) $F_{1}(x,y) = \begin{cases} (1 - \mathrm{e}^{-x})(1 - \mathrm{e}^{-y}), & x > 0, y > 0, \\ 0, & \text{其他} \end{cases}$}{(B) $F_{2}(x,y) = \dfrac{1}{\pi^{2}}\left(\dfrac{\pi}{2} + \arctan\dfrac{x}{2}\right)\left(\dfrac{\pi}{2} + \arctan\dfrac{y}{3}\right)$}{(C) $F_{3}(x,y) = \begin{cases} 1, & x + 2y \geqslant 1, \\ 0, & x + 2y < 1 \end{cases}$}{(D) $F_{4}(x,y) = \begin{cases} 1 - 2^{-x} - 2^{-y} + 2^{-x-y}, & x > 0, y > 0, \\ 0, & \text{其他} \end{cases}$}
+\optone{(A) $F_{1}(x,y) = \begin{cases} (1 - \mathrm{e}^{-x})(1 - \mathrm{e}^{-y}), & x > 0, y > 0, \\ 0, & \text{其他} \end{cases}$}%
+{(B) $F_{2}(x,y) = \dfrac{1}{\pi^{2}}\left(\dfrac{\pi}{2} + \arctan\dfrac{x}{2}\right)\left(\dfrac{\pi}{2} + \arctan\dfrac{y}{3}\right)$}%
+{(C) $F_{3}(x,y) = \begin{cases} 1, & x + 2y \geqslant 1, \\ 0, & x + 2y < 1 \end{cases}$}%
+{(D) $F_{4}(x,y) = \begin{cases} 1 - 2^{-x} - 2^{-y} + 2^{-x-y}, & x > 0, y > 0, \\ 0, & \text{其他} \end{cases}$}
 
 \item（李林880-基-18-选1）设二维随机变量 $(X, Y)$ 的分布函数为 $F(x, y)$，则概率 $P\{X > x_{0}, Y > y_{0}\} = (\quad)$
 \opttwo{(A) $1 + F(x_{0}, y_{0}) - F(x_{0}, +\infty) - F(+\infty, y_{0})$}{(B) $F(x_{0}, y_{0}) - 1 + F(x_{0}, +\infty) + F(+\infty, y_{0})$}{(C) $1 - F(x_{0}, +\infty) - F(+\infty, y_{0})$}{(D) $1 - F(x_{0}, y_{0})$}
