@@ -29,7 +29,7 @@ jobs:
       - name: Compile all LaTeX documents
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: "latex/**/*.tex"
+          root_file: "latex/考研/数学一/概统-第三讲-多维随机变量及其分布/*.tex"
           compiler: latexmk
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
