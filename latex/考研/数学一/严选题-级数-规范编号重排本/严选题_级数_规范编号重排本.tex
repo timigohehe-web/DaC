@@ -38,14 +38,14 @@
 
 % ---- 一~五级标题 ----
 \newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
-\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\addvspace{0.9em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
-\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\addvspace{0.7em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em}\nobreak\justheadingtrue}
-\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\addvspace{0.55em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em}\nobreak\justheadingtrue}
-\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\addvspace{0.4em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
+\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.9em plus 0.6em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
+\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.7em plus 0.6em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.55em plus 0.5em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.4em plus 0.5em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
 
 % ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
-\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
-\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
 
 \begin{document}
 
