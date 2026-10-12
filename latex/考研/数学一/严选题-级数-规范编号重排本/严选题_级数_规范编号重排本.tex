@@ -1,0 +1,601 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=1.65cm,top=1.5cm,bottom=1.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.05}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+
+% ---- 填空 ----
+\newcommand{\bk}{\underline{\hspace{3.2em}}}
+
+% ---- 选项块（悬挂左缩进，自动换行） ----
+\newcommand{\opts}[1]{\par\vspace{0.08em}\begingroup\leftskip=1.7em\noindent #1\par\endgroup}
+
+% ---- 一~五级标题 ----
+\newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
+\newcommand{\Htwo}[1]{\par\addvspace{0.8em}\noindent{\large\bfseries #1}\par\vspace{0.05em}\hrule height 0.7pt\vspace{0.3em}}
+\newcommand{\Hthree}[1]{\par\addvspace{0.65em}\noindent{\normalsize\bfseries #1}\par\addvspace{0.2em}}
+\newcommand{\Hfour}[1]{\par\addvspace{0.45em}\noindent{\bfseries #1}\par\addvspace{0.12em}}
+\newcommand{\Hfive}[1]{\par\addvspace{0.35em}\noindent\hspace{0.4em}{\small\bfseries\textbullet\ #1}\par\addvspace{0.02em}}
+
+% ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
+\newcommand{\Q}[2]{\par\addvspace{0.42em}\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\addvspace{0.42em}\noindent\textbf{【#1】}\hspace{0.25em}}
+
+\begin{document}
+
+\Hone{七、级数}
+\begin{center}\small 编号规则：题号 \textbf{【7.x.y-n】} 中 $n$ 为本章题目的连续序号，7.x.y 为该题所属三级条目；［　］内为题目出处，小题用 (1)(2) 分问、a. b. 分小问。\end{center}
+
+\Htwo{7.1　数项级数}
+
+\Hthree{7.1.1　具体}
+
+\Hfour{正项级数}
+
+\Hfive{比较 · 一般形式}
+
+\Q{7.1.1-1}{1999数一}设 $a_n=\displaystyle\int_{0}^{\frac{\pi}{4}}\tan^{n}x\,\mathrm{d}x$。
+(1) 求 $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n}(a_n+a_{n+2})$ 的值；
+(2) 试证：对任意的常数 $\lambda>0$，级数 $\displaystyle\sum_{n=1}^{\infty}\frac{a_n}{n^{\lambda}}$ 收敛。
+
+\Hfive{比较 · 极限形式}
+
+\Q{7.1.1-2}{张宇1000基础1}设 $p$ 为常数，若级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(\sqrt{n+1}-\sqrt{n})^{p}}{n}$ 与 $\displaystyle\sum_{n=1}^{\infty}\left[\frac{1}{n^{p}}-\frac{1}{(n+1)^{p}}\right]$ 均收敛，则（　）。
+\opts{A. $-2<p\leqslant-1$\quad B. $-1\leqslant p<0$\quad C. $1<p\leqslant 0$\quad D. $p>0$}
+
+\Q{7.1.1-3}{1998江苏竞赛 · 例7.1}下列级数收敛的是（　）。
+\opts{A. $\displaystyle\sum_{n=2}^{\infty}\frac{1}{\ln\sqrt[3]{n}}$\quad B. $\displaystyle\sum_{n=1}^{\infty}\frac{\mathrm{e}^{n}}{3^{n}-2^{n}}$\quad C. $\displaystyle\sum_{n=1}^{\infty}\left(3-\frac{1}{n}\right)^{n}\sin\frac{1}{3^{n}}$\quad D. $\displaystyle\sum_{n=2}^{\infty}\left(1-\frac{1}{n}\right)^{n\ln n}$}
+
+\Q{7.1.1-4}{姜真题同源150 · 例7.2}下列级数发散的是（　）。
+\opts{A. $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^{2+\frac{1}{n}}}$\quad B. $\displaystyle\sum_{n=1}^{\infty}\frac{2^{n}n!}{n^{n}}$\quad C. $\displaystyle\sum_{n=1}^{\infty}\frac{\ln n\cdot\cos n}{\sqrt{n^{3}+2n-2}}$\quad D. $\displaystyle\sum_{n=2}^{\infty}\frac{1}{\ln(n!)}$}
+
+\Hfive{比值}
+
+\Q{7.1.1-5}{1988数三}讨论级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(n+1)!}{n^{n+1}}$ 的敛散性。
+
+\Q{7.1.1-6}{880综合选择3；李正元例11.6-1}设 $a>0$，$\displaystyle\sum_{n=1}^{\infty}\frac{a^{n}n!}{n^{n}}$ 收敛，$\displaystyle\sum_{n=2}^{\infty}\frac{\sqrt{n+2}-\sqrt{n-2}}{n^{a}}$ 发散，则（　）。
+\opts{A. $a>\mathrm{e}$\quad B. $a=\mathrm{e}$\quad C. $\frac{1}{2}<a<\mathrm{e}$\quad D. $0<a\leqslant\frac{1}{2}$}
+
+\Hfive{根值}
+
+\Q{7.1.1-7}{姜晓千基础例题；660数一334；武基础严选第十章选择8}判别级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{na}{n+1}\right)^{n}\ (a>0)$ 的敛散性。
+
+\Q{7.1.1-8}{张宇30例16.12}级数 $\displaystyle\sum_{n=1}^{\infty}\left[\mathrm{e}^{\frac{\sin^{2}an}{n^{2}}}+\left(\cos\frac{1}{\sqrt{n}}\right)^{n^{2}}-1\right]$（　）。
+\opts{A. 收敛\quad B. 发散\quad C. 敛散性与 $\alpha$ 有关\quad D. 无法判断}
+
+\Q{7.1.1-9}{880综合填空4}$\displaystyle\lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^{n}\frac{1}{3^{k}}\left(1+\frac{1}{k}\right)^{k^{2}}=$ \bk。
+
+\Hfour{交错级数}
+
+\Hfive{交错 $p$ 级数}
+
+\Q{7.1.1-10}{2012数三；强化严选第七章13}已知级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\sqrt{n}\sin\frac{1}{n^{\alpha}}$ 绝对收敛，级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n^{2-\alpha}}$ 条件收敛，则（　）。
+\opts{A. $0<\alpha\leqslant\frac{1}{2}$\quad B. $\frac{1}{2}<\alpha\leqslant1$\quad C. $1<\alpha\leqslant\frac{3}{2}$\quad D. $\frac{3}{2}<\alpha<2$}
+
+\Q{7.1.1-11}{660数一336}级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\left(\frac{1}{n}-\int_{0}^{\frac{1}{n}}\frac{x^{a}\,\mathrm{d}x}{x+x^{a+1}}\right)$（常数 $a\geqslant1$）（　）。
+\opts{A. 发散\quad B. 条件收敛\quad C. 绝对收敛\quad D. 条件收敛还是绝对收敛与 $a$ 的取值有关}
+
+\Hfive{三角}
+
+\Q{7.1.1-12}{1992数一}级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\left(1-\cos\frac{a}{n}\right)$（常数 $a>0$）（　）。
+\opts{A. 发散\quad B. 条件收敛\quad C. 绝对收敛\quad D. 敛散性与 $a$ 有关}
+
+\Q{7.1.1-13}{1996数一}设 $a_n>0\ (n=1,2,\cdots)$ 且 $\displaystyle\sum_{n=1}^{\infty}a_n$ 收敛，常数 $\lambda\in\left(0,\frac{\pi}{2}\right)$，则级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\left(n\tan\frac{\lambda}{n}\right)a_{2n}$（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 敛散性与 $\lambda$ 有关}
+
+\Hfive{对数}
+
+\Q{7.1.1-14}{2025数三}已知 $k$ 为常数，则级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\left[\frac{1}{n}-\ln\left(1+\frac{k}{n^{2}}\right)\right]$（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 敛散性与 $k$ 的取值相关}
+
+\Q{7.1.1-15}{1995数一}设 $u_n=(-1)^{n}\ln\left(1+\frac{1}{\sqrt{n}}\right)$，则级数（　）。
+\opts{A. $\sum_{n=1}^{\infty}u_n$ 与 $\sum_{n=1}^{\infty}u_n^{2}$ 都收敛\quad B. $\sum_{n=1}^{\infty}u_n$ 与 $\sum_{n=1}^{\infty}u_n^{2}$ 都发散\quad C. $\sum_{n=1}^{\infty}u_n$ 收敛而 $\sum_{n=1}^{\infty}u_n^{2}$ 发散\quad D. $\sum_{n=1}^{\infty}u_n$ 发散而 $\sum_{n=1}^{\infty}u_n^{2}$ 收敛}
+
+\Q{7.1.1-16}{2015数三}下列级数中发散的是（　）。
+\opts{A. $\sum_{n=1}^{\infty}\frac{n}{3^{n}}$\quad B. $\sum_{n=1}^{\infty}\frac{1}{\sqrt{n}}\ln\left(1+\frac{1}{n}\right)$\quad C. $\sum_{n=2}^{\infty}\frac{(-1)^{n}+1}{\ln n}$\quad D. $\sum_{n=1}^{\infty}\frac{n!}{n^{n}}$}
+
+\Q{7.1.1-17}{武强化严选第七章4}设常数 $p>0$，则级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{\ln(\mathrm{e}^{n}+p)}$（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 敛散性与 $p$ 的取值有关}
+
+\Hfive{拆项}
+
+\Q{7.1.1-18}{1987数一}设常数 $k>0$，则级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\frac{k+n}{n^{2}}$（　）。
+\opts{A. 发散\quad B. 绝对收敛\quad C. 条件收敛\quad D. 敛散性与 $k$ 值有关}
+
+\Q{7.1.1-19}{1997北京竞赛；张宇30例16.16}判别下列级数的敛散性：
+(1) $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n-\ln n}$；
+(2) $\displaystyle\sum_{n=2}^{\infty}\frac{(-1)^{n}}{\sqrt{n}+(-1)^{n}}$。
+
+\Hfive{$\sin$ 型}
+
+\Q{7.1.1-20}{2025数一}已知级数 (1) $\displaystyle\sum_{n=1}^{\infty}\sin\frac{n^{3}\pi}{n^{2}+1}$，(2) $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\left(\frac{1}{\sqrt[3]{n^{2}}}-\tan\frac{1}{\sqrt[3]{n^{2}}}\right)$，则（　）。
+\opts{A. (1) 与 (2) 均条件收敛\quad B. (1) 条件收敛，(2) 绝对收敛\quad C. (1) 绝对收敛，(2) 条件收敛\quad D. (1) 与 (2) 均绝对收敛}
+
+\Q{7.1.1-21}{660数一331}在如下四个级数 ① $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\frac{\ln(n+1)}{n}$，② $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\frac{n}{2^{n}}$，③ $\displaystyle\sum_{n=2}^{\infty}\frac{(-1)^{n-1}}{\sqrt{n}-(-1)^{n}}$，④ $\displaystyle\sum_{n=1}^{\infty}\sin\left(n\pi+\frac{1}{\sqrt{n}}\right)$ 中，条件收敛的级数是（　）。
+\opts{A. ①②\quad B. ②③\quad C. ③④\quad D. ①④}
+
+\Q{7.1.1-22}{1995南京大学 · 例7.3}设 $u_n=\displaystyle\int_{n\pi}^{(n+1)\pi}\frac{\sin x}{x}\,\mathrm{d}x\ (n=1,2,\cdots)$，则级数 $\displaystyle\sum_{n=1}^{\infty}u_n$ 为（　）。
+\opts{A. 发散的正项级数\quad B. 收敛的正项级数\quad C. 发散的交错级数\quad D. 收敛的交错级数}
+
+\Hfour{任意项级数}
+
+\Q{7.1.1-23}{1990数一}设 $\alpha$ 为常数，则级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{\sin n\alpha}{n^{2}}-\frac{1}{\sqrt{n}}\right)$（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 敛散性与 $\alpha$ 取值有关}
+
+\Q{7.1.1-24}{2016数三；张宇30例16.18}级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{1}{\sqrt{n}}-\frac{1}{\sqrt{n+1}}\right)\sin(n+k)$（$k$ 为常数）（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 收敛性与 $k$ 有关}
+
+\Hfour{泰勒展开}
+
+\Hfive{直接展开}
+
+\Q{7.1.1-25}{2017数三；张宇30习题16.4}若级数 $\displaystyle\sum_{n=2}^{\infty}\left[\sin\frac{1}{n}-k\ln\left(1-\frac{1}{n}\right)\right]$ 收敛，则 $k=$（　）。
+\opts{A. $1$\quad B. $2$\quad C. $-1$\quad D. $-2$}
+
+\Q{7.1.1-26}{660数一333；张宇30习题16.11}级数 $\displaystyle\sum_{n=1}^{\infty}\left[\ln\left(1+\frac{(-1)^{n}}{\sqrt{n}}\right)-\frac{(-1)^{n}}{n^{p}}\right]\ (p>0)$（　）。
+\opts{A. 发散\quad B. 条件收敛\quad C. 绝对收敛\quad D. 敛散性与 $p$ 有关}
+
+\Hfive{结合微分方程}
+
+\Q{7.1.1-27}{880综合解答1；强化严选第七章26}已知函数 $y=y(x)$ 满足方程 $y'=x+y$，且 $y(0)=1$，讨论级数 $\displaystyle\sum_{n=1}^{\infty}\left[y\left(\frac{1}{n}\right)-1-\frac{1}{n}\right]$ 的敛散性。
+
+\Hthree{7.1.2　抽象敛散}
+
+\Hfour{基本性质}
+
+\Hfive{四则运算}
+
+\Q{7.1.2-28}{2006数一三；强化严选第七章9}若级数 $\displaystyle\sum_{n=1}^{\infty}a_n$ 收敛，则级数（　）。
+\opts{A. $\sum_{n=1}^{\infty}|a_n|$ 收敛\quad B. $\sum_{n=1}^{\infty}(-1)^{n}a_n$ 收敛\quad C. $\sum_{n=1}^{\infty}a_na_{n+1}$ 收敛\quad D. $\sum_{n=1}^{\infty}\frac{a_n+a_{n+1}}{2}$ 收敛}
+
+\Q{7.1.2-29}{880基础选择1；基础严选第十章选择9}设级数 $\displaystyle\sum_{n=1}^{\infty}u_n$ 与 $\displaystyle\sum_{n=1}^{\infty}v_n$ 均发散，则（　）。
+\opts{A. $\sum_{n=1}^{\infty}(u_n+v_n)$ 必发散\quad B. $\sum_{n=1}^{\infty}u_nv_n$ 必发散\quad C. $\sum_{n=1}^{\infty}(|u_n|+|v_n|)$ 必发散\quad D. $\sum_{n=1}^{\infty}(u_n^{2}+v_n^{2})$ 必发散}
+
+\Hfive{加括号}
+
+\Q{7.1.2-30}{2005数三}设 $a_n>0$，$n=1,2,\dots$，若 $\displaystyle\sum_{n=1}^{\infty}a_n$ 发散，$\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 收敛，则下列结论正确的是（　）。
+\opts{A. $\sum_{n=1}^{\infty}a_{2n-1}$ 收敛，$\sum_{n=1}^{\infty}a_{2n}$ 发散\quad B. $\sum_{n=1}^{\infty}a_{2n}$ 收敛，$\sum_{n=1}^{\infty}a_{2n-1}$ 发散\quad C. $\sum_{n=1}^{\infty}(a_{2n-1}+a_{2n})$ 收敛\quad D. $\sum_{n=1}^{\infty}(a_{2n-1}-a_{2n})$ 收敛}
+
+\Q{7.1.2-31}{2011数三；强化严选第七章12}设 $\{u_n\}$ 是数列，则下列命题正确的是（　）。
+\opts{A. 若 $\sum_{n=1}^{\infty}u_n$ 收敛，则 $\sum_{n=1}^{\infty}(u_{2n-1}+u_{2n})$ 收敛；\quad B. 若 $\sum_{n=1}^{\infty}(u_{2n-1}+u_{2n})$ 收敛，则 $\sum_{n=1}^{\infty}u_n$ 收敛；\\[0.35em] C. 若 $\sum_{n=1}^{\infty}u_n$ 收敛，则 $\sum_{n=1}^{\infty}(u_{2n-1}-u_{2n})$ 收敛；\quad D. 若 $\sum_{n=1}^{\infty}(u_{2n-1}-u_{2n})$ 收敛，则 $\sum_{n=1}^{\infty}u_n$ 收敛}
+
+\Hfive{正负项分离}
+
+\Q{7.1.2-32}{2003数三}设 $p_n=\dfrac{a_n+|a_n|}{2}$，$q_n=\dfrac{a_n-|a_n|}{2}$，$n=1,2,\cdots$，则下列命题正确的是（　）。
+\opts{A. 若 $\sum_{n=1}^{\infty}a_n$ 条件收敛，则 $\sum_{n=1}^{\infty}p_n$ 与 $\sum_{n=1}^{\infty}q_n$ 都收敛；\quad B. 若 $\sum_{n=1}^{\infty}a_n$ 绝对收敛，则 $\sum_{n=1}^{\infty}p_n$ 与 $\sum_{n=1}^{\infty}q_n$ 都收敛；\\[0.35em] C. 若 $\sum_{n=1}^{\infty}a_n$ 条件收敛，则 $\sum_{n=1}^{\infty}p_n$ 与 $\sum_{n=1}^{\infty}q_n$ 敛散性都不定；\quad D. 若 $\sum_{n=1}^{\infty}a_n$ 绝对收敛，则 $\sum_{n=1}^{\infty}p_n$ 与 $\sum_{n=1}^{\infty}q_n$ 敛散性都不定}
+
+\Q{7.1.2-33}{660数一316}给出以下 4 个命题：
+① 若 $\displaystyle\sum_{n=1}^{\infty}a_n$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|+a_n}{2}$ 和 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|-a_n}{2}$ 至少有一个收敛；
+② 若 $\displaystyle\sum_{n=1}^{\infty}|a_n|$ 发散，则 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|+a_n}{2}$ 和 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|-a_n}{2}$ 都发散；
+③ 若 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|+a_n}{2}$ 和 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|-a_n}{2}$ 至少有一个发散，则 $\displaystyle\sum_{n=1}^{\infty}|a_n|$ 必发散；
+④ 若 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|+a_n}{2}$ 和 $\displaystyle\sum_{n=1}^{\infty}\frac{|a_n|-a_n}{2}$ 一个收敛、一个发散，则 $\displaystyle\sum_{n=1}^{\infty}a_n$ 必发散。
+则其中真命题个数为（　）。
+\opts{A. $0$\quad B. $1$\quad C. $2$\quad D. $3$}
+
+\Hfive{绝对与条件收敛}
+
+\Q{7.1.2-34}{1994数一三}设常数 $\lambda>0$，且级数 $\displaystyle\sum_{n=1}^{\infty}a_n^{2}$ 收敛，则级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\frac{|a_n|}{\sqrt{n^{2}+\lambda}}$（　）。
+\opts{A. 发散\quad B. 条件收敛\quad C. 绝对收敛\quad D. 敛散性与 $\lambda$ 有关}
+
+\Q{7.1.2-35}{660数一319}设正项级数 $\displaystyle\sum_{n=0}^{\infty}a_n$ 收敛，$b_n=(-1)^{n}\ln(1+a_{2n})$，则 $\displaystyle\sum_{n=1}^{\infty}b_n$（　）。
+\opts{A. 条件收敛\quad B. 绝对收敛\quad C. 发散\quad D. 不能确定敛散性}
+
+\Hfour{已知条件的处理}
+
+\Hfive{已知抽象交错发散}
+
+\Q{7.1.2-36}{1998数一；张宇30习题16.9}设正项数列 $\{a_n\}$ 单调减少，且 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}a_n$ 发散，试问级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{1}{a_n+1}\right)^{n}$ 是否收敛？并说明理由。
+
+\Hfive{已知大小关系}
+
+\Q{7.1.2-37}{1991数三}设 $0\leqslant a_n\leqslant\frac{1}{n}\ (n=1,2,\dots)$，则下列级数中肯定收敛的是（　）。
+\opts{A. $\sum_{n=1}^{\infty}a_n$\quad B. $\sum_{n=1}^{\infty}(-1)^{n}a_n$\quad C. $\sum_{n=1}^{\infty}\sqrt{a_n}$\quad D. $\sum_{n=1}^{\infty}(-1)^{n}a_n^{2}$}
+
+\Q{7.1.2-38}{2023数一三}已知 $a_n<b_n\ (n=1,2,\cdots)$。若级数 $\displaystyle\sum_{n=1}^{\infty}a_n$ 与 $\displaystyle\sum_{n=1}^{\infty}b_n$ 均收敛，则“$\displaystyle\sum_{n=1}^{\infty}a_n$ 绝对收敛”是“$\displaystyle\sum_{n=1}^{\infty}b_n$ 绝对收敛”的（　）。
+\opts{A. 充分必要条件\quad B. 充分不必要条件\quad C. 必要不充分条件\quad D. 既不充分也不必要条件}
+
+\Q{7.1.2-39}{660数一318}设有命题
+① 若 $\displaystyle\sum_{n=1}^{\infty}a_n$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}a_{2n}$ 收敛；
+② 若 $\displaystyle\sum_{n=1}^{\infty}a_n$ 为正项级数，且 $\dfrac{a_{n+1}}{a_n}<1\ (n=1,2,\cdots)$，则 $\displaystyle\sum_{n=1}^{\infty}a_n$ 收敛；
+③ 若存在极限 $\displaystyle\lim_{n\to\infty}\frac{u_n}{v_n}=l\neq0$，且 $\displaystyle\sum_{n=1}^{\infty}v_n$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}u_n$ 收敛；
+④ 若 $w_n<u_n<v_n\ (n=1,2,3,\cdots)$，又 $\displaystyle\sum_{n=1}^{\infty}v_n$ 与 $\displaystyle\sum_{n=1}^{\infty}w_n$ 都收敛，则 $\displaystyle\sum_{n=1}^{\infty}u_n$ 收敛。
+则上述命题中正确的个数为（　）。
+\opts{A. $1$\quad B. $2$\quad C. $3$\quad D. $4$}
+
+\Q{7.1.2-40}{660数一326；基础严选第十章选择26}$a_n$ 和 $b_n$ 符合下列哪一个条件，可由 $\displaystyle\sum_{n=1}^{\infty}a_n$ 发散推得 $\displaystyle\sum_{n=1}^{\infty}b_n$ 发散（　）。
+\opts{A. $a_n\leqslant b_n$\quad B. $|a_n|\leqslant b_n$\quad C. $a_n\leqslant|b_n|$\quad D. $|a_n|\leqslant|b_n|$}
+
+\Hfive{已知极限 · 比较审敛法极限形式}
+
+\Q{7.1.2-41}{2004数一}设 $\displaystyle\sum_{n=1}^{\infty}a_n$ 为正项级数，下列结论中正确的是（　）。
+\opts{A. 若 $\lim_{n\to\infty}na_n=0$，则级数 $\sum_{n=1}^{\infty}a_n$ 收敛；\quad B. 若存在非零常数 $\lambda$，使得 $\lim_{n\to\infty}na_n=\lambda$，则级数 $\sum_{n=1}^{\infty}a_n$ 发散；\\[0.35em] C. 若级数 $\sum_{n=1}^{\infty}a_n$ 收敛，则 $\lim_{n\to\infty}n^{2}a_n=0$；\quad D. 若级数 $\sum_{n=1}^{\infty}a_n$ 发散，则存在非零常数 $\lambda$，使得 $\lim_{n\to\infty}na_n=\lambda$}
+
+\Q{7.1.2-42}{2013数三；强化严选第七章14}设 $\{a_n\}$ 为正项数列，下列选项正确的是（　）。
+\opts{A. 若 $a_n>a_{n+1}$，则 $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 收敛；\quad B. 若 $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 收敛，则 $a_n>a_{n+1}$；\\[0.35em] C. 若 $\sum_{n=1}^{\infty}a_n$ 收敛，则存在常数 $p>1$，使 $\lim_{n\to\infty}n^{p}a_n$ 存在；\quad D. 若存在常数 $p>1$，使 $\lim_{n\to\infty}n^{p}a_n$ 存在，则 $\sum_{n=1}^{\infty}a_n$ 收敛}
+
+\Hfive{已知极限 · 必要条件}
+
+\Q{7.1.2-43}{2004数三；张宇30习题16.1}设有下列命题：
+(1) 若 $\displaystyle\sum_{n=1}^{\infty}(u_{2n-1}+u_{2n})$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}u_n$ 收敛；
+(2) 若 $\displaystyle\sum_{n=1}^{\infty}u_n$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}u_{n+100}$ 收敛；
+(3) 若 $\displaystyle\lim_{n\to\infty}\frac{u_{n+1}}{u_n}>1$，则 $\displaystyle\sum_{n=1}^{\infty}u_n$ 发散；
+(4) 若 $\displaystyle\sum_{n=1}^{\infty}(u_n+v_n)$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}u_n$，$\displaystyle\sum_{n=1}^{\infty}v_n$ 都收敛。
+则以上命题中正确的是（　）。
+\opts{A. (1)(2)\quad B. (2)(3)\quad C. (3)(4)\quad D. (1)(4)}
+
+\Hfive{已知极限 · 与导数结合}
+
+\Q{7.1.2-44}{1994数一；李正元例11.25}设 $f(x)$ 在点 $x=0$ 的某一邻域内具有二阶连续导数，且 $\displaystyle\lim_{x\to0}\frac{f(x)}{x}=0$，证明级数 $\displaystyle\sum_{n=1}^{\infty}f\left(\frac{1}{n}\right)$ 绝对收敛。
+
+\Q{7.1.2-45}{880综合选择6}设 $f(x)$ 有一阶连续导数，且 $\displaystyle\lim_{x\to0}\frac{f(x)}{x}=1$，$a_n=f\left(\frac{1}{n}\right)$，$n=1,2,\cdots$，则（　）。
+\opts{A. $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 收敛，$\sum_{n=1}^{\infty}a_n$ 收敛；\quad B. $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 发散，$\sum_{n=1}^{\infty}a_n^{2}$ 收敛；\\[0.35em] C. $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 发散，$\sum_{n=1}^{\infty}a_n$ 收敛；\quad D. $\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ 收敛，$\sum_{n=1}^{\infty}a_n^{2}$ 收敛}
+
+\Hfour{放缩}
+
+\Hfive{有界 · 直接给出}
+
+\Q{7.1.2-46}{2019数一}设 $\{u_n\}$ 是单调增加的有界数列，则下列级数中收敛的是（　）。
+\opts{A. $\sum_{n=1}^{\infty}\frac{u_n}{n}$\quad B. $\sum_{n=1}^{\infty}(-1)^{n}\frac{1}{u_n}$\quad C. $\sum_{n=1}^{\infty}\left(1-\frac{u_n}{u_{n+1}}\right)$\quad D. $\sum_{n=1}^{\infty}(u_{n+1}^{2}-u_n^{2})$}
+
+\Hfive{有界 · 已知极限}
+
+\Q{7.1.2-47}{2009数一；强化严选第七章10}设有两个数列 $\{a_n\},\{b_n\}$，若 $\displaystyle\lim_{n\to\infty}a_n=0$，则（　）。
+\opts{A. 当 $\sum_{n=1}^{\infty}b_n$ 收敛时，$\sum_{n=1}^{\infty}a_nb_n$ 收敛；\quad B. 当 $\sum_{n=1}^{\infty}b_n$ 发散时，$\sum_{n=1}^{\infty}a_nb_n$ 发散；\\[0.35em] C. 当 $\sum_{n=1}^{\infty}|b_n|$ 收敛时，$\sum_{n=1}^{\infty}a_n^{2}b_n^{2}$ 收敛；\quad D. 当 $\sum_{n=1}^{\infty}|b_n|$ 发散时，$\sum_{n=1}^{\infty}a_n^{2}b_n^{2}$ 发散}
+
+\Q{7.1.2-48}{880基础解答2-1}设 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}a_n\mathrm{e}^{n}$ 收敛，判别 $\displaystyle\sum_{n=1}^{\infty}a_n$ 的敛散性。
+
+\Q{7.1.2-49}{2019数三；张宇30例16.19}若 $\displaystyle\sum_{n=1}^{\infty}nu_n$ 绝对收敛，$\displaystyle\sum_{n=1}^{\infty}\frac{v_n}{n}$ 条件收敛，则（　）。
+\opts{A. $\sum_{n=1}^{\infty}u_nv_n$ 条件收敛\quad B. $\sum_{n=1}^{\infty}u_nv_n$ 绝对收敛\quad C. $\sum_{n=1}^{\infty}(u_n+v_n)$ 收敛\quad D. $\sum_{n=1}^{\infty}(u_n+v_n)$ 发散}
+
+\Q{7.1.2-50}{姜真题同源150 · 例7.4}下列级数绝对收敛的是（　）。
+\opts{A. $\sum_{n=1}^{\infty}a_nb_n$，其中 $\sum_{n=1}^{\infty}b_n$ 绝对收敛，$\sum_{n=1}^{\infty}(a_n-a_{n-1})$ 收敛；\quad B. $\sum_{n=1}^{\infty}(-1)^{n}(\sqrt[n]{3}-1)$；\\[0.35em] C. $\sum_{n=1}^{\infty}(-1)^{n}\tan(\sqrt{n^{2}+2}\pi)$；\quad D. $\sum_{n=2}^{\infty}\frac{(-1)^{n}\ln n}{n^{p}}\ (0<p\leqslant1)$}
+
+\Hfive{两个级数都收敛}
+
+\Q{7.1.2-51}{1988数三；张宇30习题16.2}已知级数 $\displaystyle\sum_{n=1}^{\infty}a_n^{2}$ 和 $\displaystyle\sum_{n=1}^{\infty}b_n^{2}$ 都收敛，试证明级数 $\displaystyle\sum_{n=1}^{\infty}a_nb_n$ 绝对收敛。
+
+\Q{7.1.2-52}{1996数三；880基础选择2}下述各选项正确的是（　）。
+\opts{A. 若 $\sum_{n=1}^{\infty}u_n^{2}$ 和 $\sum_{n=1}^{\infty}v_n^{2}$ 都收敛，则 $\sum_{n=1}^{\infty}(u_n+v_n)^{2}$ 收敛；\quad B. 若 $\sum_{n=1}^{\infty}|u_nv_n|$ 收敛，则 $\sum_{n=1}^{\infty}u_n^{2}$ 与 $\sum_{n=1}^{\infty}v_n^{2}$ 都收敛；\\[0.35em] C. 若正项级数 $\sum_{n=1}^{\infty}u_n$ 发散，则 $u_n\geqslant\frac{1}{n}$；\quad D. 若级数 $\sum_{n=1}^{\infty}u_n$ 收敛，且 $u_n\geqslant v_n\ (n=1,2,\cdots)$，则级数 $\sum_{n=1}^{\infty}v_n$ 也收敛}
+
+\Hfive{双数列}
+
+\Q{7.1.2-53}{2014数一；张宇30例16.10}设数列 $\{a_n\},\{b_n\}$ 满足 $0<a_n<\frac{\pi}{2}$，$0<b_n<\frac{\pi}{2}$，$\cos a_n-a_n=\cos b_n$，且级数 $\displaystyle\sum_{n=1}^{\infty}b_n$ 收敛。
+(1) 证明 $\displaystyle\lim_{n\to\infty}a_n=0$；
+(2) 证明级数 $\displaystyle\sum_{n=1}^{\infty}\frac{a_n}{b_n}$ 收敛。
+
+\Hfour{级数定义}
+
+\Q{7.1.2-54}{2002数一}设 $u_n\neq0\ (n=1,2,3,\cdots)$，且 $\displaystyle\lim_{n\to\infty}\frac{n}{u_n}=1$，则级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n+1}\left(\frac{1}{u_n}+\frac{1}{u_{n+1}}\right)$（　）。
+\opts{A. 发散\quad B. 绝对收敛\quad C. 条件收敛\quad D. 收敛性根据所给条件不能判定}
+
+\Q{7.1.2-55}{2016数一}已知函数 $f(x)$ 可导，且 $f(0)=1$，$0<f'(x)<\frac{1}{2}$。设数列 $\{x_n\}$ 满足 $x_{n+1}=f(x_n)\ (n=1,2,\cdots)$。证明：
+(1) 级数 $\displaystyle\sum_{n=1}^{\infty}(x_{n+1}-x_n)$ 绝对收敛；
+(2) $\displaystyle\lim_{n\to\infty}x_n$ 存在，且 $0<\displaystyle\lim_{n\to\infty}x_n<2$。
+
+\Q{7.1.2-56}{1997数一}设 $a_1=2$，$a_{n+1}=\frac{1}{2}\left(a_n+\frac{1}{a_n}\right)(n=1,2,\cdots)$，证明：
+(1) $\displaystyle\lim_{n\to\infty}a_n$ 存在；
+(2) 级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{a_n}{a_{n+1}}-1\right)$ 收敛。
+
+\Htwo{7.2　幂级数}
+
+\Hthree{7.2.1　收敛域（区间）}
+
+\Hfour{具体}
+
+\Hfive{常规}
+
+\Q{7.2.1-57}{880基础解答3-3}求幂级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}n^{n}x^{n}$ 的收敛域。
+
+\Q{7.2.1-58}{张宇1000强化29}幂级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\frac{x^{2n+1}}{2n+1}$ 的收敛域为 \bk。
+
+\Q{7.2.1-59}{880基础解答4-1}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{x^{n^{2}}}{2^{n}}$ 的收敛域。
+
+\Q{7.2.1-60}{2011北京竞赛}函数项级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}4^{2n}\left(\frac{\mathrm{e}^{x}-1}{\mathrm{e}^{x}+1}\right)^{4n+1}$ 的收敛域为 \bk。
+
+\Q{7.2.1-61}{2026数一}级数 $\displaystyle\sum_{n=1}^{\infty}\left[\frac{3+(-1)^{n}}{4}\right]^{n}x^{2n}$ 的收敛域为（　）。
+\opts{A. $[-2,2]$\quad B. $[-1,1]$\quad C. $(-2,2)$\quad D. $(-1,1)$}
+
+\Hfive{中心平移}
+
+\Q{7.2.1-62}{1992数三}级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(x-2)^{2n}}{n4^{n}}$ 的收敛域为 \bk。
+
+\Hfive{$n$ 次方和差}
+
+\Q{7.2.1-63}{2009数三}幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{\mathrm{e}^{n}-(-1)^{n}}{n^{2}}x^{n}$ 的收敛半径为 \bk。
+
+\Q{7.2.1-64}{2000数一}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{1}{3^{n}+(-2)^{n}}\frac{x^{n}}{n}$ 的收敛区间，并讨论该区间端点处的收敛性。
+
+\Q{7.2.1-65}{660数一131}幂级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}\frac{(x+1)^{n}}{n(1-4^{n})}$ 的收敛域为 \bk。
+
+\Hfive{$\ln$ 相关}
+
+\Q{7.2.1-66}{1996北京竞赛}幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}8^{n}}{n\ln(n^{3}+n)}x^{3n-2}$ 的收敛域为 \bk。
+
+\Hfive{分子阶乘}
+
+\Q{7.2.1-67}{2022数一；张宇30例16.25}已知级数 $\displaystyle\sum_{n=1}^{\infty}\frac{n!}{n^{n}}\mathrm{e}^{-nx}$ 的收敛域为 $(a,+\infty)$，则 $a=$ \bk。
+
+\Hfour{抽象}
+
+\Hfive{一点收敛}
+
+\Q{7.2.1-68}{武强化严选第七章15}若幂级数 $\displaystyle\sum_{n=0}^{\infty}a_n(x+1)^{n}$ 在 $x=1$ 处收敛，则级数 $\displaystyle\sum_{n=0}^{\infty}a_n$（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 发散\quad D. 敛散性不定}
+
+\Q{7.2.1-69}{660数一330}设 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}a_n2^{n}$ 收敛，则 $\displaystyle\sum_{n=1}^{\infty}a_n$（　）。
+\opts{A. 条件收敛\quad B. 绝对收敛\quad C. 发散\quad D. 敛散性不确定}
+
+\Hfive{一点发散、一点收敛（直接给出）}
+
+\Q{7.2.1-70}{2008数一；强化严选第七章20}已知幂级数 $\displaystyle\sum_{n=0}^{\infty}a_n(x+2)^{n}$ 在 $x=0$ 处收敛，在 $x=-4$ 处发散，则幂级数 $\displaystyle\sum_{n=0}^{\infty}a_n(x-3)^{n}$ 的收敛域为 \bk。
+
+\Hfive{一点发散、一点收敛（需推导）}
+
+\Q{7.2.1-71}{2011数一；强化严选第七章17}设数列 $\{a_n\}$ 单调减少，$\displaystyle\lim_{n\to\infty}a_n=0$，$S_n=\sum_{k=1}^{n}a_k\ (n=1,2,\cdots)$ 无界，则幂级数 $\displaystyle\sum_{n=1}^{\infty}a_n(x-1)^{n}$ 的收敛域为（　）。
+\opts{A. $(-1,1]$\quad B. $[-1,1)$\quad C. $[0,2)$\quad D. $(0,2]$}
+
+\Q{7.2.1-72}{姜真题同源150 · 例7.8}设数列 $\{a_n\}$ 单调递减，且 $\displaystyle\lim_{n\to\infty}a_n\ln n=1$，则幂级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}a_n(x+1)^{n}$ 的收敛域为 \bk。
+
+\Hfive{已知一级数、求另一幂级数}
+
+\Q{7.2.1-73}{1997数一；强化严选第七章19；李正元例11.15-3}设幂级数 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 的收敛半径为 3，则幂级数 $\displaystyle\sum_{n=1}^{\infty}na_n(x-1)^{n+1}$ 的收敛区间为 \bk。
+
+\Q{7.2.1-74}{2020数三}设幂级数 $\displaystyle\sum_{n=1}^{\infty}na_n(x-2)^{n}$ 的收敛区间为 $(-2,6)$，则 $\displaystyle\sum_{n=1}^{\infty}a_n(x+1)^{2n}$ 的收敛区间为（　）。
+\opts{A. $(-2,6)$\quad B. $(-3,1)$\quad C. $(-5,3)$\quad D. $(-17,15)$}
+
+\Hfive{一点条件收敛（直接给出）}
+
+\Q{7.2.1-75}{武强化严选第七章23}设幂级数 $\displaystyle\sum_{n=1}^{\infty}a_nx^{n}$ 在 $x=2$ 时条件收敛，则幂级数 $\displaystyle\sum_{n=1}^{\infty}a_nx^{2n}$ 的收敛域为 \bk。
+
+\Q{7.2.1-76}{武强化严选第七章16}设 $\displaystyle\sum_{n=1}^{\infty}\frac{(x-a)^{n}}{n}$ 在 $x=-2$ 处条件收敛，则 $\displaystyle\sum_{n=1}^{\infty}n^{2}(x-a)^{n}$ 在 $x=\ln\frac{1}{2}$ 处（　）。
+\opts{A. 绝对收敛\quad B. 条件收敛\quad C. 必发散\quad D. 敛散性由 $a$ 确定}
+
+\Hfive{一点条件收敛（需转化为幂级数）}
+
+\Q{7.2.1-77}{2015数一}若级数 $\displaystyle\sum_{n=1}^{\infty}a_n$ 条件收敛，则 $x=\sqrt{3}$ 与 $x=3$ 依次为幂级数 $\displaystyle\sum_{n=1}^{\infty}na_n(x-1)^{n}$ 的（　）。
+\opts{A. 收敛点，收敛点\quad B. 收敛点，发散点\quad C. 发散点，收敛点\quad D. 发散点，发散点}
+
+\Q{7.2.1-78}{张宇1000强化13}若级数 $\displaystyle\sum_{n=1}^{\infty}a_n2^{n}$ 条件收敛，则幂级数 $\displaystyle\sum_{n=1}^{\infty}na_n(x+1)^{n}$ 的收敛区间为（　）。
+\opts{A. $(-3,1)$\quad B. $(-1,3)$\quad C. $(-2,2)$\quad D. $(-4,2)$}
+
+\Q{7.2.1-79}{武强化严选第七章22}已知级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n}a_n$ 条件收敛，则幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}a_n}{n}(x+1)^{n}$ 的收敛区间为 \bk。
+
+\Hfive{阿贝尔}
+
+\Q{7.2.1-80}{2020数一}设 $R$ 为幂级数 $\displaystyle\sum_{n=1}^{\infty}a_nx^{n}$ 的收敛半径，$r$ 是实数，则（　）。
+\opts{A. 当 $\sum_{n=1}^{\infty}a_{2n}r^{2n}$ 发散时，$|r|\geqslant R$；\quad B. 当 $\sum_{n=1}^{\infty}a_{2n}r^{2n}$ 收敛时，$|r|\leqslant R$；\\[0.35em] C. 当 $|r|\geqslant R$ 时，$\sum_{n=1}^{\infty}a_{2n}r^{2n}$ 发散；\quad D. 当 $|r|\leqslant R$ 时，$\sum_{n=1}^{\infty}a_{2n}r^{2n}$ 收敛}
+
+\Hthree{7.2.2　求和}
+
+\Hfour{幂级数求和}
+
+\Hfive{系数具体 · 子型（一次）}
+
+\Q{7.2.2-81}{1990数一}求幂级数 $\displaystyle\sum_{n=0}^{\infty}(2n+1)x^{n}$ 的收敛域，并求其和函数。
+
+\Q{7.2.2-82}{2017数一}幂级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}nx^{n-1}$ 在区间 $(-1,1)$ 内的和函数 $S(x)=$ \bk。
+
+\Hfive{系数具体 · 子型（二次）}
+
+\Q{7.2.2-83}{2014数三}求幂级数 $\displaystyle\sum_{n=0}^{\infty}(n+1)(n+3)x^{n}$ 的收敛域及和函数。
+
+\Q{7.2.2-84}{1992北京竞赛}求极限 $\displaystyle\lim_{x\to1^{-}}(1-x)^{3}\sum_{n=1}^{\infty}n^{2}x^{n}$。
+
+\Hfive{系数具体 · 母型无阶乘（一次）}
+
+\Q{7.2.2-85}{1987数一；880基础解答5-1}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n2^{n}}x^{n-1}$ 的收敛域，并求其和函数。
+
+\Q{7.2.2-86}{2005数三；张宇30习题16.13}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\left(\frac{1}{2n+1}-1\right)x^{2n}$ 在区间 $(-1,1)$ 内的和函数 $S(x)$。
+
+\Q{7.2.2-87}{2010数一；张宇30例16.32}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{2n-1}x^{2n}$ 的收敛域及和函数。
+
+\Q{7.2.2-88}{2022数三}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{(-4)^{n}+1}{4^{n}(2n+1)}x^{2n}$ 的收敛域及和函数 $S(x)$。
+
+\Hfive{系数具体 · 母型无阶乘（二次）}
+
+\Q{7.2.2-89}{2021数一}设 $u_n(x)=\mathrm{e}^{-nx}+\frac{x^{n+1}}{n(n+1)}\ (n=1,2,\cdots)$，求级数 $\displaystyle\sum_{n=1}^{\infty}u_n(x)$ 的收敛域及和函数。
+
+\Q{7.2.2-90}{2006数三；强化严选第七章32}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}x^{2n+1}}{n(2n-1)}$ 的收敛域及和函数 $S(x)$。
+
+\Q{7.2.2-91}{2016数三}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{x^{2n+2}}{(n+1)(2n+1)}$ 的收敛域及和函数。
+
+\Q{7.2.2-92}{武强化严选第七章30}求幂级数 $x+2\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{4n^{2}-1}x^{2n+1}$ 的收敛域及和函数。
+
+\Q{7.2.2-93}{2012数一}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{4n^{2}+4n+3}{2n+1}x^{2n}$ 的收敛域及和函数。
+
+\Q{7.2.2-94}{880基础解答5-2；李正元例11.16-1}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{(n-1)^{2}}{n+1}x^{n}$ 的收敛域及和函数。
+
+\Hfive{系数具体 · 母型有阶乘（指数）}
+
+\Q{7.2.2-95}{姜真题同源150}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{n^{2}+1}{2^{n}n!}x^{n}$ 的和函数。
+
+\Hfive{系数具体 · 母型有阶乘（三角）}
+
+\Q{7.2.2-96}{2019数一}幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}}{(2n)!}x^{n}$ 在 $(0,+\infty)$ 内的和函数 $S(x)=$ \bk。
+
+\Q{7.2.2-97}{姜真题同源150；108考点24第6题}求 $\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}(n+1)}{(2n+3)!}x^{2n}$ 的和函数。
+
+\Hfive{系数具体 · 母型有阶乘（微分方程）}
+
+\Q{7.2.2-98}{2023数三}$\displaystyle\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!}=$ \bk。
+
+\Q{7.2.2-99}{2002数一三；880基础解答11}(1) 验证函数 $y(x)=1+\frac{x^{3}}{3!}+\frac{x^{6}}{6!}+\frac{x^{9}}{9!}+\cdots+\frac{x^{3n}}{(3n)!}+\cdots\ (-\infty<x<+\infty)$ 满足微分方程 $y''+y'+y=\mathrm{e}^{x}$；
+(2) 利用 (1) 的结果求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{x^{3n}}{(3n)!}$ 的和函数。
+
+\Q{7.2.2-100}{武强化严选第七章31}求幂级数 $\displaystyle\sum_{n=0}^{\infty}\frac{x^{4n}}{(4n)!}$ 的收敛域与和函数。
+
+\Q{7.2.2-101}{2004数三}设级数 $\frac{x^{4}}{2\cdot4}+\frac{x^{6}}{2\cdot4\cdot6}+\frac{x^{8}}{2\cdot4\cdot6\cdot8}+\cdots\ (-\infty<x<+\infty)$ 的和函数为 $S(x)$。求：
+(1) $S(x)$ 所满足的一阶微分方程；
+(2) $S(x)$ 的表达式。
+
+\Hfive{系数以递推数列给出}
+
+\Q{7.2.2-102}{2020数一；张宇30例16.33；1000强化20}设数列 $\{a_n\}$ 满足 $a_1=1$，$(n+1)a_{n+1}=\left(n+\frac{1}{2}\right)a_n$。证明：当 $|x|<1$ 时，幂级数 $\displaystyle\sum_{n=1}^{\infty}a_nx^{n}$ 收敛，并求其和函数。
+
+\Q{7.2.2-103}{2013数一；强化严选第七章37}设数列 $\{a_n\}$ 满足条件 $a_0=3$，$a_1=1$，$a_{n-2}-n(n-1)a_n=0\ (n\geqslant2)$，$S(x)$ 是幂级数 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 的和函数。
+(1) 证明 $S''(x)-S(x)=0$；
+(2) 求 $S(x)$ 的表达式。
+
+\Q{7.2.2-104}{2017数三；880拓展1}若 $a_0=1$，$a_1=0$，$a_{n+1}=\frac{1}{n+1}(na_n+a_{n-1})\ (n=1,2,3,\cdots)$，$S(x)$ 为幂级数 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 的和函数。
+(1) 证明 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 的收敛半径不小于 1；
+(2) 证明 $(1-x)S'(x)-xS(x)=0\ (x\in(-1,1))$，并求 $S(x)$ 的表达式。
+
+\Q{7.2.2-105}{2007数一；强化严选第七章36}设幂级数 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 在 $(-\infty,+\infty)$ 内收敛，其和函数 $y(x)$ 满足 $y''-2xy'-4y=0$，$y(0)=0$，$y'(0)=1$。
+(1) 证明 $a_{n+2}=\frac{2}{n+1}a_n$，$n=1,2,\cdots$；
+(2) 求 $y(x)$ 的表达式。
+
+\Hfour{数项级数求和}
+
+\Hfive{结合积分}
+
+\Q{7.2.2-106}{1998数三}设有两条抛物线 $y=nx^{2}+\frac{1}{n}$ 和 $y=(n+1)x^{2}+\frac{1}{n+1}$，记它们交点的横坐标的绝对值为 $a_n$。
+(1) 求这两条抛物线所围成的平面图形的面积 $S_n$；
+(2) 求级数 $\displaystyle\sum_{n=1}^{\infty}\frac{S_n}{a_n}$ 的和。
+
+\Q{7.2.2-107}{2009数一}设 $a_n$ 为曲线 $y=x^{n}$ 与 $y=x^{n+1}\ (n=1,2,\cdots)$ 所围成区域的面积，记 $S_1=\displaystyle\sum_{n=1}^{\infty}a_n$，$S_2=\displaystyle\sum_{n=1}^{\infty}a_{2n-1}$，求 $S_1$ 与 $S_2$ 的值。
+
+\Hfive{直接给出 · 含 $n$ 次方（子型）}
+
+\Q{7.2.2-108}{1999数三}$\displaystyle\sum_{n=1}^{\infty}n\left(\frac{1}{2}\right)^{n-1}=$ \bk。
+
+\Q{7.2.2-109}{1993数一；李正元例11.20-1；张宇30习题16.14}求级数 $\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}(n^{2}-n+1)}{2^{n}}$ 的和。
+
+\Hfive{直接给出 · 含 $n$ 次方（母型）}
+
+\Q{7.2.2-110}{1996数一；1000基础13；李正元例11.20-2；880基础解答10-1}$\displaystyle\sum_{n=2}^{\infty}\frac{1}{(n^{2}-1)2^{n}}=$ \bk。
+
+\Q{7.2.2-111}{660数一133；基础严选第十章填空9}级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n2^{n+1}}$ 的和为 \bk。
+
+\Q{7.2.2-112}{武基础严选第十章解答10}求 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n(2n-1)}\frac{1}{3^{n}}$ 的和。
+
+\Q{7.2.2-113}{900第八章数一A类23}计算级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}2^{n}+3n+1}{(3n+1)2^{n}}$ 的和。
+
+\Q{7.2.2-114}{武基础严选第十章填空12}级数 $\displaystyle\sum_{n=1}^{\infty}\frac{2^{n}}{n!}$ 等于 \bk。
+
+\Hfive{直接给出 · 无 $n$ 次方}
+
+\Q{7.2.2-115}{2018数一}$\displaystyle\sum_{n=0}^{\infty}(-1)^{n}\frac{2n+3}{(2n+1)!}=$（　）。
+\opts{A. $\sin1+\cos1$\quad B. $2\sin1+\cos1$\quad C. $2\sin1+2\cos1$\quad D. $2\sin1+3\cos1$}
+
+\Q{7.2.2-116}{2021浙江竞赛}求级数 $\displaystyle\sum_{n=0}^{\infty}\frac{n^{2}+1}{n!}$ 的和。
+
+\Qn{7.2.2-117}求 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}(n+1)}{n!(n+2)}$ 的和。
+
+\Q{7.2.2-118}{张宇1000强化35}求级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}}{n(2n-1)}$ 的和。
+
+\Qn{7.2.2-119}求级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{(2n-1)(2n+1)}$ 的和。
+
+\Hfive{级数定义}
+
+\Q{7.2.2-120}{1991数一；880综合填空6}已知级数 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}a_n=2$，$\displaystyle\sum_{n=1}^{\infty}a_{2n-1}=5$，则级数 $\displaystyle\sum_{n=1}^{\infty}a_n$ 等于（　）。
+\opts{A. $3$\quad B. $7$\quad C. $8$\quad D. $9$}
+
+\Hthree{7.2.3　展开}
+
+\Hfour{有理函数}
+
+\Hfive{$1/$ 二次函数}
+
+\Q{7.2.3-121}{1987数三；880基础解答6-1；张宇30习题16.15}将函数 $f(x)=\frac{1}{x^{2}-3x+2}$ 展开成 $x$ 的幂级数，并指出收敛区间。
+
+\Q{7.2.3-122}{2007数三}将 $f(x)=\frac{1}{x^{2}-3x-4}$ 展开成 $x-1$ 的幂级数，并写出其收敛区间。
+
+\Hfive{$1/$ 框框的平方}
+
+\Q{7.2.3-123}{2026数三}函数 $f(x)$ 满足 $f(x)=\frac{1}{(2-x)^{2}}-\displaystyle\int_{0}^{1}f(t)\,\mathrm{d}t$，将 $f(x)$ 展开成 $x$ 的幂级数。
+
+\Q{7.2.3-124}{2008江苏竞赛 · 例7.15}将 $f(x)=\frac{x^{2}+2}{(x-1)^{2}(1+2x)}$ 展开成 $x$ 的幂级数。
+
+\Q{7.2.3-125}{姜真题同源150}将 $f(x)=\frac{x}{(x+1)^{2}}$ 展开成 $x-1$ 的幂级数。
+
+\Q{7.2.3-126}{姜真题同源150}将 $f(x)=\frac{1}{x^{2}}$ 展开成 $x-3$ 的幂级数。
+
+\Hfour{对数}
+
+\Q{7.2.3-127}{2024数一三}设幂级数 $\displaystyle\sum_{n=0}^{\infty}a_nx^{n}$ 的和函数为 $\ln(2+x)$，则 $\displaystyle\sum_{n=0}^{\infty}na_{2n}=$（　）。
+\opts{A. $-\frac{1}{6}$\quad B. $-\frac{1}{3}$\quad C. $\frac{1}{6}$\quad D. $\frac{1}{3}$}
+
+\Q{7.2.3-128}{姜晓千基础}将 $f(x)=\ln\frac{x}{x+1}$ 展开成 $x-1$ 的幂级数。
+
+\Q{7.2.3-129}{1995数三；880基础解答6-2}将函数 $y=\ln(1-x-2x^{2})$ 展成 $x$ 的幂级数，并指出其收敛区间。
+
+\Q{7.2.3-130}{1994数一}将函数 $f(x)=\frac{1}{4}\ln\frac{1+x}{1-x}+\frac{1}{2}\arctan x-x$ 展开成 $x$ 的幂级数。
+
+\Hfour{三角}
+
+\Hfive{$\arctan$}
+
+\Q{7.2.3-131}{2001数一；强化严选第七章34}设 $f(x)=\begin{cases}\dfrac{1+x^{2}}{x}\arctan x,&x\neq0,\\[0.3em] 1,&x=0,\end{cases}$ 试将 $f(x)$ 展开成 $x$ 的幂级数，并求级数 $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}}{1-4n^{2}}$ 的和。
+
+\Q{7.2.3-132}{2017江苏竞赛 · 例7.16}将 $f(x)=\frac{x}{(1+x^{2})^{2}}+\arctan\frac{1+x}{1-x}$ 展开成 $x$ 的幂级数。
+
+\Q{7.2.3-133}{2003数一}将函数 $f(x)=\arctan\frac{1-2x}{1+2x}$ 展开成 $x$ 的幂级数，并求级数 $\displaystyle\sum_{n=0}^{\infty}\frac{(-1)^{n}}{2n+1}$ 的和。
+
+\Q{7.2.3-134}{真题同源150；武强化严选第七章29}将 $f(x)=\arctan\frac{4+x^{2}}{4-x^{2}}$ 展开成 $x$ 的幂级数。
+
+\Hfive{$\sin$ / $\cos$}
+
+\Q{7.2.3-135}{2018数三}已知 $\cos2x-\frac{1}{(1+x)^{2}}=\displaystyle\sum_{n=0}^{\infty}a_nx^{n}\ (-1<x<1)$，求 $a_n$。
+
+\Q{7.2.3-136}{880基础解答9}将 $f(x)=\sin\frac{\pi}{2}x$ 在 $x=-2$ 处进行幂级数展开。
+
+\Q{7.2.3-137}{880综合解答10}将 $f(x)=\sin x+x\cos x$ 展开为 $x$ 的幂级数，并求 $\displaystyle\sum_{n=0}^{\infty}(-1)^{n}\frac{n+1}{(2n+1)!}$ 的和。
+
+\Hfour{指数相关}
+
+\Q{7.2.3-138}{880综合解答8}将 $f(x)=x\mathrm{e}^{x}$ 在 $x=2$ 处展开为幂级数，并求 $f^{(n)}(2)$。
+
+\Q{7.2.3-139}{880基础填空3}$f(x)=\displaystyle\int_{0}^{x}\mathrm{e}^{-t^{2}}\,\mathrm{d}t$ 展开为 $x$ 的幂级数为 \bk。
+
+\Hthree{7.2.4　傅里叶级数（仅数一）}
+
+\Hfour{傅里叶系数}
+
+\Q{7.2.4-140}{1993数一；张宇30习题16.8}设函数 $f(x)=\pi x+x^{2}\ (-\pi<x<\pi)$ 的傅里叶级数展开式为 $\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos nx+b_n\sin nx)$，则其中系数 $b_3$ 的值为 \bk。
+
+\Q{7.2.4-141}{2003数一；强化严选第七章42}设 $x^{2}=\displaystyle\sum_{n=0}^{\infty}a_n\cos nx\ (-\pi\leqslant x\leqslant\pi)$，则 $a_2=$ \bk。
+
+\Q{7.2.4-142}{2023数一；1000强化38}设 $f(x)$ 是周期为 2 的周期函数，且 $f(x)=1-x$，$x\in[0,1]$。若 $f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}a_n\cos n\pi x$，则 $\displaystyle\sum_{n=1}^{\infty}a_{2n}=$ \bk。
+
+\Q{7.2.4-143}{2024数一}已知函数 $f(x)=x+1$。若 $f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}a_n\cos nx$，$x\in[0,\pi]$，则 $\displaystyle\lim_{n\to\infty}n^{2}\sin a_{2n-1}=$ \bk。
+
+\Hfour{狄利克雷收敛定理}
+
+\Q{7.2.4-144}{1988数一；李正元例11.21-1}设 $f(x)$ 是周期为 2 的周期函数，它在区间 $(-1,1]$ 上的定义为 $f(x)=\begin{cases}2,&-1<x\leqslant0,\\[0.3em] x^{3},&0<x\leqslant1,\end{cases}$ 则 $f(x)$ 的傅里叶级数在 $x=1$ 处收敛于 \bk。
+
+\Q{7.2.4-145}{1992数一；880基础填空5}设 $f(x)=\begin{cases}-1,&-\pi<x\leqslant0,\\[0.3em] 1+x^{2},&0<x\leqslant\pi,\end{cases}$ 则其以 $2\pi$ 为周期的傅里叶级数在点 $x=\pi$ 处收敛于 \bk。
+
+\Q{7.2.4-146}{1989数一；李正元例11.21-2；十章填空14}设函数 $f(x)=x^{2}$，$0\leqslant x\leqslant1$，$S(x)=\displaystyle\sum_{n=1}^{\infty}b_n\sin n\pi x\ (-\infty<x<+\infty)$，其中 $b_n=2\displaystyle\int_{0}^{1}f(x)\sin n\pi x\,\mathrm{d}x$，$n=1,2,3,\dots$，则 $S\left(-\frac{1}{2}\right)=$（　）。
+\opts{A. $-\frac{1}{2}$\quad B. $-\frac{1}{4}$\quad C. $\frac{1}{4}$\quad D. $\frac{1}{2}$}
+
+\Q{7.2.4-147}{1999数一；张宇30例16.38}设 $f(x)=\begin{cases}x,&0\leqslant x\leqslant\frac{1}{2},\\[0.3em] 2-2x,&\frac{1}{2}<x<1,\end{cases}$ $S(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}a_n\cos n\pi x\ (-\infty<x<+\infty)$，其中 $a_n=2\displaystyle\int_{0}^{1}f(x)\cos n\pi x\,\mathrm{d}x\ (n=0,1,2,\cdots)$，则 $S\left(-\frac{5}{2}\right)$ 等于（　）。
+\opts{A. $\frac{1}{2}$\quad B. $-\frac{1}{2}$\quad C. $\frac{3}{4}$\quad D. $-\frac{3}{4}$}
+
+\Q{7.2.4-148}{2013数一；强化严选第七章41}设 $f(x)=\left|x-\frac{1}{2}\right|$，$b_n=2\displaystyle\int_{0}^{1}f(x)\sin n\pi x\,\mathrm{d}x\ (n=1,2,\cdots)$，令 $S(x)=\sum_{n=1}^{\infty}b_n\sin n\pi x$，则 $S\left(-\frac{9}{4}\right)=$（　）。
+\opts{A. $\frac{3}{4}$\quad B. $\frac{1}{4}$\quad C. $-\frac{1}{4}$\quad D. $-\frac{3}{4}$}
+
+\Q{7.2.4-149}{2025数一}已知函数 $f(x)=\begin{cases}0,&0\leqslant x<\frac{1}{2},\\[0.3em] x^{2},&\frac{1}{2}\leqslant x\leqslant1\end{cases}$ 的傅里叶级数为 $\displaystyle\sum_{n=1}^{\infty}b_n\sin n\pi x$，且 $S(x)$ 为 $\displaystyle\sum_{n=1}^{\infty}b_n\sin n\pi x$ 的和函数，则 $S\left(-\frac{7}{2}\right)=$ \bk。
+
+\Hfour{展开为傅里叶级数}
+
+\Q{7.2.4-150}{1991数一；强化严选第七章48}将函数 $f(x)=2+|x|\ (-1\leqslant x\leqslant1)$ 展开成以 2 为周期的傅里叶级数，并由此求级数 $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^{2}}$ 的和。
+
+\end{document}
