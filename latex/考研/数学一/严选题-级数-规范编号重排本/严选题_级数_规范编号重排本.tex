@@ -54,14 +54,14 @@
 
 % ---- 一~五级标题 ----
 \newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
-\newcommand{\Htwo}[1]{\par\addvspace{0.8em}\nobreak\noindent{\large\bfseries #1}\par\vspace{0.05em}\hrule height 0.7pt\vspace{0.3em}\nobreak\justheadingtrue}
-\newcommand{\Hthree}[1]{\par\addvspace{0.65em}\nobreak\noindent{\normalsize\bfseries #1}\par\addvspace{0.2em}\nobreak\justheadingtrue}
-\newcommand{\Hfour}[2]{\par\addvspace{0.45em}\nobreak\noindent{\bfseries #1\enskip #2}\par\addvspace{0.1em}\nobreak\justheadingtrue}
-\newcommand{\Hfive}[2]{\par\addvspace{0.32em}\nobreak\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\addvspace{0pt}\nobreak\justheadingtrue}
+\newcommand{\Htwo}[1]{\par\addvspace{0.8em}\nobreak\noindent{\large\bfseries #1}\par\vspace{0.05em}\hrule height 0.7pt\vspace{0.3em}\nobreak\justheadingtrue\typeout{H5-#1-#2 justheading=\ifjustheading T\else F\fi}}
+\newcommand{\Hthree}[1]{\par\addvspace{0.65em}\nobreak\noindent{\normalsize\bfseries #1}\par\addvspace{0.2em}\nobreak\justheadingtrue\typeout{H5-#1-#2 justheading=\ifjustheading T\else F\fi}}
+\newcommand{\Hfour}[2]{\par\addvspace{0.45em}\nobreak\noindent{\bfseries #1\enskip #2}\par\addvspace{0.1em}\nobreak\justheadingtrue\typeout{H5-#1-#2 justheading=\ifjustheading T\else F\fi}}
+\newcommand{\Hfive}[2]{\par\addvspace{0.32em}\nobreak\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\addvspace{0pt}\nobreak\justheadingtrue\typeout{H5-#1-#2 justheading=\ifjustheading T\else F\fi}}
 
 % ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
-\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
-\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+\newcommand{\Q}[2]{\typeout{Q-#1 justheading=\ifjustheading T\else F\fi}\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\typeout{Q-#1 justheading=\ifjustheading T\else F\fi}\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
 
 \begin{document}
 
