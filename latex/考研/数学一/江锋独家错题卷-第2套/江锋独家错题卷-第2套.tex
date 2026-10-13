@@ -1,0 +1,230 @@
+% !TEX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=1.6cm,top=1.4cm,bottom=1.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.0}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+\clubpenalty=10000
+\widowpenalty=10000
+\raggedbottom
+
+% ---- 大题标题 ----
+\newcommand{\parttitle}[1]{\par\addvspace{0.7em plus 0.4em}\noindent{\large\bfseries #1}\par\nobreak\vspace{0.25em}\nobreak}
+
+% ---- 题源标注 ----
+\newcommand{\src}[1]{{\small［#1］}}
+
+% ---- 选项：悬挂缩进，自动换行 ----
+\newcommand{\opt}[1]{\par\addvspace{0.1em}\hangindent=1.7em\hangafter=1\noindent #1\par}
+
+% ---- 填空横线 ----
+\newcommand{\blank}{\underline{\hspace{3.2cm}}}
+
+\setlist[enumerate]{label=\arabic*.,leftmargin=2.0em,itemsep=0.34em,parsep=0pt,topsep=0.3em}
+\setlist[enumerate,2]{label=(\arabic*),leftmargin=2.2em,itemsep=0.16em,parsep=0pt,topsep=0.16em}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries 江锋独家错题卷（概念深水区·第 2 套）}\\[0.3em]
+{\small 命题人：江峰\quad 2026-10-13\quad 时长 180 分钟（白纸闭卷，严禁中途看手机、翻讲义、查答案）\quad 满分 150 分}\\[0.1em]
+{\small 选择 12$\times$5$=$60\quad 填空 6$\times$5$=$30\quad 解答 9 题共 60 分\quad 每题做完在题号旁标注【真会】/【蒙】/【卡】/【白卷】}\\[0.1em]
+{\small 每题前［出处］即该题错题原案所在的真题／月考卷；底牌为 8 套真题与月考模拟卷里筛出的 74 条丢分记录（见 \texttt{薄弱点诊断\_2026-10-13.md}）}
+\end{center}
+
+\parttitle{一、选择题（1$\sim$12 题，每题 5 分，共 60 分）}
+
+\begin{enumerate}
+
+\item\src{出处：2027月考(一) T2 ＋ 2021数一 T1 融合变式}设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶可导，且 $f(0)=0$。若已知极限
+\[ \lim_{x\to 0}\frac{f(x)-\sin x}{x^{2}}=2 \]
+则下列结论正确的是（\quad）
+\opt{(A) $x=0$ 是 $f(x)$ 的极大值点 \quad (B) $x=0$ 是 $f(x)$ 的极小值点}
+\opt{(C) 点 $(0,0)$ 是曲线 $y=f(x)$ 的拐点}
+\opt{(D) 曲线 $y=f(x)$ 在 $x=0$ 处有切线 $y=x$，但 $x=0$ 不是极值点}
+
+\item\src{出处：2027月考(一) T5 ＋ 2013数一 T12 融合变式}下列反常积分中，条件收敛的是（\quad）
+\opt{(A) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{x^{2}}\,\mathrm{d}x$ \quad (B) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{\sqrt{x}}\,\mathrm{d}x$}
+\opt{(C) $\displaystyle\int_{1}^{+\infty}\frac{\sin^{2}x}{x}\,\mathrm{d}x$ \quad (D) $\displaystyle\int_{0}^{1}\frac{\cos(1/x)}{\sqrt{x}}\,\mathrm{d}x$}
+
+\item\src{出处：2023数一 T4 ＋ 严选题7.1.1-11(660一336) 深度融合}关于无穷级数
+\[ \sum_{n=1}^{\infty}\left[\frac{(-1)^{n}}{\sqrt{n}}+\frac{1}{n}\right] \quad\text{与}\quad \sum_{n=1}^{\infty}\ln\left(1+\frac{(-1)^{n}}{\sqrt{n}}\right) \]
+的敛散性，下列判断正确的是（\quad）
+\opt{(A) 两者均发散 \quad (B) 前者发散，后者条件收敛}
+\opt{(C) 两者均条件收敛 \quad (D) 前者收敛，后者发散}
+
+\item\src{出处：2021数一 T2 ＋ 2027月考(一) T6 概念链深挖}设函数 $f(x,y)$ 在点 $(0,0)$ 的某邻域内有定义，且 $f(0,0)=0$。下列命题中正确的是（\quad）
+\opt{(A) 若 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{f(x,y)-ax-by}{\sqrt{x^{2}+y^{2}}}=0$，则偏导数 $f_x'(x,y)$ 在 $(0,0)$ 处必连续}
+\opt{(B) 若 $f(x,y)$ 在 $(0,0)$ 处可微，则沿着任意非零向量 $\boldsymbol l$ 的方向导数 $\dfrac{\partial f}{\partial\boldsymbol l}(0,0)$ 均存在}
+\opt{(C) 若偏导数 $f_x'(0,0)$ 与 $f_y'(0,0)$ 均存在，且沿任意直线 $y=kx$ 趋于 $(0,0)$ 时均有 $f(x,kx)=o\!\left(\sqrt{x^{2}+k^{2}x^{2}}\right)$，则 $f(x,y)$ 在 $(0,0)$ 处必可微}
+\opt{(D) 若 $f(x,y)$ 在 $(0,0)$ 处的两个偏导数 $f_x',f_y'$ 存在且有界，则 $f(x,y)$ 在 $(0,0)$ 处必连续}
+
+\item\src{出处：2023数一 T2 原型变式（曾靠硬蒙选C）}设常数 $a,b\in\mathbb{R}$，若微分方程 $y''+ay'+by=0$ 的所有解在整个实数轴 $(-\infty,+\infty)$ 上均有界，则参数 $a,b$ 满足的充要条件是（\quad）
+\opt{(A) $a=0,\ b>0$ \quad (B) $a>0,\ b>0$ \quad (C) $a\ge 0,\ b>0$ \quad (D) $a=0,\ b\ge 0$}
+
+\item\src{出处：2019数一 T6 变式（曾法向量与交线方向搞混）}设三个平面方程构成的线性方程组为 $A\boldsymbol x=\boldsymbol b$，其中 $A$ 为 $3\times3$ 实矩阵。若矩阵的秩满足 $r(A)=2$ 且 $r(A,\boldsymbol b)=3$，且矩阵 $A$ 的任意两行向量均不成比例，则这三个平面在三维空间中的几何构型为（\quad）
+\opt{(A) 两两相交于三条互相平行的直线，无公共点（空心三棱柱）}
+\opt{(B) 存在两个互相平行的平面，第三个平面与它们分别相交}
+\opt{(C) 三个平面交于同一条直线}
+\opt{(D) 三个平面两两相交于同一条直线并重合}
+
+\item\src{出处：2027月考(一) T8 ＋ 2026数一 T6 融合变式}设 $A$ 为 $m\times n$ 实矩阵，$B$ 为 $n\times p$ 实矩阵。下列命题中错误的是（\quad）
+\opt{(A) 齐次线性方程组 $A^{\mathrm{T}}A\boldsymbol x=\boldsymbol 0$ 与 $A\boldsymbol x=\boldsymbol 0$ 必为同解方程组}
+\opt{(B) 若矩阵列满秩即 $r(A)=n$，则方阵 $A^{\mathrm{T}}A$ 必为正定矩阵}
+\opt{(C) 齐次线性方程组 $AB\boldsymbol x=\boldsymbol 0$ 有非零解的充分必要条件是 $B\boldsymbol x=\boldsymbol 0$ 有非零解}
+\opt{(D) 矩阵的秩恒满足 $r(A^{\mathrm{T}}A)=r(AA^{\mathrm{T}})=r(A)$}
+
+\item\src{出处：2027月考(一) T10 ＋ 2013数一 T13 融合变式}设 $A,B$ 均为 $n$ 阶实对称矩阵，下列命题中正确的是（\quad）
+\opt{(A) 若 $A$ 为正定矩阵，则必存在可逆矩阵 $P$ 使得 $P^{-1}AP=E$}
+\opt{(B) 若 $A,B$ 均正定，则矩阵乘积 $AB$ 必为正定矩阵}
+\opt{(C) $A$ 正定的充分必要条件是矩阵 $A$ 与单位矩阵 $E$ 合同}
+\opt{(D) 若 $A$ 正定，则其伴随矩阵 $A^{*}$ 不一定正定}
+
+\item\src{出处：2019数一 T22 ＋ 2021数一 T8 融合变式}设随机变量 $X$ 服从标准正态分布 $N(0,1)$，令随机变量 $Y=X^{2}$。记 $\rho_{XY}$ 为 $X$ 与 $Y$ 的相关系数，则（\quad）
+\opt{(A) $X$ 与 $Y$ 相互独立，且 $\rho_{XY}=0$ \quad (B) $X$ 与 $Y$ 不独立，且 $\rho_{XY}=0$}
+\opt{(C) $X$ 与 $Y$ 不独立，且 $\rho_{XY}\neq 0$ \quad (D) $X$ 与 $Y$ 相互独立，且 $\rho_{XY}\neq 0$}
+
+\item\src{出处：2026数一 T10 原型变式（曾靠“选项配平”猜错）}设元件 $A$ 与 $B$ 的寿命分别服从参数为 $p_1$ 与 $p_2$ 的几何分布（$0<p_1<p_2<1$）。库房中两类元件各占一半且外观无区别。随机抽取一件，记其寿命为 $T$。其离散失效率定义为 $\lambda(k)=P\{T=k\mid T\ge k\}$（$k=1,2,\dots$）。则关于失效率 $\lambda(k)$ 的性态，下列判断正确的是（\quad）
+\opt{(A) $\lambda(k)$ 严格单调递增（老化加速） \quad (B) $\lambda(k)$ 严格单调递减（老化减速，DHR）}
+\opt{(C) $\lambda(k)$ 恒为常数（保持无记忆性）}
+\opt{(D) 当 $k\to\infty$ 时，$\lambda(k)\to\dfrac{p_1+p_2}{2}$}
+
+\item\src{出处：2023数一 T9 变式（考场曾违规翻书）}设总体样本 $X_1,X_2,\dots,X_m$ 独立同分布于 $N(0,\sigma^{2})$，样本 $Y_1,Y_2,\dots,Y_n$ 独立同分布于 $N(0,2\sigma^{2})$，且两组样本相互独立。则下列构造出的统计量服从 $F(m,n)$ 分布的是（\quad）
+\opt{(A) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$ \quad (B) $\dfrac{2n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$}
+\opt{(C) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{2m\sum_{j=1}^{n}Y_j^{2}}$ \quad (D) $\dfrac{m\sum_{j=1}^{n}Y_j^{2}}{2n\sum_{i=1}^{m}X_i^{2}}$}
+
+\item\src{出处：2026数一 T20(I) 变式（曾觉得“显然”写不出解析证明）}设连续函数 $g(x)$ 在区间 $[0,1]$ 上严格单调递增，且积分满足 $\displaystyle\int_{0}^{1}g(x)\,\mathrm{d}x=0$。记定积分 $I=\displaystyle\int_{0}^{1}xg(x)\,\mathrm{d}x$，则下列结论恒成立的是（\quad）
+\opt{(A) $I<0$ \quad (B) $I=0$ \quad (C) $I>0$ \quad (D) $I$ 的正负号取决于端点值 $g(0)$ 的符号}
+
+\end{enumerate}
+
+\parttitle{二、填空题（13$\sim$18 题，每题 5 分，共 30 分）}
+
+\begin{enumerate}[resume]
+
+\item\src{出处：2027月考(一) T11 变式}设函数 $y=y(x)$ 由隐式方程
+\[ x=\int_{0}^{y-2x}\frac{1}{\sqrt{1+t^{4}}}\,\mathrm{d}t \]
+确定，则极限 $\displaystyle\lim_{n\to\infty}n\left[y\left(\frac{1}{n}\right)-y(0)\right]=\blank$。
+
+\item\src{出处：2027月考(一) T15 变式（专治令 $y'=p(y)$ 漏乘 $p$）}微分方程 $yy''+(y')^{2}=0$ 满足初始条件 $y(0)=1$、$y'(0)=2$ 的特解为 $y(x)=\blank$。
+
+\item\src{出处：2015数一 T12 ＋ 2019数一 T19 变式（曾算出 $2/3>1/6$ 荒谬值）}设空间四面体区域 $\Omega=\{(x,y,z)\mid x+y+z\le 1,\ x\ge 0,\ y\ge 0,\ z\ge 0\}$，则三重积分
+\[ \iiint_{\Omega}(3x+2y+z)\,\mathrm{d}x\mathrm{d}y\mathrm{d}z=\blank \]
+
+\item\src{出处：2027月考(一) T6 变式}设二元函数
+\[ f(x,y)=\begin{cases}\dfrac{x^{3}y-xy^{3}}{x^{2}+y^{2}},&x^{2}+y^{2}\neq 0\\[2mm] 0,&x^{2}+y^{2}=0\end{cases} \]
+则二阶混合偏导数 $f_{xy}''(0,0)=\blank$。
+
+\item\src{出处：2026数一 T15 ＋ 2021数一 T21 融合变式}设 3 阶实对称矩阵 $A$ 满足矩阵方程 $A^{2}=A$，且矩阵的秩 $r(A)=2$，则行列式 $|2A+E|=\blank$。
+
+\item\src{出处：2015数一 T14 变式（曾因式分解抄错爆出 $\Phi(1)^{2}$）}设随机变量 $X,Y$ 相互独立且均服从标准正态分布 $N(0,1)$，则概率 $P\{X^{2}-Y^{2}>0\}=\blank$。
+
+\end{enumerate}
+
+\parttitle{三、解答题（19$\sim$27 题，共 60 分）}
+
+\begin{enumerate}[resume]
+
+\item（7 分）\src{出处：2013数一 T18 ＋ 2023数一 T20(II) 深度融合}设函数 $f(x)$ 在闭区间 $[0,1]$ 上一阶连续可导，在开区间 $(0,1)$ 内二阶可导，且满足边界条件与定积分值：
+\[ f(0)=0,\quad f(1)=1,\quad \int_{0}^{1}f(x)\,\mathrm{d}x=\frac{1}{3} \]
+证明：在开区间 $(0,1)$ 内必存在一点 $\xi\in(0,1)$，使得 $f''(\xi)>0$。
+
+\item（7 分）\src{出处：2021数一 T14(白卷) ＋ 2023数一 T19(漏系数) ＋ 2015数一 T19(白卷) 终极熔炼}计算曲面积分
+\[ I=\iint_{\Sigma}x^{3}\,\mathrm{d}y\mathrm{d}z+y^{3}\,\mathrm{d}z\mathrm{d}x+z\,\mathrm{d}x\mathrm{d}y \]
+其中 $\Sigma$ 为抛物面 $z=1-x^{2}-y^{2}\ (z\ge 0)$ 的上侧。
+
+\item（7 分）\src{出处：2015数一 T22(第二问扣4分卡死) ＋ 2013数一 T16 融合变式}求幂级数 $\displaystyle\sum_{n=1}^{\infty}\frac{n}{n+1}x^{n}$ 的收敛域与和函数 $S(x)$。
+
+\item（7 分）\src{出处：2026数一 T21(死求4阶特征值扣4分) ＋ 2026数一 T6 深度变式}设矩阵
+\[ A=\begin{pmatrix}1&0&1\\0&1&1\\1&1&2\end{pmatrix},\qquad B=\begin{pmatrix}1&1\\0&1\\1&2\end{pmatrix} \]
+\begin{enumerate}
+\item 证明 $A$ 的列向量组可由 $B$ 的列向量组线性表出，并求出分解式 $A=BC$（其中 $C$ 为 $2\times3$ 矩阵）；
+\item 利用分解式 $A=BC$，求矩阵的高次幂 $A^{10}$。
+\end{enumerate}
+
+\item（7 分）\src{出处：2013数一 T21(战损6分) ＋ 2021数一 T21 变式}设三维非零列向量 $\boldsymbol\alpha=(1,1,1)^{\mathrm{T}}$，定义 3 阶矩阵 $A=\boldsymbol\alpha\boldsymbol\alpha^{\mathrm{T}}-2E$。
+\begin{enumerate}
+\item 求矩阵 $A$ 的全部特征值及其对应的特征子空间维数；
+\item 求一个可逆正交矩阵 $Q$，使得 $Q^{\mathrm{T}}AQ$ 为对角矩阵。
+\end{enumerate}
+
+\item（7 分）\src{出处：2026数一 T22 原型变式（曾全盘弃权吃零蛋扣12分）}某工业系统由 $n$ 个独立工作的电子元件串联组成，每个元件的寿命 $X_i\ (i=1,2,\dots,n)$ 均服从参数为 $\lambda\ (\lambda>0)$ 的指数分布。当系统中第一个元件发生故障时系统立即停机。记系统工作寿命为 $T$。
+\begin{enumerate}
+\item 求系统寿命 $T$ 的概率密度函数 $f_T(t)$，并指出 $T$ 服从何种概率分布及其分布参数；
+\item 计算系统的平均寿命 $E(T)$ 与方差 $D(T)$；
+\item 若设计指标要求系统的平均寿命不得低于 $t_0\ (t_0>0)$，试求该系统所能串联容纳的最多元件个数 $n$。
+\end{enumerate}
+
+\item（6 分）\src{出处：2019数一 T22(民科证明扣7分) ＋ 2021数一 T22(白卷12分) 融合变式}设二维随机变量 $(X,Y)$ 的联合概率密度函数为
+\[ f(x,y)=\begin{cases}c(x+y),&0<x<1,\ 0<y<1\\[1mm] 0,&\text{其他}\end{cases} \]
+\begin{enumerate}
+\item 求常数 $c$ 的值；
+\item 求边缘概率密度函数 $f_X(x)$ 与 $f_Y(y)$；
+\item 严格按照概率论关于随机变量独立的数学定义，判定 $X$ 与 $Y$ 是否相互独立，并给出严谨推导。
+\end{enumerate}
+
+\item（6 分）\src{出处：2027月考(一) T15 ＋ 2019数一 T10 融合变式}求微分方程 $yy''-2(y')^{2}=0$ 满足初始条件 $y(0)=1$、$y'(0)=1$ 的特解 $y(x)$。
+
+\item（6 分）\src{出处：2017数一 T19 ＋ 2015数一 T19 降维思想融合}在三维空间直角坐标系中，求坐标原点 $(0,0,0)$ 到两条平面的交线
+\[ \begin{cases}x+y+z=1\\ 2x-y+z=2\end{cases} \]
+的最短距离。
+
+\end{enumerate}
+
+\parttitle{卷后自评与真伪核验表（交卷必填）}
+
+{\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{|c|p{2.0cm}|p{4.0cm}|X|p{3.3cm}|}
+\hline
+\textbf{题号} & \textbf{自评标记} & \textbf{错题原案出处溯源} & \textbf{考查死穴与命题陷阱} & \textbf{天赢自审（哪一步卡壳 / 为什么心虚）}\\
+\hline
+1 & & 2027月考(一) T2 ＋ 2021数一 T1 & 单点可导与洛必达边界 / 极值驻点判定陷阱 & \\ \hline
+2 & & 2027月考(一) T5 ＋ 2013数一 T12 & 狄利克雷判别法严格条件 / 瑕积分与无穷积分 & \\ \hline
+3 & & 2023数一 T4 ＋ 严选题7.1.1-11 & 交错级数 Leibniz 破缺 / 泰勒定阶调和抵消 & \\ \hline
+4 & & 2021数一 T2 ＋ 2027月考(一) T6 & 可微、方向导数存在与偏导连续关系链 & \\ \hline
+5 & & 2023数一 T2（曾靠硬蒙选 C） & 二阶微分方程解在全实轴有界 / 纯虚根特征 & \\ \hline
+6 & & 2019数一 T6（法向量与交线搞混） & 平面位置关系与增广矩阵秩的几何对应 & \\ \hline
+7 & & 2027月考(一) T8 ＋ 2026数一 T6 & 矩阵同解定理与列空间相容性 & \\ \hline
+8 & & 2027月考(一) T10 ＋ 2013数一 T13 & 正定二次型规范形 / 合同与相似严格边界 & \\ \hline
+9 & & 2019数一 T22 ＋ 2021数一 T8 & 零相关与独立性严格判定 / 对称分布协方差 & \\ \hline
+10 & & 2026数一 T10（曾选项配平猜错） & 混合几何分布 / 幸存者偏差与 DHR 性质 & \\ \hline
+11 & & 2023数一 T9（考场曾违规翻书） & 抽样分布自由度 / 正态二次型构造 F 分布 & \\ \hline
+12 & & 2026数一 T20(I)（单调积分为 0 解析证明） & 单调函数积分零点与保号性构造技巧 & \\ \hline
+13 & & 2027月考(一) T11（见 $1/n$ 乱套定积分） & 变上限积分隐函数求导 / 单点导数定义融合 & \\ \hline
+14 & & 2027月考(一) T15（令 $y'=p(y)$ 漏乘 $p$） & 不显含自变量降阶换元链式法则 & \\ \hline
+15 & & 2015数一 T12 ＋ 2019数一 T19 & 空间区域轮换对称性与四面体形心降维 & \\ \hline
+16 & & 2027月考(一) T6（分段二阶偏导定义） & 分界点处二阶混合偏导数的定义法分步求解 & \\ \hline
+17 & & 2026数一 T15 ＋ 2021数一 T21 & 幂等矩阵的特征值性质与矩阵行列式 & \\ \hline
+18 & & 2015数一 T14（因式分解翻车） & 独立对称变量象限二等分概率性质 & \\ \hline
+19 & & 2013数一 T18 ＋ 2023数一 T20(II) & 积分值约束下的二阶导数符号反证 / 构造法 & \\ \hline
+20 & & 2021数一 T14 ＋ 2023数一 T19 ＋ 2015数一 T19 & 开放曲面补底面 / 高斯公式与降维消元 & \\ \hline
+21 & & 2015数一 T22 ＋ 2013数一 T16 & 幂级数拆项求和 / 逐项积分端点收敛域 & \\ \hline
+22 & & 2026数一 T21 ＋ 2026数一 T6 & 像空间包含关系 / 满秩分解 $A=BC$ 算高次幂 & \\ \hline
+23 & & 2013数一 T21 ＋ 2021数一 T21 & 秩 1 外积矩阵的谱分解与 Schmidt 正交化 & \\ \hline
+24 & & 2026数一 T22（极小值寿命试验交白卷） & 串联系统极小值次序统计量 / 连续寿命分布 & \\ \hline
+25 & & 2019数一 T22 ＋ 2021数一 T22 & 二维联合密度独立性定义检验与矩性质 & \\ \hline
+26 & & 2027月考(一) T15 ＋ 2019数一 T10 & 缺 $x$ 型二阶方程令 $y'=p(y)$ 链式求导 & \\ \hline
+27 & & 2017数一 T19 ＋ 2015数一 T19 & 空间直线距离约束极值 / 几何降维法 & \\ \hline
+\end{tabularx}
+}
+
+\end{document}
