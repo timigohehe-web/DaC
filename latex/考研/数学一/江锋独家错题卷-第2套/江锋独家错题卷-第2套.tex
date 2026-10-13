@@ -29,8 +29,33 @@
 % ---- 大题标题 ----
 \newcommand{\parttitle}[1]{\par\addvspace{0.6em plus 0.4em}\noindent{\large\bfseries #1}\par\nobreak\vspace{0.2em}\nobreak}
 
-% ---- 选项：小一号字，悬挂缩进，自动换行 ----
-\newcommand{\opt}[1]{\par\addvspace{0.06em}\begingroup\small\hangindent=1.7em\hangafter=1\noindent #1\par\endgroup}
+% ---- 选项：等宽自适应分列（4 列 -> 2 列 -> 单列悬挂），ABCD 严格对齐 ----
+\newlength{\optA}\newlength{\optB}\newlength{\optC}\newlength{\optD}
+\newlength{\optMax}\newlength{\optColW}
+\newcommand{\optline}[1]{\par\addvspace{0.06em}\hangindent=1.4em\hangafter=1\noindent #1\par}
+\newcommand{\opts}[4]{%
+  \par\addvspace{0.12em}\begingroup
+  \setlength{\tabcolsep}{0.5em}%
+  \settowidth{\optA}{#1}\settowidth{\optB}{#2}\settowidth{\optC}{#3}\settowidth{\optD}{#4}%
+  \setlength{\optMax}{\optA}%
+  \ifdim\optB>\optMax\setlength{\optMax}{\optB}\fi
+  \ifdim\optC>\optMax\setlength{\optMax}{\optC}\fi
+  \ifdim\optD>\optMax\setlength{\optMax}{\optD}\fi
+  \setlength{\optColW}{\linewidth}%
+  \addtolength{\optColW}{-6\tabcolsep}\divide\optColW by 4 \addtolength{\optColW}{-0.35em}%
+  \ifdim\optMax>\optColW
+    \setlength{\optColW}{\linewidth}%
+    \addtolength{\optColW}{-2\tabcolsep}\divide\optColW by 2 \addtolength{\optColW}{-0.35em}%
+    \ifdim\optMax>\optColW
+      \optline{#1}\optline{#2}\optline{#3}\optline{#4}%
+    \else
+      \begin{tabularx}{\linewidth}{@{}XX@{}}#1&#2\\#3&#4\end{tabularx}\par
+    \fi
+  \else
+    \begin{tabularx}{\linewidth}{@{}XXXX@{}}#1&#2&#3&#4\end{tabularx}\par
+  \fi
+  \endgroup
+}
 
 % ---- 填空横线 ----
 \newcommand{\blank}{\underline{\hspace{3.2cm}}}
@@ -54,54 +79,42 @@
 \item 设函数 $f(x)$ 在 $x=0$ 的某邻域内二阶可导，且 $f(0)=0$。若已知极限
 \[ \lim_{x\to 0}\frac{f(x)-\sin x}{x^{2}}=2 \]
 则下列结论正确的是（\quad）
-\opt{(A) $x=0$ 是 $f(x)$ 的极大值点 \quad (B) $x=0$ 是 $f(x)$ 的极小值点}
-\opt{(C) 点 $(0,0)$ 是曲线 $y=f(x)$ 的拐点}
-\opt{(D) 曲线 $y=f(x)$ 在 $x=0$ 处有切线 $y=x$，但 $x=0$ 不是极值点}
+\opts{(A) $x=0$ 是 $f(x)$ 的极大值点}{(B) $x=0$ 是 $f(x)$ 的极小值点}{(C) 点 $(0,0)$ 是曲线 $y=f(x)$ 的拐点}{(D) 曲线 $y=f(x)$ 在 $x=0$ 处有切线 $y=x$，但 $x=0$ 不是极值点}
 
 \item 下列反常积分中，条件收敛的是（\quad）
-\opt{(A) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{x^{2}}\,\mathrm{d}x$ \quad (B) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{\sqrt{x}}\,\mathrm{d}x$}
-\opt{(C) $\displaystyle\int_{1}^{+\infty}\frac{\sin^{2}x}{x}\,\mathrm{d}x$ \quad (D) $\displaystyle\int_{0}^{1}\frac{\cos(1/x)}{\sqrt{x}}\,\mathrm{d}x$}
+\opts{(A) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{x^{2}}\,\mathrm{d}x$}{(B) $\displaystyle\int_{1}^{+\infty}\frac{\sin x}{\sqrt{x}}\,\mathrm{d}x$}{(C) $\displaystyle\int_{1}^{+\infty}\frac{\sin^{2}x}{x}\,\mathrm{d}x$}{(D) $\displaystyle\int_{0}^{1}\frac{\cos(1/x)}{\sqrt{x}}\,\mathrm{d}x$}
 
 \item 关于无穷级数
 \[ \sum_{n=1}^{\infty}\left[\frac{(-1)^{n}}{\sqrt{n}}+\frac{1}{n}\right] \quad\text{与}\quad \sum_{n=1}^{\infty}\ln\left(1+\frac{(-1)^{n}}{\sqrt{n}}\right) \]
 的敛散性，下列判断正确的是（\quad）
-\opt{(A) 两者均发散 \quad (B) 前者发散，后者条件收敛 \quad (C) 两者均条件收敛 \quad (D) 前者收敛，后者发散}
+\opts{(A) 两者均发散}{(B) 前者发散，后者条件收敛}{(C) 两者均条件收敛}{(D) 前者收敛，后者发散}
 
 \item 设函数 $f(x,y)$ 在点 $(0,0)$ 的某邻域内有定义，且 $f(0,0)=0$。下列命题中正确的是（\quad）
-\opt{(A) 若 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{f(x,y)-ax-by}{\sqrt{x^{2}+y^{2}}}=0$，则偏导数 $f_x'(x,y)$ 在 $(0,0)$ 处必连续}
-\opt{(B) 若 $f(x,y)$ 在 $(0,0)$ 处可微，则沿着任意非零向量 $\boldsymbol l$ 的方向导数 $\dfrac{\partial f}{\partial\boldsymbol l}(0,0)$ 均存在}
-\opt{(C) 若偏导数 $f_x'(0,0)$ 与 $f_y'(0,0)$ 均存在，且沿任意直线 $y=kx$ 趋于 $(0,0)$ 时均有 $f(x,kx)=o\!\left(\sqrt{x^{2}+k^{2}x^{2}}\right)$，则 $f(x,y)$ 在 $(0,0)$ 处必可微}
-\opt{(D) 若 $f(x,y)$ 在 $(0,0)$ 处的两个偏导数 $f_x',f_y'$ 存在且有界，则 $f(x,y)$ 在 $(0,0)$ 处必连续}
+\opts{(A) 若 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{f(x,y)-ax-by}{\sqrt{x^{2}+y^{2}}}=0$，则偏导数 $f_x'(x,y)$ 在 $(0,0)$ 处必连续}{(B) 若 $f(x,y)$ 在 $(0,0)$ 处可微，则沿着任意非零向量 $\boldsymbol l$ 的方向导数 $\dfrac{\partial f}{\partial\boldsymbol l}(0,0)$ 均存在}{(C) 若偏导数 $f_x'(0,0)$ 与 $f_y'(0,0)$ 均存在，且沿任意直线 $y=kx$ 趋于 $(0,0)$ 时均有 $f(x,kx)=o(\sqrt{x^{2}+k^{2}x^{2}})$，则 $f(x,y)$ 在 $(0,0)$ 处必可微}{(D) 若 $f(x,y)$ 在 $(0,0)$ 处的两个偏导数 $f_x',f_y'$ 存在且有界，则 $f(x,y)$ 在 $(0,0)$ 处必连续}
 
 \item 设常数 $a,b\in\mathbb{R}$，若微分方程 $y''+ay'+by=0$ 的所有解在整个实数轴 $(-\infty,+\infty)$ 上均有界，则参数 $a,b$ 满足的充要条件是（\quad）
-\opt{(A) $a=0,\ b>0$ \quad (B) $a>0,\ b>0$ \quad (C) $a\ge 0,\ b>0$ \quad (D) $a=0,\ b\ge 0$}
+\opts{(A) $a=0,\ b>0$}{(B) $a>0,\ b>0$}{(C) $a\ge 0,\ b>0$}{(D) $a=0,\ b\ge 0$}
 
 \item 设三个平面方程构成的线性方程组为 $A\boldsymbol x=\boldsymbol b$，其中 $A$ 为 $3\times3$ 实矩阵。若矩阵的秩满足 $r(A)=2$ 且 $r(A,\boldsymbol b)=3$，且矩阵 $A$ 的任意两行向量均不成比例，则这三个平面在三维空间中的几何构型为（\quad）
-\opt{(A) 两两相交于三条互相平行的直线，无公共点（空心三棱柱） \quad (B) 存在两个互相平行的平面，第三个平面与它们分别相交}
-\opt{(C) 三个平面交于同一条直线 \quad (D) 三个平面两两相交于同一条直线并重合}
+\opts{(A) 两两相交于三条互相平行的直线，无公共点（空心三棱柱）}{(B) 存在两个互相平行的平面，第三个平面与它们分别相交}{(C) 三个平面交于同一条直线}{(D) 三个平面两两相交于同一条直线并重合}
 
 \item 设 $A$ 为 $m\times n$ 实矩阵，$B$ 为 $n\times p$ 实矩阵。下列命题中错误的是（\quad）
-\opt{(A) 齐次线性方程组 $A^{\mathrm{T}}A\boldsymbol x=\boldsymbol 0$ 与 $A\boldsymbol x=\boldsymbol 0$ 必为同解方程组}
-\opt{(B) 若矩阵列满秩即 $r(A)=n$，则方阵 $A^{\mathrm{T}}A$ 必为正定矩阵}
-\opt{(C) 齐次线性方程组 $AB\boldsymbol x=\boldsymbol 0$ 有非零解的充分必要条件是 $B\boldsymbol x=\boldsymbol 0$ 有非零解}
-\opt{(D) 矩阵的秩恒满足 $r(A^{\mathrm{T}}A)=r(AA^{\mathrm{T}})=r(A)$}
+\opts{(A) 齐次线性方程组 $A^{\mathrm{T}}A\boldsymbol x=\boldsymbol 0$ 与 $A\boldsymbol x=\boldsymbol 0$ 必为同解方程组}{(B) 若矩阵列满秩即 $r(A)=n$，则方阵 $A^{\mathrm{T}}A$ 必为正定矩阵}{(C) 齐次线性方程组 $AB\boldsymbol x=\boldsymbol 0$ 有非零解的充分必要条件是 $B\boldsymbol x=\boldsymbol 0$ 有非零解}{(D) 矩阵的秩恒满足 $r(A^{\mathrm{T}}A)=r(AA^{\mathrm{T}})=r(A)$}
 
 \item 设 $A,B$ 均为 $n$ 阶实对称矩阵，下列命题中正确的是（\quad）
-\opt{(A) 若 $A$ 为正定矩阵，则必存在可逆矩阵 $P$ 使得 $P^{-1}AP=E$ \quad (B) 若 $A,B$ 均正定，则矩阵乘积 $AB$ 必为正定矩阵}
-\opt{(C) $A$ 正定的充分必要条件是矩阵 $A$ 与单位矩阵 $E$ 合同 \quad (D) 若 $A$ 正定，则其伴随矩阵 $A^{*}$ 不一定正定}
+\opts{(A) 若 $A$ 为正定矩阵，则必存在可逆矩阵 $P$ 使得 $P^{-1}AP=E$}{(B) 若 $A,B$ 均正定，则矩阵乘积 $AB$ 必为正定矩阵}{(C) $A$ 正定的充分必要条件是矩阵 $A$ 与单位矩阵 $E$ 合同}{(D) 若 $A$ 正定，则其伴随矩阵 $A^{*}$ 不一定正定}
 
 \item 设随机变量 $X$ 服从标准正态分布 $N(0,1)$，令随机变量 $Y=X^{2}$。记 $\rho_{XY}$ 为 $X$ 与 $Y$ 的相关系数，则（\quad）
-\opt{(A) $X,Y$ 相互独立且 $\rho_{XY}=0$ \quad (B) $X,Y$ 不独立且 $\rho_{XY}=0$ \quad (C) $X,Y$ 不独立且 $\rho_{XY}\neq 0$ \quad (D) $X,Y$ 相互独立且 $\rho_{XY}\neq 0$}
+\opts{(A) $X$ 与 $Y$ 相互独立，且 $\rho_{XY}=0$}{(B) $X$ 与 $Y$ 不独立，且 $\rho_{XY}=0$}{(C) $X$ 与 $Y$ 不独立，且 $\rho_{XY}\neq 0$}{(D) $X$ 与 $Y$ 相互独立，且 $\rho_{XY}\neq 0$}
 
 \item 设元件 $A$ 与 $B$ 的寿命分别服从参数为 $p_1$ 与 $p_2$ 的几何分布（$0<p_1<p_2<1$）。库房中两类元件各占一半且外观无区别。随机抽取一件，记其寿命为 $T$。其离散失效率定义为 $\lambda(k)=P\{T=k\mid T\ge k\}$（$k=1,2,\dots$）。则关于失效率 $\lambda(k)$ 的性态，下列判断正确的是（\quad）
-\opt{(A) $\lambda(k)$ 严格单调递增（老化加速） \quad (B) $\lambda(k)$ 严格单调递减（老化减速，DHR） \quad (C) $\lambda(k)$ 恒为常数（保持无记忆性）}
-\opt{(D) 当 $k\to\infty$ 时，$\lambda(k)\to\dfrac{p_1+p_2}{2}$}
+\opts{(A) $\lambda(k)$ 严格单调递增（老化加速）}{(B) $\lambda(k)$ 严格单调递减（老化减速，DHR）}{(C) $\lambda(k)$ 恒为常数（保持无记忆性）}{(D) 当 $k\to\infty$ 时，$\lambda(k)\to\dfrac{p_1+p_2}{2}$}
 
 \item 设总体样本 $X_1,X_2,\dots,X_m$ 独立同分布于 $N(0,\sigma^{2})$，样本 $Y_1,Y_2,\dots,Y_n$ 独立同分布于 $N(0,2\sigma^{2})$，且两组样本相互独立。则下列构造出的统计量服从 $F(m,n)$ 分布的是（\quad）
-\opt{(A) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$ \quad (B) $\dfrac{2n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$ \quad (C) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{2m\sum_{j=1}^{n}Y_j^{2}}$ \quad (D) $\dfrac{m\sum_{j=1}^{n}Y_j^{2}}{2n\sum_{i=1}^{m}X_i^{2}}$}
+\opts{(A) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$}{(B) $\dfrac{2n\sum_{i=1}^{m}X_i^{2}}{m\sum_{j=1}^{n}Y_j^{2}}$}{(C) $\dfrac{n\sum_{i=1}^{m}X_i^{2}}{2m\sum_{j=1}^{n}Y_j^{2}}$}{(D) $\dfrac{m\sum_{j=1}^{n}Y_j^{2}}{2n\sum_{i=1}^{m}X_i^{2}}$}
 
 \item 设连续函数 $g(x)$ 在区间 $[0,1]$ 上严格单调递增，且积分满足 $\displaystyle\int_{0}^{1}g(x)\,\mathrm{d}x=0$。记定积分 $I=\displaystyle\int_{0}^{1}xg(x)\,\mathrm{d}x$，则下列结论恒成立的是（\quad）
-\opt{(A) $I<0$ \quad (B) $I=0$ \quad (C) $I>0$ \quad (D) $I$ 的正负号取决于端点值 $g(0)$ 的符号}
+\opts{(A) $I<0$}{(B) $I=0$}{(C) $I>0$}{(D) $I$ 的正负号取决于端点值 $g(0)$ 的符号}
 
 \end{enumerate}
 
