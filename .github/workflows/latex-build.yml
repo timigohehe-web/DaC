@@ -30,7 +30,7 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           # 只编译当前这一个文件（改这里指向要编译的 tex）
-          root_file: "latex/考研/数学一/严选题-微分方程-规范编号重排本/严选题_微分方程_规范编号重排本.tex"
+          root_file: "latex/考研/数学一/严选题-极限与连续-规范编号重排本/严选题_极限与连续_规范编号重排本.tex"
           compiler: latexmk
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
