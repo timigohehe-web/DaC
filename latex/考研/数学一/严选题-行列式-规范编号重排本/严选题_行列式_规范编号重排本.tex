@@ -1,0 +1,254 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.0cm,top=1.9cm,bottom=2.0cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% --- 分页美观：禁止孤行、寡行；标题块整体不可分割 ---
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=5000
+\raggedbottom
+\newif\ifjustheading
+\justheadingfalse
+
+\linespread{1.3}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+
+% ---- 填空 ----
+\newcommand{\bk}{\underline{\hspace{3.2em}}}
+
+% ---- 选项块（悬挂左缩进，自动换行） ----
+% ---- 选项：自适应分列（四列等宽对齐 -> 两列 -> 单列悬挂） ----
+\newlength{\optA}\newlength{\optB}\newlength{\optC}\newlength{\optD}
+\newlength{\optMax}\newlength{\optColW}
+\newcommand{\optline}[1]{\par\addvspace{0.06em}\hangindent=1.4em\hangafter=1\noindent #1\par}
+\newcommand{\opts}[4]{%
+  \par\addvspace{0.1em}\begingroup
+  \setlength{\tabcolsep}{0.5em}%
+  \settowidth{\optA}{#1}\settowidth{\optB}{#2}\settowidth{\optC}{#3}\settowidth{\optD}{#4}%
+  \setlength{\optMax}{\optA}%
+  \ifdim\optB>\optMax\setlength{\optMax}{\optB}\fi
+  \ifdim\optC>\optMax\setlength{\optMax}{\optC}\fi
+  \ifdim\optD>\optMax\setlength{\optMax}{\optD}\fi
+  \setlength{\optColW}{\linewidth}%
+  \addtolength{\optColW}{-6\tabcolsep}\divide\optColW by 4 \addtolength{\optColW}{-0.35em}%
+  \ifdim\optMax>\optColW
+    \setlength{\optColW}{\linewidth}%
+    \addtolength{\optColW}{-2\tabcolsep}\divide\optColW by 2 \addtolength{\optColW}{-0.35em}%
+    \ifdim\optMax>\optColW
+      \optline{#1}\optline{#2}\optline{#3}\optline{#4}%
+    \else
+      \begin{tabularx}{\linewidth}{@{}XX@{}}#1&#2\\#3&#4\end{tabularx}\par
+    \fi
+  \else
+    \begin{tabularx}{\linewidth}{@{}XXXX@{}}#1&#2&#3&#4\end{tabularx}\par
+  \fi
+  \endgroup
+}
+
+% ---- 一~五级标题 ----
+\newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
+\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.9em plus 0.6em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
+\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.7em plus 0.6em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.55em plus 0.5em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.4em plus 0.5em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
+
+% ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
+\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+
+\begin{document}
+
+\Hone{一、行列式}
+\begin{center}\small
+编号：题号 \textbf{【1.x.y-n】} 中 $n$ 为本章题目连续序号、1.x.y 为该题所属三级条目；标题数字点分最多到三级，四级用大写字母（1.3.1-A）。\quad ［　］内为出处缩写；小题用 (1)(2) 分问。每题下方留白即作答区。
+\end{center}
+
+\Htwo{1.1　具体行列式计算}
+
+\Hthree{1.1.1　具体行列式计算}
+
+\Q{1.1.1-1}{14数一/二/三}$\begin{vmatrix}0 & a & b & 0 \\ a & 0 & 0 & b \\ 0 & c & d & 0 \\ c & 0 & 0 & d\end{vmatrix}=$（　）。
+\opts{A. $(ad-bc)^{2}$}{B. $-(ad-bc)^{2}$}{C. $a^{2}d^{2}-b^{2}c^{2}$}{D. $b^{2}c^{2}-a^{2}d^{2}$}
+\vspace{3.6cm}
+
+\Q{1.1.1-2}{15数一}$n$ 阶行列式 $\begin{vmatrix}2&0&\cdots&0&2\\-1&2&\cdots&0&2\\\vdots&\vdots&&\vdots&\vdots\\0&0&\cdots&2&2\\0&0&\cdots&-1&2\end{vmatrix}=$ \bk。
+\vspace{4.0cm}
+
+\Q{1.1.1-3}{16数一/三}行列式 $\begin{vmatrix}\lambda&-1&0&0\\0&\lambda&-1&0\\0&0&\lambda&-1\\4&3&2&\lambda+1\end{vmatrix}=$ \bk。
+\vspace{3.2cm}
+
+\Q{1.1.1-4}{20数一/二/三}行列式 $\begin{vmatrix}a&0&-1&1\\0&a&1&-1\\-1&1&a&0\\1&-1&0&a\end{vmatrix}=$ \bk。
+\vspace{3.4cm}
+
+\Htwo{1.2　抽象行列式计算}
+
+\Hthree{1.2.1　抽象行列式计算}
+
+\Q{1.2.1-5}{99数一}设 $A$ 是 $m \times n$ 矩阵，$B$ 是 $n \times m$ 矩阵，则（　）。
+\opts{A. 当 $m>n$ 时，必有行列式 $|AB|\neq 0$}{B. 当 $m>n$ 时，必有行列式 $|AB|=0$}{C. 当 $n>m$ 时，必有行列式 $|AB|\neq 0$}{D. 当 $n>m$ 时，必有行列式 $|AB|=0$}
+\vspace{3.0cm}
+
+\Q{1.2.1-6}{03数二}设三阶方阵 $A,B$ 满足 $A^{2}B-A-B=E$，其中 $E$ 为三阶单位矩阵，若 $A=\begin{bmatrix}1&0&1\\0&2&0\\-2&0&1\end{bmatrix}$，则 $|B|=$ \bk。
+\vspace{3.2cm}
+
+\Q{1.2.1-7}{05数一/二}设 $\alpha_{1},\alpha_{2},\alpha_{3}$ 均为 3 维列向量，记矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3})$，$B=\left(\alpha_{1}+\alpha_{2}+\alpha_{3},\alpha_{1}+2\alpha_{2}+4\alpha_{3},\alpha_{1}+3\alpha_{2}+9\alpha_{3}\right)$。如果 $|A|=1$，那么 $|B|=$ \bk。
+\vspace{3.6cm}
+
+\Q{1.2.1-8}{18数三}设 $A$ 为 3 阶矩阵，$\alpha_{1},\alpha_{2},\alpha_{3}$ 是线性无关的向量组。若 $A\alpha_{1}=\alpha_{1}+\alpha_{2}$，$A\alpha_{2}=\alpha_{2}+\alpha_{3}$，$A\alpha_{3}=\alpha_{1}+\alpha_{3}$，则 $|A|=$ \bk。
+\vspace{3.4cm}
+
+\Q{1.2.1-9}{01数一}已知 3 阶矩阵 $A$ 与 3 维向量 $x$，使得向量组 $x,Ax,A^{2}x$ 线性无关，且满足 $A^{3}x=3Ax-2A^{2}x$。
+
+(1) 记 $P=(x,Ax,A^{2}x)$，求 3 阶矩阵 $B$，使 $A=PBP^{-1}$；
+
+(2) 计算行列式 $|A+E|$。
+\vspace{6.0cm}
+
+\Q{1.2.1-10}{95数一}设 $A$ 是 $n$ 阶方阵，且 $AA^{T}=E$，$|A|<0$，则 $|A+E|=$ \bk。
+\vspace{2.8cm}
+
+\Q{1.2.1-11}{10数二/三}设 $A,B$ 为 3 阶矩阵，且 $|A|=3$，$|B|=2$，$|A^{-1}+B|=2$，则 $|A+B^{-1}|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-12}{12数二/三}设 $A$ 为 3 阶矩阵，$|A|=3$，$A^{*}$ 为 $A$ 的伴随矩阵，若交换 $A$ 的第 1 行与第 2 行得矩阵 $B$，则 $|BA^{*}|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-13}{23数二/三}已知线性方程组 $\begin{cases}ax_{1}+x_{3}=1,\\ x_{1}+ax_{2}+x_{3}=0,\\ x_{1}+2x_{2}+ax_{3}=0,\\ ax_{1}+bx_{2}=2\end{cases}$ 有解，其中 $a,b$ 为常数。若 $\begin{vmatrix}a&0&1\\1&a&1\\1&2&a\end{vmatrix}=4$，则 $\begin{vmatrix}1&a&1\\1&2&a\\a&b&0\end{vmatrix}=$ \bk。
+\vspace{3.8cm}
+
+\Q{1.2.1-14}{18数一}设 2 阶矩阵 $A$ 有两个不同特征值，$\alpha_{1},\alpha_{2}$ 是 $A$ 的线性无关的特征向量，且满足 $A^{2}(\alpha_{1}+\alpha_{2})=\alpha_{1}+\alpha_{2}$，则 $|A|=$ \bk。
+\vspace{3.2cm}
+
+\Q{1.2.1-15}{15数二/三}设 3 阶矩阵 $A$ 的特征值为 $2,-2,1$，$B=A^{2}-A+E$，其中 $E$ 为 3 阶单位矩阵，则行列式 $|B|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-16}{24数三}设 $A$ 为 3 阶矩阵，$A^{*}$ 为 $A$ 的伴随矩阵，$E$ 为 3 阶单位矩阵。若 $r(2E-A)=1$，$r(E+A)=2$，则 $|A^{*}|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-17}{880综填}设 $A$ 是 3 阶方阵，且满足 $|A-E|=|A+2E|=|2A+3E|=0$，则 $|2A^{*}-3E|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-18}{姜基}设 $n$ 阶实对称矩阵 $A$ 满足 $A^{4}+2A^{3}+A^{2}+2A=O$，且 $r(A)=r$，则 $|A+3E|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-19}{姜强}设 $n$ 阶实对称矩阵 $A$ 满足 $A^{2}+A=O$，$n$ 阶矩阵 $B$ 满足 $B^{2}+B=E$，且 $r(AB)=2$，则 $|A+2E|=$ \bk。
+\vspace{3.0cm}
+
+\Q{1.2.1-20}{姜强}设 $n$ 阶矩阵 $A$ 与 $B$ 相似，满足 $A^{2}=2E$，则 $|AB+A-B-E|=$ \bk。
+\vspace{3.2cm}
+
+\Q{1.2.1-21}{25押四数二卷3-16}设 $A,B,C$ 均为 3 阶矩阵，$A$ 的特征值为 $1,2,3$。$B$ 是可逆矩阵，且满足 $AB-B^{2}+BC=O$，$E$ 是 3 阶单位矩阵，则行列式 $|(B-C)^{-1}+E|=$ \bk。
+\vspace{3.4cm}
+
+\Q{1.2.1-22}{25押四数二卷1-16}设 $\alpha_{1},\alpha_{2},\cdots,\alpha_{k}\ (k>1)$ 是 $n$ 维正交单位实列向量组，$A=\displaystyle\sum_{i=1}^{k}\alpha_{i}\alpha_{i}^{T}$，$E$ 是 $n$ 阶单位矩阵，则行列式 $|(A+E)^{*}|=$ \bk。
+\vspace{3.6cm}
+
+\Q{1.2.1-23}{姜强}设 $n$ 阶矩阵 $A$ 满足 $A^{2}=A$，$A\neq E$，证明 $|A|=0$。
+\vspace{5.5cm}
+
+\Q{1.2.1-24}{姜基}证明：
+
+(1) 设 $A$ 为 $n$ 阶正交矩阵，且 $|A|<0$，则 $|A+E|=0$；
+
+(2) 设 $A,B$ 为 $n$ 阶正交矩阵，且 $|A|+|B|=0$，则 $|A+B|=0$。
+\vspace{6.0cm}
+
+\Q{1.2.1-25}{姜基}设 $A$ 为 $m$ 阶矩阵，$B$ 为 $n$ 阶矩阵，$C$ 为 $l$ 阶矩阵，$D=\begin{pmatrix}O&O&A\\O&B&O\\C&O&O\end{pmatrix}$。若 $|A|=a$，$|B|=b$，$|C|=c$，则 $|D|=$ \bk。
+\vspace{3.4cm}
+
+\Q{1.2.1-26}{姜强}设 $A$ 为 2 阶矩阵，$B=2\begin{pmatrix}(2A)^{-1}-(2A)^{*}&O\\O&A\end{pmatrix}$。若 $|A|=-1$，则 $|B|=$ \bk。
+\vspace{3.4cm}
+
+\Q{1.2.1-27}{姜强}设 $A$ 为 $n$ 阶矩阵，$\alpha,\beta$ 为 $n$ 维列向量。若 $|A|=a$，$\begin{vmatrix}A&\alpha\\\beta^{T}&b\end{vmatrix}=0$，则 $\begin{vmatrix}A&\alpha\\\beta^{T}&c\end{vmatrix}=$ \bk。
+\vspace{3.6cm}
+
+\Htwo{1.3　(代数)余子式相关问题}
+
+\Hthree{1.3.1　代数余子式求和}
+
+\Hfour{1.3.1-A}{部分代数余子式求和}
+
+\Q{1.3.1-28}{19数二}已知矩阵 $A=\begin{pmatrix}1&-1&0&0\\-2&1&-1&1\\3&-2&2&-1\\0&0&3&4\end{pmatrix}$，$A_{ij}$ 表示 $|A|$ 中 $(i,j)$ 元的代数余子式，则 $A_{11}-A_{12}=$ \bk。
+\vspace{3.2cm}
+
+\Q{1.3.1-29}{姜强}已知 $|A|=\begin{vmatrix}1&2&3&4&5\\2&2&2&1&1\\3&1&2&4&5\\1&1&1&2&2\\4&3&1&5&0\end{vmatrix}=27$，则 $A_{41}+A_{42}+A_{43}=$ \bk，$A_{44}+A_{45}=$ \bk。
+\vspace{3.8cm}
+
+\Q{1.3.1-30}{21数一}设 $A=(a_{ij})$ 为 3 阶矩阵，$A_{ij}$ 为代数余子式，若 $A$ 的每行元素之和均为 2，且 $|A|=3$，则 $A_{11}+A_{21}+A_{31}=$ \bk。
+\vspace{2.8cm}
+
+\Q{1.3.1-31}{880综选}设 $A$ 是 3 阶可逆矩阵，$A^{-1}$ 的特征值为 $3,2,1$，则 $|A|$ 的代数余子式之和 $A_{11}+A_{22}+A_{33}=$（　）。
+\opts{A. $\dfrac{1}{6}$}{B. $\dfrac{1}{3}$}{C. $\dfrac{1}{2}$}{D. $1$}
+\vspace{3.2cm}
+
+\Hfour{1.3.1-B}{所有代数余子式求和}
+
+\Q{1.3.1-32}{姜强}设 $A=\begin{pmatrix}0&1&0&\cdots&0\\0&0&2&\cdots&0\\\vdots&\vdots&\vdots&\ddots&\vdots\\0&0&0&\cdots&n-1\\n&0&0&\cdots&0\end{pmatrix}$，则 $|A|$ 的所有代数余子式的和为 \bk。
+\vspace{3.4cm}
+
+\Q{1.3.1-33}{900二1B-1}设矩阵 $A=\begin{pmatrix}1&0&0&1\\0&1&0&1\\0&0&1&1\\1&1&1&1\end{pmatrix}$，则 $A$ 的所有元素的代数余子式之和为 \bk。
+\vspace{3.0cm}
+
+\Hthree{1.3.2　余子式求和}
+
+\Q{1.3.2-34}{24数三}设矩阵 $A=\begin{pmatrix}a+1&b&3\\a&\frac{b}{2}&1\\1&1&2\end{pmatrix}$，$M_{ij}$ 表示 $A$ 的 $i$ 行 $j$ 列元素的余子式，$|A|=-\dfrac{1}{2}$，且 $-M_{21}+M_{22}-M_{23}=0$，则（　）。
+\opts{A. $a=0$ 或 $a=-\dfrac{3}{2}$}{B. $a=0$ 或 $a=\dfrac{3}{2}$}{C. $b=1$ 或 $b=-\dfrac{1}{2}$}{D. $b=-1$ 或 $b=\dfrac{1}{2}$}
+\vspace{3.8cm}
+
+\Q{1.3.2-35}{姜基}设 $|A|=\begin{vmatrix}3&0&4&0\\2&2&2&2\\0&-7&0&0\\5&3&-2&2\end{vmatrix}$。
+
+(1) 求第 4 行元素的余子式之和；
+
+(2) 求第 4 行元素的代数余子式之和。
+\vspace{5.5cm}
+
+\Q{1.3.2-36}{25超越数二8卷10}设四阶矩阵 $A=(a_{ij})_{4\times 4}$ 满足 $\displaystyle\sum_{j=1}^{4}a_{ij}=0\ (i=1,2,3,4)$，$M_{ij}$ 与 $A_{ij}$ 分别为元素 $a_{ij}$ 的余子式和代数余子式，下列四个式子中必成立的有（　）个。
+
+(1) $M_{21}+M_{22}+M_{23}+M_{24}=0$
+
+(2) $A_{21}+A_{22}+A_{23}+A_{24}=0$
+
+(3) $M_{21}=M_{22}=M_{23}=M_{24}$
+
+(4) $A_{21}=A_{22}=A_{23}=A_{24}$
+\opts{A. 1}{B. 2}{C. 3}{D. 4}
+\vspace{3.8cm}
+
+\Htwo{1.4　多项式 $f(x)$ 以行列式形式给出}
+
+\Hthree{1.4.1　确定 $f(x)$ 中 $x$ 某次方的系数}
+
+\Q{1.4.1-37}{21数二/三}$f(x)=\begin{vmatrix}x&x&1&2x\\1&x&2&-1\\2&1&x&1\\2&-1&1&x\end{vmatrix}$ 中 $x^{3}$ 项的系数为 \bk。
+\vspace{3.8cm}
+
+\Q{1.4.1-38}{900二1B-1}多项式 $f(x)=\begin{vmatrix}1&x&-1&x^{2}+1\\x&1&x^{2}+1&-1\\-1&x^{2}+1&1&x\\x^{2}+1&-1&x&1\end{vmatrix}$ 的常数项是 \bk。
+\vspace{4.2cm}
+
+\Hthree{1.4.2　方程根的个数}
+
+\Q{1.4.2-39}{99数二}记行列式 $\begin{vmatrix}x-2&x-1&x-2&x-3\\2x-2&2x-1&2x-2&2x-3\\3x-3&3x-2&4x-5&3x-5\\4x&4x-3&5x-7&4x-3\end{vmatrix}$ 为 $f(x)$，则方程 $f(x)=0$ 的根的个数为（　）。
+\opts{A. 1}{B. 2}{C. 3}{D. 4}
+\vspace{3.8cm}
+
+\Q{1.4.2-40}{25数三}已知 $f(x)=\begin{vmatrix}2x+1&3&2x+1&1\\2x&-3&4x&-2\\2x+1&2&2x+1&1\\2x&-4&4x&-2\end{vmatrix}$，$g(x)=\begin{vmatrix}2x+1&1&2x+1&3\\5x+1&-2&4x&-3\\0&1&2x+1&2\\2x&-2&4x&-4\end{vmatrix}$，则方程 $f(x)=g(x)$ 的不同根的个数为 \bk。
+\vspace{4.4cm}
+
+\end{document}
