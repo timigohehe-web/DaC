@@ -1,0 +1,449 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.0cm,top=1.9cm,bottom=2.0cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% --- 分页美观：禁止孤行、寡行；标题块整体不可分割 ---
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=5000
+\raggedbottom
+\newif\ifjustheading
+\justheadingfalse
+
+\linespread{1.3}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+
+% ---- 填空 ----
+\newcommand{\bk}{\underline{\hspace{3.2em}}}
+
+% ---- 选项块（悬挂左缩进，自动换行） ----
+% ---- 选项：自适应分列（四列等宽对齐 -> 两列 -> 单列悬挂） ----
+\newlength{\optA}\newlength{\optB}\newlength{\optC}\newlength{\optD}
+\newlength{\optMax}\newlength{\optColW}
+\newcommand{\optline}[1]{\par\addvspace{0.06em}\hangindent=1.4em\hangafter=1\noindent #1\par}
+\newcommand{\opts}[4]{%
+  \par\addvspace{0.1em}\begingroup
+  \setlength{\tabcolsep}{0.5em}%
+  \settowidth{\optA}{#1}\settowidth{\optB}{#2}\settowidth{\optC}{#3}\settowidth{\optD}{#4}%
+  \setlength{\optMax}{\optA}%
+  \ifdim\optB>\optMax\setlength{\optMax}{\optB}\fi
+  \ifdim\optC>\optMax\setlength{\optMax}{\optC}\fi
+  \ifdim\optD>\optMax\setlength{\optMax}{\optD}\fi
+  \setlength{\optColW}{\linewidth}%
+  \addtolength{\optColW}{-6\tabcolsep}\divide\optColW by 4 \addtolength{\optColW}{-0.35em}%
+  \ifdim\optMax>\optColW
+    \setlength{\optColW}{\linewidth}%
+    \addtolength{\optColW}{-2\tabcolsep}\divide\optColW by 2 \addtolength{\optColW}{-0.35em}%
+    \ifdim\optMax>\optColW
+      \optline{#1}\optline{#2}\optline{#3}\optline{#4}%
+    \else
+      \begin{tabularx}{\linewidth}{@{}XX@{}}#1&#2\\#3&#4\end{tabularx}\par
+    \fi
+  \else
+    \begin{tabularx}{\linewidth}{@{}XXXX@{}}#1&#2&#3&#4\end{tabularx}\par
+  \fi
+  \endgroup
+}
+
+% ---- 一~五级标题 ----
+\newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
+\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.9em plus 0.6em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
+\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.7em plus 0.6em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.55em plus 0.5em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.4em plus 0.5em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
+
+% ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
+\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+
+\begin{document}
+
+\Hone{二、矩阵}
+\begin{center}\small
+编号：题号 \textbf{【2.x.y-n】} 中 $n$ 为本章题目连续序号、2.x.y 为该题所属三级条目；标题数字点分最多到三级。\quad ［　］内为出处缩写；小题用 (1)(2) 分问。每题下方留白即作答区。
+\end{center}
+
+\Htwo{2.1　逆}
+
+\Hthree{2.1.1　抽象逆}
+
+\Q{2.1.1-1}{01数一}设 $n$ 阶矩阵 $A$ 满足 $A^{2}+A-4E=O$，则 $(A-E)^{-1}=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.1.1-2}{03数三}设 $n$ 维向量 $\alpha=(a,0,\cdots,0,a)^{T}$，$a<0$；$E$ 为 $n$ 阶单位矩阵，矩阵 $A=E-\alpha\alpha^{T}$，$B=E+\dfrac{1}{a}\alpha\alpha^{T}$，其中 $A$ 的逆矩阵为 $B$，则 $a=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.1.1-3}{22数一}已知矩阵 $A$ 和 $E-A$ 可逆，其中 $E$ 为单位矩阵，某矩阵 $B$ 满足 $\left[E-(E-A)^{-1}\right]B=A$，则 $B-A=$ \bk。
+\vspace{3.4cm}
+
+\Hthree{2.1.2　(不)可逆的判定与证明}
+
+\Q{2.1.2-4}{90数三}已知对于 $n$ 阶方阵 $A$，存在自然数 $k$，使得 $A^{k}=O$，试证明矩阵 $E-A$ 可逆，并写出其逆矩阵的表达式（$E$ 为 $n$ 阶单位阵）。
+\vspace{5.6cm}
+
+\Q{2.1.2-5}{17数一/三}设 $\alpha$ 为 $n$ 维单位列向量，$E$ 为 $n$ 阶单位矩阵，则（　）。
+\opts{A. $E-\alpha\alpha^{T}$ 不可逆}{B. $E+\alpha\alpha^{T}$ 不可逆}{C. $E+2\alpha\alpha^{T}$ 不可逆}{D. $E-2\alpha\alpha^{T}$ 不可逆}
+\vspace{3.2cm}
+
+\Q{2.1.2-6}{97数三}设 $A$ 为 $n$ 阶非奇异矩阵，$\alpha$ 为 $n$ 维列向量，$b$ 为常数。记分块矩阵 $P=\begin{bmatrix}E&0\\-\alpha^{T}A^{*}&|A|\end{bmatrix}$，$Q=\begin{bmatrix}A&\alpha\\\alpha^{T}&b\end{bmatrix}$，其中 $A^{*}$ 是矩阵 $A$ 的伴随矩阵，$E$ 为 $n$ 阶单位矩阵。
+
+(1) 计算并化简 $PQ$；
+
+(2) 证明：矩阵 $Q$ 可逆的充分必要条件是 $\alpha^{T}A^{-1}\alpha\neq b$。
+\vspace{6.2cm}
+
+\Htwo{2.2　伴随矩阵}
+
+\Hthree{2.2.1　伴随等于转置/本身}
+
+\Q{2.2.1-7}{05数三}设矩阵 $A=(a_{ij})_{3\times 3}$ 满足 $A^{*}=A^{T}$，其中 $A^{*}$ 是 $A$ 的伴随矩阵，$A^{T}$ 为 $A$ 的转置矩阵。若 $a_{11},a_{12},a_{13}$ 为三个相等的正数，则 $a_{11}$ 为（　）。
+\opts{A. $\dfrac{\sqrt{3}}{3}$}{B. $3$}{C. $\dfrac{1}{3}$}{D. $\sqrt{3}$}
+\vspace{3.2cm}
+
+\Q{2.2.1-8}{13数一/二/三}设 $A=(a_{ij})$ 是 3 阶非零矩阵，$|A|$ 为 $A$ 的行列式，$A_{ij}$ 为 $a_{ij}$ 的代数余子式。若 $a_{ij}+A_{ij}=0\ (i,j=1,2,3)$，则 $|A|=$ \bk。
+\vspace{3.0cm}
+
+\Q{2.2.1-9}{880综解}设 $A$ 是 3 阶方阵，$A=(a_{ij})_{3\times 3}$，且 $a_{ij}=A_{ij},\ i,j=1,2,3$，其中 $A_{ij}$ 为 $a_{ij}$ 的代数余子式，$a_{33}\neq 0$，$b=(a_{13},a_{23},a_{33})^{T}$，求非齐次线性方程组 $Ax=b$ 的解。
+\vspace{5.2cm}
+
+\Q{2.2.1-10}{姜150}设 $A=(a_{ij})$ 为三阶非零矩阵，$A_{ij}$ 为 $a_{ij}$ 的代数余子式，$A_{ij}=2a_{ij}\ (i,j=1,2,3)$，则 $|A|=$ \bk。
+\vspace{3.2cm}
+
+\Q{2.2.1-11}{25押四数二卷2-16}设 $n$ 阶正交矩阵 $A=\left(a_{ij}\right)_{n\times n}$，且 $|A|>0$，$A$ 的伴随矩阵 $A^{*}=\left(A_{ji}\right)_{n\times n}$，则 $\displaystyle\sum_{i=1}^{n}A_{ji}-\sum_{i=1}^{n}a_{ji}=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.2.1-12}{900二2A-5}设 $n$ 为大于等于 3 的奇数，$n$ 阶非零矩阵 $A$ 满足 $A=A^{*}$，则下列说法中，正确的是（　）。
+\opts{A. $A=-A^{-1}$}{B. $A^{T}=-A^{*}$}{C. $A^{-1}=A^{*}$}{D. $|A|=0$}
+\vspace{3.2cm}
+
+\Q{2.2.1-13}{26数三}设 $A$ 为 3 阶非零矩阵，$A^{*}$ 为 $A$ 的伴随矩阵。若 $A^{*}=-2A$，则 $A^{2}=$（　）。
+\opts{A. $\begin{pmatrix}-4&0&0\\0&-4&0\\0&0&-4\end{pmatrix}$}{B. $\begin{pmatrix}-4&0&0\\0&-4&0\\0&0&4\end{pmatrix}$}{C. $\begin{pmatrix}-4&0&0\\0&4&0\\0&0&4\end{pmatrix}$}{D. $\begin{pmatrix}4&0&0\\0&4&0\\0&0&4\end{pmatrix}$}
+\vspace{4.2cm}
+
+\Htwo{2.3　秩}
+
+\Hthree{2.3.1　求秩}
+
+\Q{2.3.1-14}{95数三}已知向量组 (I) $\alpha_{1},\alpha_{2},\alpha_{3}$；(II) $\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$；(III) $\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{5}$，如果各向量组的秩分别为 $r(\mathrm{I})=r(\mathrm{II})=3$，$r(\mathrm{III})=4$。证明：向量组 $\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{5}-\alpha_{4}$ 的秩为 4。
+\vspace{5.4cm}
+
+\Q{2.3.1-15}{08数一}设 $\alpha,\beta$ 为 3 维列向量，矩阵 $A=\alpha\alpha^{T}+\beta\beta^{T}$，其中 $\alpha^{T},\beta^{T}$ 分别是 $\alpha,\beta$ 的转置。证明：
+
+(1) $r(A)\leqslant 2$；
+
+(2) 若 $\alpha,\beta$ 线性相关，则 $r(A)<2$。
+\vspace{6.0cm}
+
+\Q{2.3.1-16}{10数一}设 $A$ 为 $m\times n$ 矩阵，$B$ 为 $n\times m$ 矩阵，$E$ 为 $m$ 阶单位矩阵，若 $AB=E$，则（　）。
+\opts{A. 秩 $r(A)=m$，秩 $r(B)=m$}{B. 秩 $r(A)=m$，秩 $r(B)=n$}{C. 秩 $r(A)=n$，秩 $r(B)=m$}{D. 秩 $r(A)=n$，秩 $r(B)=n$}
+\vspace{3.2cm}
+
+\Q{2.3.1-17}{12数一}设 $\alpha$ 为 3 维单位列向量，$E$ 为 3 阶单位矩阵，则矩阵 $E-\alpha\alpha^{T}$ 的秩为 \bk。
+\vspace{2.8cm}
+
+\Q{2.3.1-18}{17数一/三}设矩阵 $A=\begin{pmatrix}1&0&1\\1&1&2\\0&1&1\end{pmatrix}$，$\alpha_{1},\alpha_{2},\alpha_{3}$ 为线性无关的 3 维列向量组，则向量组 $A\alpha_{1},A\alpha_{2},A\alpha_{3}$ 的秩为 \bk。
+\vspace{3.4cm}
+
+\Q{2.3.1-19}{姜基}设 4 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，其中 $\alpha_{1},\alpha_{2}$ 线性无关，$\alpha_{3}$ 不能由 $\alpha_{1},\alpha_{2}$ 线性表示，$\alpha_{4}=\alpha_{1}-2\alpha_{2}+3\alpha_{3}$，则 $r(A^{*})=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.3.1-20}{900二5A-10}设矩阵 $B=\begin{pmatrix}1&0&1\\0&-1&0\\1&0&1\end{pmatrix}$，已知矩阵 $A$ 与 $B$ 相似，则秩 $r(E+A)+r(E-A)=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.3.1-21}{24余五数一/二5套}设三阶矩阵 $A$ 有特征值 $\lambda_{1}=\lambda_{2}=-1$，$\lambda_{3}=2$，且 $A$ 不能相似于对角阵，则 $r(A+E)+r(A-E)+r(A-2E)=$（　）。
+\opts{A. $3$}{B. $4$}{C. $6$}{D. $7$}
+\vspace{3.4cm}
+
+\Q{2.3.1-22}{26余五数二卷2-16}已知三阶矩阵 $A$ 与三维列向量 $x$ 满足 $A^{3}x+A^{2}x-3Ax=0$，且向量组 $x,Ax,A^{2}x$ 线性无关，则 $r(A)+r(E-A)=$ \bk。
+\vspace{3.4cm}
+
+\Hthree{2.3.2　秩相关推理}
+
+\Q{2.3.2-23}{03数三}设三阶矩阵 $A=\begin{bmatrix}a&b&b\\b&a&b\\b&b&a\end{bmatrix}$，若 $A$ 的伴随矩阵的秩为 1，则必有（　）。
+\opts{A. $a=b$ 或 $a+2b=0$}{B. $a=b$ 或 $a+2b\neq 0$}{C. $a\neq b$ 且 $a+2b=0$}{D. $a\neq b$ 且 $a+2b\neq 0$}
+\vspace{3.2cm}
+
+\Q{2.3.2-24}{25数一}设 $n$ 阶矩阵 $A,B,C$ 满足 $r(A)+r(B)+r(C)=r(ABC)+2n$，给出下列四个结论：
+
+(i) $r(ABC)+n=r(AB)+r(C)$；
+
+(ii) $r(AB)+n=r(A)+r(B)$；
+
+(iii) $r(A)=r(B)=r(C)=n$；
+
+(iv) $r(AB)=r(BC)=n$。
+
+其中正确的选项是（　）。
+\opts{A. (i)(ii)}{B. (i)(iii)}{C. (ii)(iv)}{D. (iii)(iv)}
+\vspace{3.6cm}
+
+\Q{2.3.2-25}{25数二}设 3 阶矩阵 $A,B$ 满足 $r(AB)=r(BA)+1$，则（　）。
+\opts{A. 方程组 $(A+B)X=0$ 只有零解}{B. 方程组 $AX=0$ 与方程组 $BX=0$ 均只有零解}{C. 方程组 $AX=0$ 与方程组 $BX=0$ 没有公共非零解}{D. 方程组 $ABAX=0$ 与方程组 $BABX=0$ 有公共非零解}
+\vspace{3.6cm}
+
+\Q{2.3.2-26}{24余五数一/二3套}设 $n$ 阶矩阵 $A,B$ 满足 $r(A)+r(B)<n$，则下列不正确的是（　）。
+\opts{A. $A$ 与 $B$ 有公共的特征值}{B. 方程组 $\dbinom{A}{B}x=0$ 有非零解}{C. $AB$ 与 $BA$ 相似}{D. $A+B$ 的列向量组线性相关}
+\vspace{3.4cm}
+
+\Q{2.3.2-27}{25李六数一/二/三1套}设 $A$ 为 $4\times 3$ 矩阵，$B$ 为 $3\times 4$ 矩阵，若 $r(AB)=3$，则必有（　）。
+\opts{A. $A$ 的行向量组线性无关，$B$ 的行向量组线性无关}{B. $A$ 的列向量组线性无关，$B$ 的列向量组线性无关}{C. $A$ 的列向量组线性无关，$B$ 的行向量组线性无关}{D. $A$ 的行向量组线性无关，$B$ 的列向量组线性无关}
+\vspace{3.4cm}
+
+\Q{2.3.2-28}{900二5B-6}下列关于实对称矩阵的命题中，正确的是（　）。
+\opts{A. 存在实对称矩阵 $A$，使得 $\mathrm{tr}(A^{2})<0$}{B. 存在实对称矩阵 $A$，使得 $A^{2}+E$ 不可逆}{C. 不存在实对称矩阵 $A$，使得 $A^{2}=A$，但 $\mathrm{tr}(A)\neq r(A)$}{D. 以上说法均不正确}
+\vspace{3.4cm}
+
+\Htwo{2.4　高次幂}
+
+\Hthree{2.4.1　高次幂}
+
+\Q{2.4.1-29}{99数三}设 $A=\begin{bmatrix}1&0&1\\0&2&0\\1&0&1\end{bmatrix}$，而 $n\geqslant 2$ 为正整数，则 $A^{n}-2A^{n-1}=$ \bk。
+\vspace{3.2cm}
+
+\Q{2.4.1-30}{880基填}设 $B=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix}$，$A=P^{-1}BP$，则 $A^{4}-2B^{2}=$ \bk。
+\vspace{3.2cm}
+
+\Q{2.4.1-31}{姜强}设 $A=\begin{pmatrix}-1&2&-1\\-1&2&-1\\-3&6&-3\end{pmatrix}$，$P$ 为 3 阶可逆矩阵，$B=P^{-1}AP$，则 $(B+E)^{100}=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.4.1-32}{880基解}设 $A=\begin{pmatrix}2&-1&3\\a&1&b\\4&c&6\end{pmatrix}$，且 $BA=O$，$B$ 是 3 阶方阵，$r(B)>1$，求 $A^{n}$。
+\vspace{5.6cm}
+
+\Q{2.4.1-33}{900二2B-9}设 $\alpha=(1,0,2)^{T}$，$\beta=(4,1,-2)^{T}$。记 $A=\alpha\beta^{T}$，则 $(E+A)^{n}=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.4.1-34}{姜150例5}设 $A$ 为 2 阶矩阵，则 $(E-A)^{-1}=E+A$ 是 $A^{5}=O$ 的（　）。
+\opts{A. 必要非充分条件}{B. 充分非必要条件}{C. 充分必要条件}{D. 既非充分又非必要条件}
+\vspace{3.2cm}
+
+\Q{2.4.1-35}{姜150例2}设 $A$ 为 3 阶矩阵，$b=(9,18,-18)^{T}$，非齐次线性方程组 $Ax=b$ 的通解为 $k_{1}(-2,1,0)^{T}+k_{2}(2,0,1)^{T}+(1,2,-2)^{T}$，其中 $k_{1},k_{2}$ 为任意常数，求 $A$ 与 $A^{100}$。
+\vspace{6.2cm}
+
+\Q{2.4.1-36}{92数一}设 3 阶矩阵 $A$ 的特征值为 $\lambda_{1}=1,\lambda_{2}=2,\lambda_{3}=3$，对应的特征向量依次为 $\xi_{1}=\begin{pmatrix}1\\1\\1\end{pmatrix}$，$\xi_{2}=\begin{pmatrix}1\\2\\4\end{pmatrix}$，$\xi_{3}=\begin{pmatrix}1\\3\\9\end{pmatrix}$，又向量 $\beta=\begin{pmatrix}1\\1\\3\end{pmatrix}$。
+
+(1) 将 $\beta$ 用 $\xi_{1},\xi_{2},\xi_{3}$ 线性表出；
+
+(2) 求 $A^{n}\beta$（$n$ 为自然数）。
+\vspace{6.2cm}
+
+\Q{2.4.1-37}{16数一/二/三}已知矩阵 $A=\begin{pmatrix}0&-1&1\\2&-3&0\\0&0&0\end{pmatrix}$。
+
+(1) 求 $A^{99}$；
+
+(2) 设 3 阶矩阵 $B=(\alpha_{1},\alpha_{2},\alpha_{3})$ 满足 $B^{2}=BA$。记 $B^{100}=(\beta_{1},\beta_{2},\beta_{3})$，将 $\beta_{1},\beta_{2},\beta_{3}$ 分别表示为 $\alpha_{1},\alpha_{2},\alpha_{3}$ 的线性组合。
+\vspace{6.8cm}
+
+\Q{2.4.1-38}{24数一}已知数列 $\{x_{n}\},\{y_{n}\},\{z_{n}\}$ 满足 $x_{0}=-1$，$y_{0}=0$，$z_{0}=2$，且
+\[
+\left\{\begin{array}{l}
+x_{n}=-2x_{n-1}+2z_{n-1},\\
+y_{n}=-2y_{n-1}-2z_{n-1},\\
+z_{n}=-6x_{n-1}-3y_{n-1}+3z_{n-1}.
+\end{array}\right.
+\]
+记 $\alpha_{n}=\begin{pmatrix}x_{n}\\y_{n}\\z_{n}\end{pmatrix}$，写出满足 $\alpha_{n}=A\alpha_{n-1}$ 的矩阵 $A$，并求 $A^{n}$ 及 $x_{n},y_{n},z_{n}\ (n=1,2,\cdots)$。
+\vspace{7.2cm}
+
+\Q{2.4.1-39}{25数三}设矩阵 $A=\begin{pmatrix}1&-1&3&0&-1\\-1&0&-2&-a&-1\\1&1&a&2&3\end{pmatrix}$ 的秩为 2。
+
+(1) 求 $a$ 的值；
+
+(2) 求 $A$ 的列向量组的一个极大线性无关组 $\alpha,\beta$，并求矩阵 $H$，使得 $A=GH$，其中 $G=(\alpha,\beta)$。
+\vspace{6.2cm}
+
+\Q{2.4.1-40}{26数一/二/三}已知向量组 $\alpha_{1}=\begin{pmatrix}1\\0\\-1\\-1\end{pmatrix}$，$\alpha_{2}=\begin{pmatrix}1\\-1\\0\\-2\end{pmatrix}$，$\alpha_{3}=\begin{pmatrix}0\\-1\\1\\-1\end{pmatrix}$，$\alpha_{4}=\begin{pmatrix}0\\1\\-1\\1\end{pmatrix}$，记 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，$G=(\alpha_{1},\alpha_{2})$。
+
+(1) 证明：$\alpha_{1},\alpha_{2}$ 是 $\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$ 的极大线性无关组；
+
+(2) 求矩阵 $H$ 使得 $A=GH$，并求 $A^{10}$。
+\vspace{6.4cm}
+
+\Htwo{2.5　初等变换与初等矩阵}
+
+\Hthree{2.5.1　初等变换与初等矩阵}
+
+\Q{2.5.1-41}{05数一/二}设 $A$ 为 $n\ (n\geqslant 2)$ 阶可逆矩阵，交换 $A$ 的第 1 行与第 2 行得矩阵 $B$，$A^{*},B^{*}$ 分别为 $A,B$ 的伴随矩阵，则（　）。
+\opts{A. 交换 $A^{*}$ 的第 1 列与第 2 列得 $B^{*}$}{B. 交换 $A^{*}$ 的第 1 行与第 2 行得 $B^{*}$}{C. 交换 $A^{*}$ 的第 1 列与第 2 列得 $-B^{*}$}{D. 交换 $A^{*}$ 的第 1 行与第 2 行得 $-B^{*}$}
+\vspace{3.6cm}
+
+\Q{2.5.1-42}{09数二/三}设 $A,P$ 均为 3 阶矩阵，$P^{T}$ 为 $P$ 的转置矩阵，且 $P^{T}AP=\begin{pmatrix}1&0&0\\0&1&0\\0&0&2\end{pmatrix}$。若 $P=(\alpha_{1},\alpha_{2},\alpha_{3})$，$Q=(\alpha_{1}+\alpha_{2},\alpha_{2},\alpha_{3})$，则 $Q^{T}AQ$ 为（　）。
+\opts{A. $\begin{pmatrix}2&1&0\\1&1&0\\0&0&2\end{pmatrix}$}{B. $\begin{pmatrix}1&1&0\\1&2&0\\0&0&2\end{pmatrix}$}{C. $\begin{pmatrix}2&0&0\\0&1&0\\0&0&2\end{pmatrix}$}{D. $\begin{pmatrix}1&0&0\\0&2&0\\0&0&2\end{pmatrix}$}
+\vspace{3.8cm}
+
+\Q{2.5.1-43}{11数一/二/三}设 $A$ 为 3 阶矩阵，将 $A$ 的第 2 列加到第 1 列得矩阵 $B$，再交换 $B$ 的第 2 行与第 3 行得单位矩阵。记 $P_{1}=\begin{pmatrix}1&0&0\\1&1&0\\0&0&1\end{pmatrix}$，$P_{2}=\begin{pmatrix}1&0&0\\0&0&1\\0&1&0\end{pmatrix}$，则 $A=$（　）。
+\opts{A. $P_{1}P_{2}$}{B. $P_{1}^{-1}P_{2}$}{C. $P_{2}P_{1}$}{D. $P_{2}P_{1}^{-1}$}
+\vspace{3.4cm}
+
+\Q{2.5.1-44}{20数一}若矩阵 $A$ 经过初等列变换化成 $B$，则（　）。
+\opts{A. 存在矩阵 $P$，使得 $PA=B$}{B. 存在矩阵 $P$，使得 $BP=A$}{C. 存在矩阵 $P$，使得 $PB=A$}{D. 方程组 $AX=0$ 与 $BX=0$ 同解}
+\vspace{3.4cm}
+
+\Q{2.5.1-45}{21数二/三}已知矩阵 $A=\begin{pmatrix}1&0&-1\\2&-1&1\\-1&2&-5\end{pmatrix}$，若存在下三角可逆矩阵 $P$ 和上三角可逆矩阵 $Q$，使 $PAQ$ 为对角矩阵，则 $P,Q$ 可分别为（　）。
+\opts{A. $\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\begin{pmatrix}1&0&1\\0&1&3\\0&0&1\end{pmatrix}$}{B. $\begin{pmatrix}1&0&0\\2&-1&0\\-3&2&1\end{pmatrix},\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}$}{C. $\begin{pmatrix}1&0&0\\2&-1&0\\-3&2&1\end{pmatrix},\begin{pmatrix}1&0&1\\0&1&3\\0&0&1\end{pmatrix}$}{D. $\begin{pmatrix}1&0&0\\0&1&0\\1&3&1\end{pmatrix},\begin{pmatrix}1&2&-3\\0&-1&2\\0&0&1\end{pmatrix}$}
+\vspace{5.0cm}
+
+\Q{2.5.1-46}{22数二/三}设 $A$ 为 3 阶矩阵，交换 $A$ 的第 2 行和第 3 行，再将第 2 列的 $-1$ 倍加到第 1 列，得到矩阵 $\begin{pmatrix}-2&1&-1\\1&-1&0\\-1&0&0\end{pmatrix}$，则 $A^{-1}$ 的迹 $\mathrm{tr}(A^{-1})=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.5.1-47}{24数二/三}设 $A$ 为三阶矩阵，$P=\begin{pmatrix}1&0&0\\0&1&0\\1&0&1\end{pmatrix}$，若 $P^{T}AP^{2}=\begin{pmatrix}a+2c&0&c\\0&b&0\\2c&0&c\end{pmatrix}$，则矩阵 $A$ 为（　）。
+\opts{A. $\begin{pmatrix}c&0&0\\0&a&0\\0&0&b\end{pmatrix}$}{B. $\begin{pmatrix}b&0&0\\0&c&0\\0&0&a\end{pmatrix}$}{C. $\begin{pmatrix}a&0&0\\0&b&0\\0&0&c\end{pmatrix}$}{D. $\begin{pmatrix}c&0&0\\0&b&0\\0&0&a\end{pmatrix}$}
+\vspace{3.8cm}
+
+\Q{2.5.1-48}{25数二}下列矩阵中，可以经过若干初等行变换得到矩阵 $\begin{pmatrix}1&1&0&1\\0&0&1&2\\0&0&0&0\end{pmatrix}$ 的是（　）。
+\opts{A. $\begin{pmatrix}1&1&0&1\\1&2&1&3\\2&3&1&4\end{pmatrix}$}{B. $\begin{pmatrix}1&1&0&1\\1&1&2&5\\1&1&1&3\end{pmatrix}$}{C. $\begin{pmatrix}1&0&0&1\\0&1&0&3\\0&1&0&0\end{pmatrix}$}{D. $\begin{pmatrix}1&1&2&3\\1&2&2&3\\2&3&4&6\end{pmatrix}$}
+\vspace{4.0cm}
+
+\Q{2.5.1-49}{26数一/二}单位矩阵经过若干次互换两行得到的矩阵为置换矩阵。设 $A$ 为 $n$ 阶置换矩阵，$A^{*}$ 为 $A$ 的伴随矩阵，则（　）。
+\opts{A. $A^{*}$ 为置换矩阵}{B. $A^{-1}$ 为置换矩阵}{C. $A^{-1}=A^{*}$}{D. $A^{-1}=-A^{*}$}
+\vspace{3.4cm}
+
+\Q{2.5.1-50}{姜强}设 $A=\begin{pmatrix}1&2&3\\0&1&2\\0&0&1\end{pmatrix}$，$P=\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$，$Q=\begin{pmatrix}1&1&0\\0&1&0\\0&0&1\end{pmatrix}$，则 $(P^{-1})^{99}A(Q^{T})^{100}=$ \bk。
+\vspace{3.6cm}
+
+\Q{2.5.1-51}{900二2B-1}设 $A$ 为 $m\times n$ 矩阵，$r(A)=m$，则下列说法中，正确的是（　）。
+
+(1) 若 $P$ 为 $m$ 阶矩阵，且 $PA=A$，则 $P=E$；
+
+(2) 若 $P$ 为 $n$ 阶矩阵，且 $AP=A$，则 $P=E$；
+
+(3) $A$ 能通过一系列初等行变换化为形式 $(E_{m},O)$；
+
+(4) $A$ 能通过一系列初等列变换化为形式 $(E_{m},O)$。
+\opts{A. (1)(3)}{B. (1)(4)}{C. (2)(3)}{D. (2)(4)}
+\vspace{4.0cm}
+
+\Htwo{2.6　矩阵等价}
+
+\Hthree{2.6.1　矩阵等价}
+
+\Q{2.6.1-52}{04数三}设 $n$ 阶矩阵 $A$ 与 $B$ 等价，则必有（　）。
+\opts{A. 当 $|A|=a\ (a\neq 0)$ 时，$|B|=a$}{B. 当 $|A|=a\ (a\neq 0)$ 时，$|B|=-a$}{C. 当 $|A|\neq 0$ 时，$|B|=0$}{D. 当 $|A|=0$ 时，$|B|=0$}
+\vspace{3.4cm}
+
+\Q{2.6.1-53}{16数二}设矩阵 $\begin{pmatrix}a&-1&-1\\-1&a&-1\\-1&-1&a\end{pmatrix}$ 与 $\begin{pmatrix}1&1&0\\0&-1&1\\1&0&1\end{pmatrix}$ 等价，则 $a=$ \bk。
+\vspace{3.2cm}
+
+\Htwo{2.7　分块矩阵}
+
+\Hthree{2.7.1　分块矩阵伴随}
+
+\Q{2.7.1-54}{23数二/三}设 $A,B$ 为 $n$ 阶可逆矩阵，$E$ 为 $n$ 阶单位矩阵，$M^{*}$ 为矩阵 $M$ 的伴随矩阵，则 $\begin{pmatrix}A&E\\O&B\end{pmatrix}^{*}=$（　）。
+\opts{A. $\begin{pmatrix}|A|B^{*}&-B^{*}A^{*}\\O&|B|A^{*}\end{pmatrix}$}{B. $\begin{pmatrix}|A|B^{*}&-A^{*}B^{*}\\O&|B|A^{*}\end{pmatrix}$}{C. $\begin{pmatrix}|B|A^{*}&-B^{*}A^{*}\\O&|A|B^{*}\end{pmatrix}$}{D. $\begin{pmatrix}|B|A^{*}&-A^{*}B^{*}\\O&|A|B^{*}\end{pmatrix}$}
+\vspace{3.8cm}
+
+\Q{2.7.1-55}{900二2B-4}设 $A,B$ 均为 2 阶矩阵，$A^{*},B^{*}$ 分别为 $A,B$ 的伴随矩阵。若 $|A|=3$，$|B|=-1$，则分块矩阵 $\begin{pmatrix}O&A\\B&E\end{pmatrix}^{*}=$（　）。
+\opts{A. $\begin{pmatrix}-B^{*}A^{*}&3B^{*}\\-A^{*}&O\end{pmatrix}$}{B. $\begin{pmatrix}-A^{*}B^{*}&3B^{*}\\-A^{*}&O\end{pmatrix}$}{C. $\begin{pmatrix}-B^{*}A^{*}&-A^{*}\\3B^{*}&O\end{pmatrix}$}{D. $\begin{pmatrix}-A^{*}B^{*}&-A^{*}\\3B^{*}&O\end{pmatrix}$}
+\vspace{3.8cm}
+
+\Q{2.7.1-56}{姜150}设 $A=\begin{pmatrix}0&0&0&1&2\\0&0&0&3&7\\2&1&1&0&0\\1&2&1&0&0\\1&1&2&0&0\end{pmatrix}$，则 $A^{*}=$ \bk。
+\vspace{4.4cm}
+
+\Hthree{2.7.2　分块矩阵秩}
+
+\Q{2.7.2-57}{18数一/二/三}设 $A,B$ 为 $n$ 阶矩阵，记 $r(X)$ 为矩阵 $X$ 的秩，$(X,Y)$ 表示分块矩阵，则（　）。
+\opts{A. $r(A\ \ AB)=r(A)$}{B. $r(AB\ \ A)=r(A)$}{C. $r(AB)=\max\{r(A),r(B)\}$}{D. $r(A\ \ B)=r(A^{T}\ \ B^{T})$}
+\vspace{3.4cm}
+
+\Q{2.7.2-58}{900二2B-5}设 $A,B$ 为 $n$ 阶矩阵，记 $r(X)$ 为矩阵 $X$ 的秩，$(X,Y)$ 表示分块矩阵，下列说法中，不正确的是（　）。
+\opts{A. $r(A,AB)\leqslant r(A,B)$}{B. $r(BA,B)\leqslant r(A,B)$}{C. $r(A,AB)\leqslant r(A,BA)$}{D. $r(AB,B)\leqslant r(BA,B)$}
+\vspace{3.4cm}
+
+\Q{2.7.2-59}{25八套数一/二/三6套}设 $A,B$ 为 $n$ 阶实对称矩阵，则下列结论不成立的是（　）。
+\opts{A. $r(A,AB)=r(A)$}{B. $r(AB^{T}AB^{T}B)=r(AB^{T})$}{C. $r\dbinom{BA}{B^{T}BA}=r(AB^{T})$}{D. $r\dbinom{A^{T}A}{B^{T}A}=r(A)$}
+\vspace{3.6cm}
+
+\Q{2.7.2-60}{21数一}设 $A,B$ 为 $n$ 阶实矩阵，下列结论不成立的是（　）。
+\opts{A. $r\begin{pmatrix}A&O\\O&A^{T}A\end{pmatrix}=2r(A)$}{B. $r\begin{pmatrix}A&AB\\O&A^{T}\end{pmatrix}=2r(A)$}{C. $r\begin{pmatrix}A&BA\\O&AA^{T}\end{pmatrix}=2r(A)$}{D. $r\begin{pmatrix}A&O\\BA&A^{T}\end{pmatrix}=2r(A)$}
+\vspace{4.0cm}
+
+\Q{2.7.2-61}{23数一}已知 $n$ 阶矩阵 $A,B,C$ 满足 $ABC=O$，$E$ 为 $n$ 阶单位矩阵。记矩阵 $\begin{bmatrix}O&A\\BC&E\end{bmatrix}$，$\begin{bmatrix}AB&C\\O&E\end{bmatrix}$，$\begin{bmatrix}E&AB\\AB&O\end{bmatrix}$ 的秩分别为 $r_{1},r_{2},r_{3}$，则（　）。
+\opts{A. $r_{1}\leqslant r_{2}\leqslant r_{3}$}{B. $r_{1}\leqslant r_{3}\leqslant r_{2}$}{C. $r_{3}\leqslant r_{1}\leqslant r_{2}$}{D. $r_{2}\leqslant r_{1}\leqslant r_{3}$}
+\vspace{4.0cm}
+
+\Q{2.7.2-62}{23押六数三3套}设 $A=\begin{pmatrix}1&0&-1\\2&a&1\\1&2&1\end{pmatrix}$，$B$ 是 3 阶矩阵，且 $r(B)=2$，$r(AB)=1$，则下列选项中正确的是（　）。
+\opts{A. $r\begin{pmatrix}A^{*}&O\\A&B\end{pmatrix}=3$}{B. $r\begin{pmatrix}A&O\\O&B^{*}\end{pmatrix}=3$}{C. $r\begin{pmatrix}A^{*}&B\\O&A\end{pmatrix}=3$}{D. $r\begin{pmatrix}A&B^{*}\\O&B\end{pmatrix}=3$}
+\vspace{4.2cm}
+
+\Htwo{2.8　矩阵等式 $AB=\square$}
+
+\Hthree{2.8.1　$AB=E$}
+
+\Q{2.8.1-63}{姜强}设 $n$ 阶矩阵 $A,B$ 满足 $A^{2}-AB=E$，则 $r(AB-BA+2A)=$ \bk。
+\vspace{3.4cm}
+
+\Q{2.8.1-64}{91数一}设 $n$ 阶方阵 $A,B,C$ 满足关系式 $ABC=E$，其中 $E$ 是 $n$ 阶单位阵，则必有（　）。
+\opts{A. $ACB=E$}{B. $CBA=E$}{C. $BAC=E$}{D. $BCA=E$}
+\vspace{3.2cm}
+
+\Hthree{2.8.2　$AB=O$}
+
+\Q{2.8.2-65}{93数一}已知 $Q=\begin{pmatrix}1&2&3\\2&4&t\\3&6&9\end{pmatrix}$，$P$ 为 3 阶非零矩阵，且满足 $PQ=O$，则（　）。
+\opts{A. $t=6$ 时 $P$ 的秩必为 1}{B. $t=6$ 时 $P$ 的秩必为 2}{C. $t\neq 6$ 时 $P$ 的秩必为 1}{D. $t\neq 6$ 时 $P$ 的秩必为 2}
+\vspace{3.6cm}
+
+\Q{2.8.2-66}{98数三}齐次线性方程组 $\left\{\begin{array}{l}\lambda x_{1}+x_{2}+\lambda^{2}x_{3}=0,\\ x_{1}+\lambda x_{2}+x_{3}=0,\\ x_{1}+x_{2}+\lambda x_{3}=0\end{array}\right.$ 的系数矩阵记为 $A$。若存在三阶矩阵 $B\neq 0$ 使得 $AB=0$，则（　）。
+\opts{A. $\lambda=-2$ 且 $|B|=0$}{B. $\lambda=-2$ 且 $|B|\neq 0$}{C. $\lambda=1$ 且 $|B|=0$}{D. $\lambda=1$ 且 $|B|\neq 0$}
+\vspace{3.8cm}
+
+\Q{2.8.2-67}{04数一/二}设 $A,B$ 为满足 $AB=O$ 的任意两个非零矩阵，则必有（　）。
+\opts{A. $A$ 的列向量组线性相关，$B$ 的行向量组线性相关}{B. $A$ 的列向量组线性相关，$B$ 的列向量组线性相关}{C. $A$ 的行向量组线性相关，$B$ 的行向量组线性相关}{D. $A$ 的行向量组线性相关，$B$ 的列向量组线性相关}
+\vspace{3.6cm}
+
+\Q{2.8.2-68}{24数二}$A$ 为四阶矩阵，$A^{*}$ 为 $A$ 的伴随矩阵，若 $A(A-A^{*})=O$，且 $A\neq A^{*}$，则 $r(A)$ 的可能取值为（　）。
+\opts{A. 0 或 1}{B. 1 或 3}{C. 2 或 3}{D. 1 或 2}
+\vspace{3.4cm}
+
+\Q{2.8.2-69}{姜150例34}设 $A=\begin{pmatrix}1&2&1\\0&1&a\\1&a&0\end{pmatrix}$，3 阶非零矩阵 $B$ 满足 $BA=O$。
+
+(1) 求矩阵 $B$；
+
+(2) 若 $B$ 的第一列是 $(1,2,-3)^{T}$，求 $(B-E)^{6}$。
+\vspace{6.2cm}
+
+\Hthree{2.8.3　$AB=C$}
+
+\Q{2.8.3-70}{13数一/二/三}设矩阵 $A,B,C$ 均为 $n$ 阶矩阵，若 $AB=C$，则 $B$ 可逆，则（　）。
+\opts{A. 矩阵 $C$ 的行向量组与矩阵 $A$ 的行向量组等价}{B. 矩阵 $C$ 的列向量组与矩阵 $A$ 的列向量组等价}{C. 矩阵 $C$ 的行向量组与矩阵 $B$ 的行向量组等价}{D. 矩阵 $C$ 的列向量组与矩阵 $B$ 的列向量组等价}
+\vspace{3.8cm}
+
+\Q{2.8.3-71}{24余五数一/二4套}设矩阵 $A_{m\times n},B_{m\times s},C_{n\times s}$ 满足 $AC=B$，以下命题中正确的是（　）。
+\opts{A. 如果矩阵 $C$ 的列向量组线性无关，则矩阵 $B$ 的列向量组一定线性无关}{B. 如果矩阵 $C$ 的行向量组线性无关，则矩阵 $B$ 的行向量组一定线性无关}{C. 如果矩阵 $B$ 的列向量组线性无关，则矩阵 $C$ 的列向量组一定线性无关}{D. 如果矩阵 $B$ 的行向量组线性无关，则矩阵 $C$ 的行向量组一定线性无关}
+\vspace{4.2cm}
+
+\Qn{2.8.3-72}设 $A$ 为 $m\times n$ 矩阵，$B$ 为 $n\times m$ 阶矩阵，且 $r(B)=n$，则（　）。
+\opts{A. $AB$ 的列向量组与 $A$ 的列向量组等价}{B. $AB$ 的行向量组与 $A$ 的行向量组等价}{C. $BA$ 的列向量组与 $A$ 的列向量组等价}{D. $BA$ 的行向量组与 $A$ 的行向量组等价}
+\vspace{3.6cm}
+
+\Htwo{2.9　求各行（列）元素之和}
+
+\Hthree{2.9.1　求各行（列）元素之和}
+
+\Q{2.9.1-73}{880综填}设 $A$ 是 $n$ 阶可逆矩阵，$A$ 的每行元素之和均为 $k$，则 $A^{-1}$ 的每行元素之和均为 \bk。
+\vspace{3.0cm}
+
+\Q{2.9.1-74}{姜强}设 $n$ 阶矩阵 $A$ 的各列元素之和均为 2，且 $|A|=6$，则 $A^{*}$ 的各列元素之和均为（　）。
+\opts{A. 2}{B. $\dfrac{1}{3}$}{C. 3}{D. 6}
+\vspace{3.2cm}
+
+\Q{2.9.1-75}{900二5B-12}设 $A$ 为 3 阶实对称矩阵，特征值为 $1,2,3$，$\alpha=(1,-1,0)^{T}$，$\beta=(1,1,-2)^{T}$ 分别为 $A$ 的属于特征值 1 和 2 的特征向量，则 $A$ 的第一行元素之和为 \bk。
+\vspace{3.4cm}
+
+\end{document}
