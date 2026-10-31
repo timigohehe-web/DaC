@@ -1,0 +1,262 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.0cm,top=1.9cm,bottom=2.0cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% --- 分页美观：禁止孤行、寡行；标题块整体不可分割 ---
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=5000
+\raggedbottom
+\newif\ifjustheading
+\justheadingfalse
+
+\linespread{1.3}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+
+% ---- 填空 ----
+\newcommand{\bk}{\underline{\hspace{3.2em}}}
+
+% ---- 选项块（悬挂左缩进，自动换行） ----
+% ---- 选项：自适应分列（四列等宽对齐 -> 两列 -> 单列悬挂） ----
+\newlength{\optA}\newlength{\optB}\newlength{\optC}\newlength{\optD}
+\newlength{\optMax}\newlength{\optColW}
+\newcommand{\optline}[1]{\par\addvspace{0.06em}\hangindent=1.4em\hangafter=1\noindent #1\par}
+\newcommand{\opts}[4]{%
+  \par\addvspace{0.1em}\begingroup
+  \setlength{\tabcolsep}{0.5em}%
+  \settowidth{\optA}{#1}\settowidth{\optB}{#2}\settowidth{\optC}{#3}\settowidth{\optD}{#4}%
+  \setlength{\optMax}{\optA}%
+  \ifdim\optB>\optMax\setlength{\optMax}{\optB}\fi
+  \ifdim\optC>\optMax\setlength{\optMax}{\optC}\fi
+  \ifdim\optD>\optMax\setlength{\optMax}{\optD}\fi
+  \setlength{\optColW}{\linewidth}%
+  \addtolength{\optColW}{-6\tabcolsep}\divide\optColW by 4 \addtolength{\optColW}{-0.35em}%
+  \ifdim\optMax>\optColW
+    \setlength{\optColW}{\linewidth}%
+    \addtolength{\optColW}{-2\tabcolsep}\divide\optColW by 2 \addtolength{\optColW}{-0.35em}%
+    \ifdim\optMax>\optColW
+      \optline{#1}\optline{#2}\optline{#3}\optline{#4}%
+    \else
+      \begin{tabularx}{\linewidth}{@{}XX@{}}#1&#2\\#3&#4\end{tabularx}\par
+    \fi
+  \else
+    \begin{tabularx}{\linewidth}{@{}XXXX@{}}#1&#2&#3&#4\end{tabularx}\par
+  \fi
+  \endgroup
+}
+
+% ---- 一~五级标题 ----
+\newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
+\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.9em plus 0.6em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
+\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.7em plus 0.6em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.55em plus 0.5em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.4em plus 0.5em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
+
+% ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
+\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+
+\begin{document}
+\Hone{三、向量}
+
+\begin{center}\small
+编号说明：题号【3.x.y-n】，n 为本章题号连续序号，3.x.y 为该题所属三级条目；标题数字点分最多到三级。［］内为出处缩写。公式为 LaTeX 源码。小题用 (1)(2) 分问。每题下留白供手写。
+\end{center}
+
+\Htwo{3.1　向量有关计算}
+
+\Hthree{3.1.1　向量有关计算}
+
+\Q{3.1.1-1}{21数一}已知 $\alpha_{1}=\begin{pmatrix}1\\0\\1\end{pmatrix},\alpha_{2}=\begin{pmatrix}1\\2\\1\end{pmatrix},\alpha_{3}=\begin{pmatrix}3\\1\\2\end{pmatrix},\beta_{1}=\alpha_{1},\beta_{2}=\alpha_{2}-k\beta_{1},\beta_{3}=\alpha_{3}-l_{1}\beta_{1}-l_{2}\beta_{2}$，若 $\beta_{1},\beta_{2},\beta_{3}$ 两两正交，则 $l_{1},l_{2}$ 依次为（　）
+\opts{A. $\dfrac{5}{2},\dfrac{1}{2}$}{B. $-\dfrac{5}{2},\dfrac{1}{2}$}{C. $\dfrac{5}{2},-\dfrac{1}{2}$}{D. $-\dfrac{5}{2},-\dfrac{1}{2}$}
+
+\par\vspace{3.04cm}
+
+\Q{3.1.1-2}{23数一}已知向量 $\alpha_{1}=\begin{pmatrix}1\\0\\1\\1\end{pmatrix},\alpha_{2}=\begin{pmatrix}-1\\-1\\0\\1\end{pmatrix},\alpha_{3}=\begin{pmatrix}0\\1\\-1\\1\end{pmatrix},\beta=\begin{pmatrix}1\\1\\1\\-1\end{pmatrix}$，$\gamma=k_{1}\alpha_{1}+k_{2}\alpha_{2}+k_{3}\alpha_{3}$。若 $\gamma^{T}\alpha_{i}=\beta^{T}\alpha_{i}\ (i=1,2,3)$，则 $k_{1}^{2}+k_{2}^{2}+k_{3}^{2}=$ \bk。
+
+\par\vspace{3.17cm}
+
+\Q{3.1.1-3}{24数一}设实矩阵 $A=\begin{pmatrix}a+1&a\\a&a\end{pmatrix}$。若对任意实向量 $\alpha=\begin{pmatrix}x_{1}\\x_{2}\end{pmatrix},\beta=\begin{pmatrix}y_{1}\\y_{2}\end{pmatrix}$，$(\alpha^{T}A\beta)^{2}\leqslant\alpha^{T}A\alpha\cdot\beta^{T}A\beta$ 都成立，则 $a$ 的取值范围是 \bk。
+
+\par\vspace{3.04cm}
+
+\Htwo{3.2　线性表示}
+
+\Hthree{3.2.1　根据线性表示情况确定参数并将向量线性表示}
+
+\Q{3.2.1-4}{00数二}已知向量组 $\beta_{1}=\begin{bmatrix}0\\1\\-1\end{bmatrix},\beta_{2}=\begin{bmatrix}a\\2\\1\end{bmatrix},\beta_{3}=\begin{bmatrix}b\\1\\0\end{bmatrix}$ 与向量组 $\alpha_{1}=\begin{bmatrix}1\\2\\-3\end{bmatrix},\alpha_{2}=\begin{bmatrix}3\\0\\1\end{bmatrix},\alpha_{3}=\begin{bmatrix}9\\6\\-7\end{bmatrix}$ 具有相同的秩，且 $\beta_{3}$ 可由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示，求 $a,b$ 的值。
+
+\par\vspace{3.97cm}
+
+\Q{3.2.1-5}{04数三}设 $\alpha_{1}=(1,2,0)^{T},\alpha_{2}=(1,a+2,-3a)^{T},\alpha_{3}=(-1,-b-2,a+2b)^{T},\beta=(1,3,-3)^{T}$，试讨论当 $a,b$ 为何值时，
+(1) $\beta$ 不能由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示；
+(2) $\beta$ 可由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 唯一地线性表示，并求出表示式；
+(3) $\beta$ 可由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示，但表示式不唯一，并求出表示式。
+
+\par\vspace{5.82cm}
+
+\Q{3.2.1-6}{05数二}确定常数 $a$，使向量组 $\alpha_{1}=[1,1,a]^{T},\alpha_{2}=[1,a,1]^{T},\alpha_{3}=[a,1,1]^{T}$ 可由向量组 $\beta_{1}=[1,1,a]^{T},\beta_{2}=[-2,a,4]^{T},\beta_{3}=[-2,a,a]^{T}$ 线性表示，但向量组 $\beta_{1},\beta_{2},\beta_{3}$ 不能由向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示。
+
+\par\vspace{3.97cm}
+
+\Q{3.2.1-7}{11数一/二/三}设向量组 $\alpha_{1}=(1,0,1)^{T},\alpha_{2}=(0,1,1)^{T},\alpha_{3}=(1,3,5)^{T}$ 不能由向量组 $\beta_{1}=(1,1,1)^{T},\beta_{2}=(1,2,3)^{T},\beta_{3}=(3,4,a)^{T}$ 线性表示。
+(1) 求 $a$ 的值；
+(2) 将 $\beta_{1},\beta_{2},\beta_{3}$ 用 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示。
+
+\par\vspace{5.03cm}
+
+\Hthree{3.2.2　线性表示相关推理}
+
+\Q{3.2.2-8}{92数一}设向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性相关，向量组 $\alpha_{2},\alpha_{3},\alpha_{4}$ 线性无关，问：
+(1) $\alpha_{1}$ 能否由 $\alpha_{2},\alpha_{3}$ 线性表出？证明你的结论。
+(2) $\alpha_{4}$ 能否由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表出？证明你的结论。
+
+\par\vspace{5.03cm}
+
+\Q{3.2.2-9}{99数三}设向量 $\beta$ 可由向量组 $a_{1},a_{2},\cdots,a_{m}$ 线性表示，但不能由向量组 $(I):a_{1},a_{2},\cdots,a_{m-1}$ 线性表示，记向量组 $(II):a_{1},a_{2},\cdots,a_{m-1},\beta$，则（　）
+\opts{A. $a_{m}$ 不能由 $(I)$ 线性表示，也不能由 $(II)$ 线性表示}{B. $a_{m}$ 不能由 $(I)$ 线性表示，但可由 $(II)$ 线性表示}{C. $a_{m}$ 可由 $(I)$ 线性表示，也可由 $(II)$ 线性表示}{D. $a_{m}$ 可由 $(I)$ 线性表示，但不能由 $(II)$ 线性表示}
+
+\par\vspace{3.17cm}
+
+\Q{3.2.2-10}{02数二}设向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关，向量 $\beta_{1}$ 可由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示，而向量 $\beta_{2}$ 不能由 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示，则对于任意常数 $k$，必有（　）
+\opts{A. $\alpha_{1},\alpha_{2},\alpha_{3},k\beta_{1}+\beta_{2}$ 线性无关}{B. $\alpha_{1},\alpha_{2},\alpha_{3},k\beta_{1}+\beta_{2}$ 线性相关}{C. $\alpha_{1},\alpha_{2},\alpha_{3},\beta_{1}+k\beta_{2}$ 线性无关}{D. $\alpha_{1},\alpha_{2},\alpha_{3},\beta_{1}+k\beta_{2}$ 线性相关}
+
+\par\vspace{3.17cm}
+
+\Q{3.2.2-11}{03数一/二}设向量组 $I:\alpha_{1},\alpha_{2},\cdots,\alpha_{r}$ 可由向量组 $II:\beta_{1},\beta_{2},\cdots,\beta_{s}$ 线性表示，则（　）
+\opts{A. 当 $r<s$ 时，向量组 $II$ 必线性相关}{B. 当 $r>s$ 时，向量组 $II$ 必线性相关}{C. 当 $r<s$ 时，向量组 $I$ 必线性相关}{D. 当 $r>s$ 时，向量组 $I$ 必线性相关}
+
+\par\vspace{3.17cm}
+
+\Q{3.2.2-12}{10数二/三}设向量组 $I:\alpha_{1},\alpha_{2},\cdots,\alpha_{r}$ 可由向量组 $II:\beta_{1},\beta_{2},\cdots,\beta_{s}$ 线性表示，下列命题正确的是（　）
+\opts{A. 若向量组 $I$ 线性无关，则 $r\leqslant s$}{B. 若向量组 $I$ 线性相关，则 $r>s$}{C. 若向量组 $II$ 线性无关，则 $r\leqslant s$}{D. 若向量组 $II$ 线性相关，则 $r>s$}
+
+\par\vspace{3.17cm}
+
+\Hthree{3.2.3　共同线性表示}
+
+\Q{3.2.3-13}{23数一/二/三}已知向量 $\alpha_{1}=\begin{pmatrix}1\\2\\3\end{pmatrix},\alpha_{2}=\begin{pmatrix}2\\1\\1\end{pmatrix},\beta_{1}=\begin{pmatrix}2\\5\\9\end{pmatrix},\beta_{2}=\begin{pmatrix}1\\0\\1\end{pmatrix}$。若 $\gamma$ 既可由 $\alpha_{1},\alpha_{2}$ 线性表示，也可由 $\beta_{1},\beta_{2}$ 线性表示，则 $\gamma=$（　）
+\opts{A. $k\begin{pmatrix}3\\3\\4\end{pmatrix},k\in R$}{B. $k\begin{pmatrix}3\\5\\10\end{pmatrix},k\in R$}{C. $k\begin{pmatrix}-1\\1\\2\end{pmatrix},k\in R$}{D. $k\begin{pmatrix}1\\5\\8\end{pmatrix},k\in R$}
+
+\par\vspace{3.44cm}
+
+\Htwo{3.3　向量组等价}
+
+\Hthree{3.3.1　向量组等价}
+
+\Q{3.3.1-14}{22数一/二/三}设 $\alpha_{1}=(\lambda,1,1)^{T},\alpha_{2}=(1,\lambda,1)^{T},\alpha_{3}=(1,1,\lambda)^{T},\alpha_{4}=(1,\lambda,\lambda^{2})^{T}$，若 $\alpha_{1},\alpha_{2},\alpha_{3}$ 与 $\alpha_{1},\alpha_{2},\alpha_{4}$ 等价，则 $\lambda$ 的取值范围是（　）
+\opts{A. $\{0,1\}$}{B. $\{\lambda\mid\lambda\in R,\lambda\neq-2\}$}{C. $\{\lambda\mid\lambda\in R,\lambda\neq-1,\lambda\neq-2\}$}{D. $\{\lambda\mid\lambda\in R,\lambda\neq-1\}$}
+
+\par\vspace{3.17cm}
+
+\Q{3.3.1-15}{姜强}设向量 $\alpha_{1},\alpha_{2},\alpha_{3}$ 满足 $k_{1}\alpha_{1}+k_{2}\alpha_{2}+k_{3}\alpha_{3}=0$，$k_{1},k_{2},k_{3}$ 为常数，且 $k_{1}k_{3}\neq 0$，则（　）
+\opts{A. $\alpha_{1}$ 与 $\alpha_{3}$ 等价}{B. $\alpha_{1},\alpha_{2}$ 与 $\alpha_{1},\alpha_{3}$ 等价}{C. $\alpha_{1},\alpha_{2}$ 与 $\alpha_{2},\alpha_{3}$ 等价}{D. $\alpha_{1},\alpha_{3}$ 与 $\alpha_{2},\alpha_{3}$ 等价}
+
+\par\vspace{3.17cm}
+
+\Q{3.3.1-16}{19数二/三}已知向量组 $I:\alpha_{1}=\begin{pmatrix}1\\1\\4\end{pmatrix},\alpha_{2}=\begin{pmatrix}1\\0\\4\end{pmatrix},\alpha_{3}=\begin{pmatrix}1\\2\\a^{2}+3\end{pmatrix}$ 与 $II:\beta_{1}=\begin{pmatrix}1\\1\\a+3\end{pmatrix},\beta_{2}=\begin{pmatrix}0\\2\\1-a\end{pmatrix},\beta_{3}=\begin{pmatrix}1\\3\\a^{2}+3\end{pmatrix}$。若向量组 $I$ 与 $II$ 等价，求 $a$ 的取值，并将 $\beta_{3}$ 用 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性表示。
+
+\par\vspace{4.50cm}
+
+\Htwo{3.4　线性相关与线性无关}
+
+\Hthree{3.4.1　线性相关}
+
+\Q{3.4.1-17}{96数三}设有任意两个 $n$ 维向量组 $\alpha_{1},\cdots,\alpha_{m}$ 和 $\beta_{1},\cdots,\beta_{m}$，若存在两组不全为零的数 $\lambda_{1},\cdots,\lambda_{m}$ 和 $k_{1},\cdots,k_{m}$，使 $(\lambda_{1}+k_{1})\alpha_{1}+\cdots+(\lambda_{m}+k_{m})\alpha_{m}+(\lambda_{1}-k_{1})\beta_{1}+\cdots+(\lambda_{m}-k_{m})\beta_{m}=0$，则（　）
+\opts{A. $\alpha_{1},\cdots,\alpha_{m}$ 和 $\beta_{1},\cdots,\beta_{m}$ 都线性相关}{B. $\alpha_{1},\cdots,\alpha_{m}$ 和 $\beta_{1},\cdots,\beta_{m}$ 都线性无关}{C. $\alpha_{1}+\beta_{1},\cdots,\alpha_{m}+\beta_{m},\alpha_{1}-\beta_{1},\cdots,\alpha_{m}-\beta_{m}$ 线性无关}{D. $\alpha_{1}+\beta_{1},\cdots,\alpha_{m}+\beta_{m},\alpha_{1}-\beta_{1},\cdots,\alpha_{m}-\beta_{m}$ 线性相关}
+
+\par\vspace{3.44cm}
+
+\Q{3.4.1-18}{06数三}设 4 维向量组 $\alpha_{1}=(1+a,1,1,1)^{T},\alpha_{2}=(2,2+a,2,2)^{T},\alpha_{3}=(3,3,3+a,3)^{T},\alpha_{4}=(4,4,4,4+a)^{T}$，问 $a$ 为何值时，$\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$ 线性相关？当 $\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$ 线性相关时，求其一个极大线性无关组，并将其余向量用该极大线性无关组线性表示。
+
+\par\vspace{5.29cm}
+
+\Q{3.4.1-19}{12数一/二/三}设 $\alpha_{1}=\begin{pmatrix}0\\0\\c_{1}\end{pmatrix},\alpha_{2}=\begin{pmatrix}0\\1\\c_{2}\end{pmatrix},\alpha_{3}=\begin{pmatrix}1\\-1\\c_{3}\end{pmatrix},\alpha_{4}=\begin{pmatrix}-1\\1\\c_{4}\end{pmatrix}$，其中 $c_{1},c_{2},c_{3},c_{4}$ 为任意常数，则下列向量组线性相关的为（　）
+\opts{A. $\alpha_{1},\alpha_{2},\alpha_{3}$}{B. $\alpha_{1},\alpha_{2},\alpha_{4}$}{C. $\alpha_{1},\alpha_{3},\alpha_{4}$}{D. $\alpha_{2},\alpha_{3},\alpha_{4}$}
+
+\par\vspace{3.17cm}
+
+\Q{3.4.1-20}{姜强}设 4 维列向量 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关，与 4 维列向量 $\beta_{1},\beta_{2}$ 两两正交，证明 $\beta_{1},\beta_{2}$ 线性相关。
+
+\par\vspace{5.03cm}
+
+\Hthree{3.4.2　线性无关}
+
+\Q{3.4.2-21}{96数三}设向量 $\alpha_{1},\alpha_{2},\cdots,\alpha_{t}$ 是齐次线性方程组 $Ax=0$ 的一个基础解系，向量 $\beta$ 不是方程组 $Ax=0$ 的解，即 $A\beta\neq 0$。试证明：向量组 $\beta,\beta+\alpha_{1},\beta+\alpha_{2},\cdots,\beta+\alpha_{t}$ 线性无关。
+
+\par\vspace{5.29cm}
+
+\Q{3.4.2-22}{98数一}设 $A$ 是 $n$ 阶矩阵，若存在正整数 $k$，使线性方程组 $A^{k}x=0$ 有解向量 $a$，且 $A^{k-1}a\neq 0$。证明：向量组 $\alpha,A\alpha,\cdots,A^{k-1}\alpha$ 是线性无关的。
+
+\par\vspace{5.29cm}
+
+\Q{3.4.2-23}{05数一/二/三}设 $\lambda_{1},\lambda_{2}$ 是矩阵 $A$ 的两个不同的特征值，对应的特征向量分别为 $\alpha_{1},\alpha_{2}$，则 $\alpha_{1},A(\alpha_{1}+\alpha_{2})$ 线性无关的充分必要条件是（　）
+\opts{A. $\lambda_{1}\neq 0$}{B. $\lambda_{2}\neq 0$}{C. $\lambda_{1}=0$}{D. $\lambda_{2}=0$}
+
+\par\vspace{3.17cm}
+
+\Q{3.4.2-24}{08数二/三}设 $A$ 为 3 阶矩阵，$a_{1},a_{2}$ 为 $A$ 的分别属于特征值 $-1,1$ 的特征向量，向量 $a_{3}$ 满足 $Aa_{3}=a_{2}+a_{3}$，证明：
+(1) $a_{1},a_{2},a_{3}$ 线性无关；
+(2) 令 $P=(a_{1},a_{2},a_{3})$，求 $P^{-1}AP$。
+
+\par\vspace{5.56cm}
+
+\Q{3.4.2-25}{姜强}设 $A$ 为 $n$ 阶矩阵，$\alpha_{1},\alpha_{2},\alpha_{3}$ 均为 $n$ 维列向量，满足 $A^{2}\alpha_{1}=A\alpha_{1}\neq 0$，$A^{2}\alpha_{2}=\alpha_{1}+A\alpha_{2}$，$A^{2}\alpha_{3}=\alpha_{2}+A\alpha_{3}$，证明 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关。
+
+\par\vspace{5.56cm}
+
+\Q{3.4.2-26}{姜150}设 $5\times 4$ 矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，若 $\xi_{1}=(3,1,-2,1)^{T}$，$\xi_{2}=(0,1,0,1)^{T}$ 为齐次线性方程组 $Ax=0$ 的基础解系，则下列命题
+(1) $\alpha_{1},\alpha_{3}$ 线性无关；
+(2) $\alpha_{1}$ 可由 $\alpha_{2},\alpha_{3}$ 线性表示；
+(3) $\alpha_{3},\alpha_{4}$ 线性无关；
+(4) $r(\alpha_{1},\alpha_{1}+\alpha_{2},\alpha_{3}-\alpha_{4})=3$
+正确的是（　）
+\opts{A. (1)(3)}{B. (2)(4)}{C. (2)(3)}{D. (1)(4)}
+
+\par\vspace{3.70cm}
+
+\Q{3.4.2-27}{880综解}设 $A$ 是 $m\times n$ 矩阵，$a_{1}$ 与 $a_{2}$ 是非齐次线性方程组 $Ax=b$ 的两个不同解。
+(1) 证明：$\alpha_{1},\alpha_{1}-\alpha_{2}$ 线性无关；
+(2) 若 $\beta$ 是 $Ax=0$ 的一个非零解向量，$r(A)=n-1$，证明：$\beta,\alpha_{1},\alpha_{2}$ 线性相关。
+
+\par\vspace{5.56cm}
+
+\Hthree{3.4.3　综合}
+
+\Q{3.4.3-28}{97数三}设向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关，则下列向量组中，线性无关的是（　）
+\opts{A. $\alpha_{1}+\alpha_{2},\alpha_{2}+\alpha_{3},\alpha_{3}-\alpha_{1}$}{B. $\alpha_{1}+\alpha_{2},\alpha_{2}+\alpha_{3},\alpha_{1}+2\alpha_{2}+\alpha_{3}$}{C. $\alpha_{1}+2\alpha_{2},2\alpha_{2}+3\alpha_{3},3\alpha_{3}+\alpha_{1}$}{D. $\alpha_{1}+\alpha_{2}+\alpha_{3},2\alpha_{1}-3\alpha_{2}+22\alpha_{3},3\alpha_{1}+5\alpha_{2}-5\alpha_{3}$}
+
+\par\vspace{3.44cm}
+
+\Q{3.4.3-29}{06数一/二/三}设 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 均为 $n$ 维列向量，$A$ 是 $m\times n$ 矩阵，下列选项正确的是（　）
+\opts{A. 若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性相关，则 $A\alpha_{1},A\alpha_{2},\cdots,A\alpha_{s}$ 线性相关}{B. 若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性相关，则 $A\alpha_{1},A\alpha_{2},\cdots,A\alpha_{s}$ 线性无关}{C. 若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性无关，则 $A\alpha_{1},A\alpha_{2},\cdots,A\alpha_{s}$ 线性相关}{D. 若 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 线性无关，则 $A\alpha_{1},A\alpha_{2},\cdots,A\alpha_{s}$ 线性无关}
+
+\par\vspace{3.70cm}
+
+\Q{3.4.3-30}{14数一/二/三}设 $\alpha_{1},\alpha_{2},\alpha_{3}$ 均为 3 维向量，则对任意常数 $k,l$，向量组 $\alpha_{1}+k\alpha_{3},\alpha_{2}+l\alpha_{3}$ 线性无关是向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关的（　）
+\opts{A. 必要非充分条件}{B. 充分非必要条件}{C. 充分必要条件}{D. 既非充分也非必要条件}
+
+\par\vspace{3.17cm}
+
+\Q{3.4.3-31}{24数二}设向量 $\alpha_{1}=\begin{pmatrix}a\\1\\-1\\1\end{pmatrix},\alpha_{2}=\begin{pmatrix}1\\1\\b\\a\end{pmatrix},\alpha_{3}=\begin{pmatrix}1\\a\\-1\\1\end{pmatrix}$，若 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性相关，且其中任意两个向量均线性无关，则 $ab=$ \bk。
+
+\par\vspace{3.44cm}
+\\end{document}
