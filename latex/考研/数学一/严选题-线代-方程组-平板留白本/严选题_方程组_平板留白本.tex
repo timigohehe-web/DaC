@@ -1,0 +1,522 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.0cm,top=1.9cm,bottom=2.0cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\thepage}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\small\thepage}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+% --- 分页美观：禁止孤行、寡行；标题块整体不可分割 ---
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=5000
+\raggedbottom
+\newif\ifjustheading
+\justheadingfalse
+
+\linespread{1.3}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\allowdisplaybreaks
+
+% ---- 填空 ----
+\newcommand{\bk}{\underline{\hspace{3.2em}}}
+
+% ---- 选项块（悬挂左缩进，自动换行） ----
+% ---- 选项：自适应分列（四列等宽对齐 -> 两列 -> 单列悬挂） ----
+\newlength{\optA}\newlength{\optB}\newlength{\optC}\newlength{\optD}
+\newlength{\optMax}\newlength{\optColW}
+\newcommand{\optline}[1]{\par\addvspace{0.06em}\hangindent=1.4em\hangafter=1\noindent #1\par}
+\newcommand{\opts}[4]{%
+  \par\addvspace{0.1em}\begingroup
+  \setlength{\tabcolsep}{0.5em}%
+  \settowidth{\optA}{#1}\settowidth{\optB}{#2}\settowidth{\optC}{#3}\settowidth{\optD}{#4}%
+  \setlength{\optMax}{\optA}%
+  \ifdim\optB>\optMax\setlength{\optMax}{\optB}\fi
+  \ifdim\optC>\optMax\setlength{\optMax}{\optC}\fi
+  \ifdim\optD>\optMax\setlength{\optMax}{\optD}\fi
+  \setlength{\optColW}{\linewidth}%
+  \addtolength{\optColW}{-6\tabcolsep}\divide\optColW by 4 \addtolength{\optColW}{-0.35em}%
+  \ifdim\optMax>\optColW
+    \setlength{\optColW}{\linewidth}%
+    \addtolength{\optColW}{-2\tabcolsep}\divide\optColW by 2 \addtolength{\optColW}{-0.35em}%
+    \ifdim\optMax>\optColW
+      \optline{#1}\optline{#2}\optline{#3}\optline{#4}%
+    \else
+      \begin{tabularx}{\linewidth}{@{}XX@{}}#1&#2\\#3&#4\end{tabularx}\par
+    \fi
+  \else
+    \begin{tabularx}{\linewidth}{@{}XXXX@{}}#1&#2&#3&#4\end{tabularx}\par
+  \fi
+  \endgroup
+}
+
+% ---- 一~五级标题 ----
+\newcommand{\Hone}[1]{\par\addvspace{0.4em}\begin{center}{\LARGE\bfseries #1}\end{center}\addvspace{0.1em}}
+\newcommand{\Htwo}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.9em plus 0.6em}\fi\noindent{\large\bfseries #1}\par\vspace{0.05em}\nobreak\hrule height 0.7pt\nobreak\vspace{0.3em}\nobreak\justheadingtrue}
+\newcommand{\Hthree}[1]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.7em plus 0.6em}\fi\noindent{\normalsize\bfseries #1}\par\addvspace{0.3em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfour}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.55em plus 0.5em}\fi\noindent{\bfseries #1\enskip #2}\par\addvspace{0.25em plus 0.2em}\nobreak\justheadingtrue}
+\newcommand{\Hfive}[2]{\par\ifjustheading\global\justheadingfalse\else\penalty-300\addvspace{0.4em plus 0.5em}\fi\noindent\hspace{0.7em}{\small\bfseries #1\enskip #2}\par\nobreak\justheadingtrue}
+
+% ---- 题目：\Q{题号}{出处} / \Qn{题号} ----
+\newcommand{\Q}[2]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}{\small［#2］}\hspace{0.25em}}
+\newcommand{\Qn}[1]{\par\ifjustheading\global\justheadingfalse\nobreak\else\addvspace{0.42em plus 0.6em}\fi\noindent\textbf{【#1】}\hspace{0.25em}}
+
+\begin{document}
+
+\Hone{四、方程组}
+
+\begin{center}\small
+编号说明：题号【4.x.y-n】，n 为本章题号连续序号，4.x.y 为该题所属三级条目；标题数字点分最多到三级。［］内为出处缩写。公式为 LaTeX 源码。小题用 (1)(2) 分问。每题下留白供手写。
+\end{center}
+
+\Htwo{4.1　解的判定}
+
+\Hthree{4.1.1　判断解的情况}
+
+\Q{4.1.1-1}{01数三}设 $A$ 是 $n$ 阶矩阵，$\alpha$ 是 $n$ 维列向量。若 $r\begin{pmatrix}A&\alpha\\ \alpha^{T}&0\end{pmatrix}=r(A)$，则线性方程组（　）
+\opts{A. $Ax=\alpha$ 必有无穷多解}{B. $Ax=\alpha$ 必有唯一解}{C. $\begin{pmatrix}A&\alpha\\ \alpha^{T}&0\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}=0$ 仅有零解}{D. $\begin{pmatrix}A&\alpha\\ \alpha^{T}&0\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}=0$ 必有非零解}
+
+\par\vspace{3.04cm}
+
+\Q{4.1.1-2}{02数三}设 $A$ 是 $m\times n$ 矩阵，$B$ 是 $n\times m$ 矩阵，则线性方程组 $ABx=0$（　）
+\opts{A. 当 $n>m$ 时仅有零解}{B. 当 $n>m$ 时必有非零解}{C. 当 $m>n$ 时仅有零解}{D. 当 $m>n$ 时必有非零解}
+
+\par\vspace{3.04cm}
+
+\Q{4.1.1-3}{22数二/三}设矩阵 $A=\begin{pmatrix}1&1&1\\1&a&a^{2}\\1&b&b^{2}\end{pmatrix}$，$\beta=\begin{pmatrix}1\\2\\4\end{pmatrix}$，则线性方程组 $Ax=\beta$ 的解的情况为（　）
+\opts{A. 无解}{B. 有解}{C. 有无穷多解或无解}{D. 有唯一解或无解}
+
+\par\vspace{3.04cm}
+
+\Q{4.1.1-4}{姜150}设 $\alpha,\beta$ 为 $n$ 维单位列向量，$P$ 为 $n$ 阶可逆矩阵，则下列方程组中只有零解的是（　）
+\opts{A. $(E-\alpha\alpha^{T})x=0$}{B. $(\alpha^{T}P\alpha P^{-1}-\alpha\alpha^{T})x=0$}{C. $(\alpha^{T}P^{-1}\beta P-\beta\alpha^{T})x=0$}{D. $(E+\beta\beta^{T})x=0$}
+
+\par\vspace{3.17cm}
+
+\Q{4.1.1-5}{姜强}设 $A$ 为 $m\times n$ 阶矩阵，且 $r(A)=m<n$，则下列结论不正确的是（　）
+\opts{A. 线性方程组 $A^{T}x=0$ 只有零解}{B. 线性方程组 $A^{T}Ax=0$ 有非零解}{C. $\forall b$，线性方程组 $A^{T}x=b$ 有唯一解}{D. $\forall b$，线性方程组 $Ax=b$ 有无穷多解}
+
+\par\vspace{3.17cm}
+
+\Q{4.1.1-6}{900数二A}设 $A$ 为 3 阶非零矩阵，下列命题中，是齐次线性方程组 $Ax=0$ 有非零解的充分条件的个数为（　）
+(1) 非齐次线性方程组 $A^{*}x=b$ 有唯一解；
+(2) 非齐次线性方程组 $A^{*}x=b$ 有无穷多解；
+(3) 非齐次线性方程组 $AA^{T}x=b$ 有唯一解；
+(4) 非齐次线性方程组 $AA^{T}x=b$ 有无穷多解。
+\opts{A. 1}{B. 2}{C. 3}{D. 4}
+
+\par\vspace{3.70cm}
+
+\Q{4.1.1-7}{25张八}设 $A$ 是 $n$ 阶矩阵，$b$ 是 $n$ 维列向量且与 $A^{T}x=0$ 的解均正交，则（　）
+\opts{A. $A^{T}x=0$ 的解与 $A$ 的行向量正交}{B. $Ax=0$ 的解与 $A$ 的列向量正交}{C. $A^{T}x=b$ 有解}{D. $Ax=b$ 有解}
+
+\par\vspace{3.17cm}
+
+\Hthree{4.1.2　已知解的情况确定参数}
+
+\Q{4.1.2-8}{92数三}已知三阶矩阵 $B\neq 0$，且 $B$ 的每一个列向量都是以下方程组的解：
+\[
+\begin{cases}x_{1}+2x_{2}-2x_{3}=0\\ 2x_{1}-x_{2}+\lambda x_{3}=0\\ 3x_{1}+x_{2}-x_{3}=0\end{cases}
+\]
+(1) 求 $\lambda$ 的值；
+(2) 证明 $|B|=0$。
+
+\par\vspace{5.03cm}
+
+\Q{4.1.2-9}{15数一/二/三}设矩阵 $A=\begin{pmatrix}1&1&1\\1&2&a\\1&4&a^{2}\end{pmatrix}$，$b=\begin{pmatrix}1\\d\\d^{2}\end{pmatrix}$。若集合 $\Omega=\{1,2\}$，则线性方程组 $Ax=b$ 有无穷多解的充分必要条件为（　）
+\opts{A. $a\notin\Omega,\ d\notin\Omega$}{B. $a\notin\Omega,\ d\in\Omega$}{C. $a\in\Omega,\ d\notin\Omega$}{D. $a\in\Omega,\ d\in\Omega$}
+
+\par\vspace{3.17cm}
+
+\Q{4.1.2-10}{19数三}已知矩阵 $A=\begin{pmatrix}1&0&-1\\1&1&-1\\0&1&a^{2}-1\end{pmatrix}$，$b=\begin{pmatrix}0\\1\\a\end{pmatrix}$，若线性方程组 $Ax=b$ 有无穷多解，则 $a=$ \bk。
+
+\par\vspace{3.04cm}
+
+\Q{4.1.2-11}{880基填}设 $A=\begin{pmatrix}1&2&1\\2&3&a+2\\1&a&-2\end{pmatrix}$，$\beta_{1}=(1,3,4)^{T}$，$\beta_{2}=(0,1,2)^{T}$，若方程组 $AX=\beta_{1}$ 有解，且 $AX=\beta_{2}$ 无解，则 $a=$ \bk。
+
+\par\vspace{3.44cm}
+
+\Htwo{4.2　方程组求解}
+
+\Hthree{4.2.1　齐次}
+
+\Q{4.2.1-12}{01数一}设 $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$ 为线性方程组 $Ax=0$ 的一个基础解系，$\beta_{1}=t_{1}\alpha_{1}+t_{2}\alpha_{2},\beta_{2}=t_{1}\alpha_{2}+t_{2}\alpha_{3},\cdots,\beta_{s}=t_{1}\alpha_{s}+t_{2}\alpha_{1}$，其中 $t_{1},t_{2}$ 为实常数。试问 $t_{1},t_{2}$ 满足什么关系时，$\beta_{1},\beta_{2},\cdots,\beta_{s}$ 也为 $Ax=0$ 的一个基础解系。
+
+\par\vspace{5.29cm}
+
+\Q{4.2.1-13}{02数三}设齐次线性方程组
+\[
+\begin{cases}ax_{1}+bx_{2}+bx_{3}+\cdots+bx_{n}=0\\ bx_{1}+ax_{2}+bx_{3}+\cdots+bx_{n}=0\\ \cdots\cdots\\ bx_{1}+bx_{2}+bx_{3}+\cdots+ax_{n}=0\end{cases}
+\]
+其中 $a\neq 0,b\neq 0,n\geqslant 2$，试讨论 $a,b$ 为何值时，方程组仅有零解、有无穷多组解？在有无穷多组解时，求出全部解，并用基础解系表示全部解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.1-14}{93数一}设 $n$ 阶矩阵 $A=(a_{ij})$，且 $r(A)=n-1$。
+(1) 若 $A$ 的各行元素之和均为零，则线性方程组 $Ax=0$ 的一个基础解系为 \bk；
+(2) 设 $a_{ij}$ 的代数余子式为 $A_{ij}$，若 $A_{11}\neq 0$，则线性方程组 $Ax=0$ 的一个基础解系为 \bk。
+
+\par\vspace{4.23cm}
+
+\Q{4.2.1-15}{05数一/二}已知三阶矩阵 $A$ 的第 1 行是 $[a,b,c]$，$a,b,c$ 不全为零，矩阵 $B=\begin{bmatrix}1&2&3\\2&4&6\\3&6&k\end{bmatrix}$（$k$ 为常数），且 $AB=O$，求线性方程组 $AX=0$ 的通解。
+
+\par\vspace{5.03cm}
+
+\Q{4.2.1-16}{11数一/二}设 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$ 是 4 阶矩阵，$A^{*}$ 为 $A$ 的伴随矩阵。若 $(1,0,1,0)^{T}$ 是方程组 $Ax=0$ 的一个基础解系，则 $A^{*}x=0$ 的基础解系可为（　）
+\opts{A. $\alpha_{1},\alpha_{3}$}{B. $\alpha_{1},\alpha_{2}$}{C. $\alpha_{1},\alpha_{2},\alpha_{3}$}{D. $\alpha_{2},\alpha_{3},\alpha_{4}$}
+
+\par\vspace{3.17cm}
+
+\Q{4.2.1-17}{20数二/三}设 4 阶矩阵 $A=(a_{ij})$ 不可逆，$a_{12}$ 的代数余子式 $A_{12}\neq 0$，$\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$ 为矩阵 $A$ 的列向量组，$A^{*}$ 为 $A$ 的伴随矩阵，则方程组 $A^{*}x=0$ 的通解为（　）
+\opts{A. $x=k_{1}\alpha_{1}+k_{2}\alpha_{2}+k_{3}\alpha_{3}$，其中 $k_{1},k_{2},k_{3}$ 为任意常数}{B. $x=k_{1}\alpha_{1}+k_{2}\alpha_{2}+k_{3}\alpha_{4}$，其中 $k_{1},k_{2},k_{3}$ 为任意常数}{C. $x=k_{1}\alpha_{1}+k_{2}\alpha_{3}+k_{3}\alpha_{4}$，其中 $k_{1},k_{2},k_{3}$ 为任意常数}{D. $x=k_{1}\alpha_{2}+k_{2}\alpha_{3}+k_{3}\alpha_{4}$，其中 $k_{1},k_{2},k_{3}$ 为任意常数}
+
+\par\vspace{3.44cm}
+
+\Q{4.2.1-18}{19数一}设 $A=(\alpha_{1},\alpha_{2},\alpha_{3})$ 为 3 阶矩阵。若 $\alpha_{1},\alpha_{2}$ 线性无关，且 $\alpha_{3}=-\alpha_{1}+2\alpha_{2}$，则线性方程组 $Ax=0$ 的通解为 \bk。
+
+\par\vspace{3.44cm}
+
+\Hthree{4.2.2　非齐次——具体矩阵}
+
+\Q{4.2.2-19}{97数二}$\lambda$ 取何值时，方程组
+\[
+\begin{cases}2x_{1}+\lambda x_{2}-x_{3}=1\\ \lambda x_{1}-x_{2}+x_{3}=2\\ 4x_{1}+5x_{2}-5x_{3}=-1\end{cases}
+\]
+无解、有唯一解或有无穷多解？并在有无穷多解时写出方程组的通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.2-20}{00数二}设 $\alpha=\begin{bmatrix}1\\2\\1\end{bmatrix},\beta=\begin{bmatrix}1\\ \frac{1}{2}\\ 0\end{bmatrix},\gamma=\begin{bmatrix}0\\0\\8\end{bmatrix},A=\alpha\beta^{T},B=\beta^{T}\alpha$，其中 $\beta^{T}$ 是 $\beta$ 的转置，求解方程 $2B^{2}A^{2}X=A^{4}X+B^{4}X+\gamma$。
+
+\par\vspace{5.29cm}
+
+\Q{4.2.2-21}{06数一/二}已知非齐次线性方程组
+\[
+\begin{cases}x_{1}+x_{2}+x_{3}+x_{4}=-1\\ 4x_{1}+3x_{2}+5x_{3}-x_{4}=-1\\ ax_{1}+x_{2}+3x_{3}+bx_{4}=1\end{cases}
+\]
+有 3 个线性无关的解。
+(1) 证明方程组系数矩阵 $A$ 的秩 $r(A)=2$；
+(2) 求 $a,b$ 的值及方程组的通解。
+
+\par\vspace{5.82cm}
+
+\Q{4.2.2-22}{08数一/二/三}设 $n$ 元线性方程组 $Ax=b$，其中
+\[
+A=\begin{pmatrix}2a&1&&&\\ a^{2}&2a&1&&\\ &a^{2}&2a&1&\\ &&\ddots&\ddots&\ddots\\ &&&a^{2}&2a&1\\ &&&&a^{2}&2a\end{pmatrix},\quad x=\begin{pmatrix}x_{1}\\x_{2}\\\vdots\\x_{n}\end{pmatrix},\quad b=\begin{pmatrix}1\\0\\\vdots\\0\end{pmatrix}
+\]
+(1) 证明行列式 $|A|=(n+1)a^{n}$；
+(2) 当 $a$ 为何值时，该方程组有唯一解，并求 $x_{1}$；
+(3) 当 $a$ 为何值时，该方程组有无穷多解，并求通解。
+
+\par\vspace{6.61cm}
+
+\Q{4.2.2-23}{09数一/二/三}设 $A=\begin{pmatrix}1&-1&-1\\-1&1&1\\0&-4&-2\end{pmatrix}$，$\xi_{1}=\begin{pmatrix}-1\\1\\-2\end{pmatrix}$。
+(1) 求满足 $A\xi_{2}=\xi_{1},A^{2}\xi_{3}=\xi_{1}$ 的所有向量 $\xi_{2},\xi_{3}$；
+(2) 对 (1) 中的任意向量 $\xi_{2},\xi_{3}$，证明 $\xi_{1},\xi_{2},\xi_{3}$ 线性无关。
+
+\par\vspace{6.08cm}
+
+\Q{4.2.2-24}{10数一/二/三}设 $A=\begin{pmatrix}\lambda&1&1\\0&\lambda-1&0\\1&1&\lambda\end{pmatrix}$，$b=\begin{pmatrix}a\\1\\1\end{pmatrix}$。已知线性方程组 $Ax=b$ 存在 2 个不同的解。
+(1) 求 $\lambda,a$；
+(2) 求方程组 $Ax=b$ 的通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.2-25}{12数一/二/三}设 $A=\begin{pmatrix}1&a&0&0\\0&1&a&0\\0&0&1&a\\a&0&0&1\end{pmatrix}$，$\beta=\begin{pmatrix}1\\-1\\0\\0\end{pmatrix}$。
+(1) 计算行列式 $|A|$；
+(2) 当实数 $a$ 为何值时，方程组 $Ax=\beta$ 有无穷多解，并求其通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.2-26}{16数二/三}设矩阵 $A=\begin{pmatrix}1&1&1-a\\1&0&a\\a+1&1&a+1\end{pmatrix}$，$\beta=\begin{pmatrix}0\\1\\2a-2\end{pmatrix}$，且方程组 $Ax=\beta$ 无解。
+(1) 求 $a$ 的值；
+(2) 求方程组 $A^{T}Ax=A^{T}\beta$ 的通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.2-27}{25数一}设矩阵 $A=\begin{pmatrix}0&-1&2\\-1&0&2\\-1&-1&a\end{pmatrix}$，已知 1 是 $A$ 的特征多项式的重根。
+(1) 求 $a$ 的值；
+(2) 求所有满足 $A\alpha=\alpha+\beta,A^{2}\alpha=\alpha+2\beta$ 的非零列向量 $\alpha,\beta$。
+
+\par\vspace{5.82cm}
+
+\Hthree{4.2.3　非齐次——抽象矩阵（解的结构）}
+
+\Q{4.2.3-28}{11数三}设 $A$ 为 $4\times 3$ 矩阵，$\eta_{1},\eta_{2},\eta_{3}$ 是非齐次线性方程组 $Ax=\beta$ 的 3 个线性无关的解，$k_{1},k_{2}$ 为任意常数，则 $Ax=\beta$ 的通解为（　）
+\opts{A. $\dfrac{\eta_{2}+\eta_{3}}{2}+k_{1}(\eta_{2}-\eta_{1})$}{B. $\dfrac{\eta_{2}-\eta_{3}}{2}+k_{1}(\eta_{2}-\eta_{1})$}{C. $\dfrac{\eta_{2}+\eta_{3}}{2}+k_{1}(\eta_{2}-\eta_{1})+k_{2}(\eta_{3}-\eta_{1})$}{D. $\dfrac{\eta_{2}-\eta_{3}}{2}+k_{1}(\eta_{2}-\eta_{1})+k_{2}(\eta_{3}-\eta_{1})$}
+
+\par\vspace{3.44cm}
+
+\Q{4.2.3-29}{姜强}设 $A$ 为 4 阶矩阵，$k$ 为任意常数，$\eta_{1},\eta_{2},\eta_{3}$ 为非齐次线性方程组 $Ax=b$ 的三个解，满足 $\eta_{1}+\eta_{2}=\begin{pmatrix}1\\2\\3\\4\end{pmatrix},\eta_{2}+2\eta_{3}=\begin{pmatrix}2\\3\\4\\5\end{pmatrix}$。若 $r(A)=3$，则 $Ax=b$ 的通解为（　）
+\opts{A. $\begin{pmatrix}1\\2\\3\\4\end{pmatrix}+k\begin{pmatrix}-1\\0\\1\\2\end{pmatrix}$}{B. $\begin{pmatrix}2\\3\\4\\5\end{pmatrix}+k\begin{pmatrix}1\\2\\0\\1\end{pmatrix}$}{C. $\begin{pmatrix}0\\1\\2\\3\end{pmatrix}+k\begin{pmatrix}-1\\0\\1\\2\end{pmatrix}$}{D. $\begin{pmatrix}1\\1\\1\\1\end{pmatrix}+k\begin{pmatrix}1\\2\\0\\1\end{pmatrix}$}
+
+\par\vspace{4.23cm}
+
+\Q{4.2.3-30}{880综解}设 $A$ 是 $m\times n$ 矩阵，$r(A)=n-2$，非齐次线性方程组 $Ax=b$ 的 3 个解向量 $\alpha_{1},\alpha_{2},\alpha_{3}$ 满足 $\alpha_{1}+\alpha_{2}=(1,2,3,4)^{T},\alpha_{2}+2\alpha_{3}=(-2,1,5,3)^{T},2\alpha_{3}+3\alpha_{1}=(11,5,-6,7)^{T}$，求方程组 $Ax=b$ 的通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.3-31}{04数三改}设 $n$ 阶矩阵 $A$ 的伴随矩阵 $A^{*}\neq O$，$\xi_{1},\xi_{2},\xi_{3},\xi_{4}$ 为非齐次线性方程组 $Ax=b$ 的互不相等的解，则 $Ax=b$ 的线性无关解向量的个数为 \bk。
+
+\par\vspace{3.44cm}
+
+\Hthree{4.2.4　已知向量关系求通解}
+
+\Q{4.2.4-32}{02数一/二}已知 4 阶方阵 $A=[\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}]$，$\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4}$ 均为 4 维列向量，其中 $\alpha_{2},\alpha_{3},\alpha_{4}$ 线性无关，$\alpha_{1}=2\alpha_{2}-\alpha_{3}$。如果 $\beta=\alpha_{1}+\alpha_{2}+\alpha_{3}+\alpha_{4}$，求线性方程组 $Ax=\beta$ 的通解。
+
+\par\vspace{5.29cm}
+
+\Q{4.2.4-33}{25数二}设矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，若 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性无关，且 $\alpha_{1}+\alpha_{2}=\alpha_{3}+\alpha_{4}$，则方程组 $AX=\alpha_{1}+4\alpha_{4}$ 的通解为 $X=$ \bk。
+
+\par\vspace{3.70cm}
+
+\Q{4.2.4-34}{17数一/二/三}设 3 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3})$ 有 3 个不同的特征值，且 $\alpha_{3}=\alpha_{1}+2\alpha_{2}$。
+(1) 证明 $r(A)=2$；
+(2) 设 $\beta=\alpha_{1}+\alpha_{2}+\alpha_{3}$，求方程组 $Ax=\beta$ 的通解。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.4-35}{姜150}设 4 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，其中 $\alpha_{1},\alpha_{2},\alpha_{3}$ 线性相关，$\alpha_{2},\alpha_{3},\alpha_{4}$ 线性无关。若 $\xi=(1,2,3,a)^{T}$ 为线性方程组 $Ax=0$ 的解。
+(1) 求 $a$；
+(2) 若 $\eta=(2,b,c,d)^{T}$ 为 $Ax=\beta$ 的解，$\beta=\alpha_{1}+\alpha_{2}+\alpha_{3}+\alpha_{4}$，求 $b,c,d$。
+
+\par\vspace{5.56cm}
+
+\Q{4.2.4-36}{原稿缺题干}原稿此处仅存考点行与出处「姜晓千真题同源150; 880方程组综合解答」，题干 OCR 缺失，待补。
+
+\par\vspace{2.65cm}
+
+\Hthree{4.2.5　已知一方程组通解，求另一方程组通解}
+
+\Q{4.2.5-37}{姜150}设 3 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3})$，非齐次线性方程组 $Ax=\beta$ 的通解为 $k(2,1,1)^{T}+(1,-2,0)^{T}$，其中 $k$ 为任意常数。若 $B=(\alpha_{1},\alpha_{2},\alpha_{3},\beta-5\alpha_{3})$，求线性方程组 $By=\beta+\alpha_{3}$ 的通解。
+
+\par\vspace{5.29cm}
+
+\Q{4.2.5-38}{姜150}设 4 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$，非齐次线性方程组 $Ax=\beta$ 的通解为 $k(1,-2,4,0)^{T}+(1,2,2,1)^{T}$，其中 $k$ 为任意常数。若 $B=(\alpha_{3},\alpha_{2},\alpha_{1},\beta-\alpha_{4})$，求线性方程组 $Bx=\alpha_{1}-\alpha_{2}+\alpha_{3}$ 的通解。
+
+\par\vspace{5.29cm}
+
+\Q{4.2.5-39}{25李三套}设 $\alpha,\beta,\gamma$ 是 3 阶矩阵 $A$ 的 3 个特征向量，其中 $\beta$ 与 $\gamma$ 为属于不同特征值的特征向量。方程组 $Ax=\beta+\gamma$ 的通解为 $x=k\alpha+\beta+\dfrac{1}{3}\gamma$，其中 $k$ 为任意常数。
+(1) 求方程组 $Ax=\beta-\gamma$ 的通解；
+(2) 若 $\alpha=(1,1,1)^{T}$，且 $A$ 的伴随矩阵 $A^{*}$ 为对称矩阵，求 $A^{*}$。
+
+\par\vspace{6.08cm}
+
+\Hthree{4.2.6　根据其他已知条件求解}
+
+\Q{4.2.6-40}{21数三}设 $A=(\alpha_{1},\alpha_{2},\alpha_{3},\alpha_{4})$ 为 4 阶正交矩阵，$B=\begin{pmatrix}\alpha_{1}^{T}\\\alpha_{2}^{T}\\\alpha_{3}^{T}\end{pmatrix}$，$\beta=\begin{pmatrix}1\\1\\1\end{pmatrix}$，$k$ 表示任意常数，则线性方程组 $BX=\beta$ 的通解 $X=$（　）
+\opts{A. $\alpha_{2}+\alpha_{3}+\alpha_{4}+k\alpha_{1}$}{B. $\alpha_{1}+\alpha_{3}+\alpha_{4}+k\alpha_{2}$}{C. $\alpha_{1}+\alpha_{2}+\alpha_{4}+k\alpha_{3}$}{D. $\alpha_{1}+\alpha_{2}+\alpha_{3}+k\alpha_{4}$}
+
+\par\vspace{3.44cm}
+
+\Q{4.2.6-41}{900数二B}设 $A=(a_{ij})_{3\times 3}$ 是正交矩阵，且 $a_{22}=1$，$b=(0,1,0)^{T}$，则线性方程组 $Ax=b$ 的解是 \bk。
+
+\par\vspace{3.17cm}
+
+\Q{4.2.6-42}{900数二B}设 3 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3})$ 满足 $A\alpha_{1}=(1,0,1)^{T},A\alpha_{2}=(0,1,0)^{T},A\alpha_{3}=(0,0,0)^{T}$，$\alpha_{3}\neq 0$，则线性方程组 $Ax=(1,1,1)^{T}$ 的通解为 \bk。
+
+\par\vspace{3.70cm}
+
+\Q{4.2.6-43}{900数二B}若 3 阶矩阵 $A$ 有三个特征值 $0,3,5$，$u,v,w$ 分别为属于 $0,3,5$ 的一个特征向量，则线性方程组 $Ax=v+w$ 的通解为 \bk。
+
+\par\vspace{3.70cm}
+
+\Q{4.2.6-44}{880综填}设 $\alpha_{1},\alpha_{2},\alpha_{3},\beta$ 均为三维列向量，$A=(\beta-\alpha_{1}-2\alpha_{2}-3\alpha_{3},\alpha_{1},\alpha_{2},\alpha_{3})$，则方程组 $Ax=\beta$ 的一个特解为 \bk。
+
+\par\vspace{3.70cm}
+
+\Htwo{4.3　解的关系}
+
+\Hthree{4.3.1　公共解}
+
+\Q{4.3.1-45}{07数一/二/三}设线性方程组
+\[
+\begin{cases}x_{1}+x_{2}+x_{3}=0\\ x_{1}+2x_{2}+ax_{3}=0\\ x_{1}+4x_{2}+a^{2}x_{3}=0\end{cases}
+\]
+与方程 $x_{1}+2x_{2}+x_{3}=a-1$ 有公共解，求 $a$ 的值及所有公共解。
+
+\par\vspace{5.29cm}
+
+\Q{4.3.1-46}{姜强}设齐次线性方程组 $(I)\begin{cases}2x_{1}+3x_{2}-x_{3}=0\\ x_{1}+2x_{2}+x_{3}-x_{4}=0\end{cases}$，齐次线性方程组 $(II)$ 的一个基础解系为 $\alpha_{1}=(2,-1,a+2,1)^{T},\alpha_{2}=(-1,2,4,a+8)^{T}$。
+(1) 求方程组 $(I)$ 的一个基础解系；
+(2) 当 $a$ 为何值时，方程组 $(I)$ 与 $(II)$ 有非零公共解，并求所有非零公共解。
+
+\par\vspace{6.08cm}
+
+\Q{4.3.1-47}{姜150}设 $A$ 为 $2\times 4$ 阶矩阵，线性方程组 $Ax=0$ 的基础解系为 $\alpha_{1}=(1,3,0,2)^{T},\alpha_{2}=(1,2,-1,3)^{T}$，线性方程组 $Bx=0$ 的基础解系为 $\beta_{1}=(1,1,2,1)^{T},\beta_{2}=(0,-3,1,a)^{T}$。
+(1) 求满足条件的一个矩阵 $A$；
+(2) 若方程组 $Ax=0$ 与 $Bx=0$ 有非零公共解，求 $a$ 的值及所有的非零公共解。
+
+\par\vspace{6.08cm}
+
+\Hthree{4.3.2　同解}
+
+\Q{4.3.2-48}{00数三}设 $A$ 是 $n$ 阶矩阵，对方程组 $(I)Ax=0$ 和 $(II)A^{T}Ax=0$，必有（　）
+\opts{A. $(II)$ 的解是 $(I)$ 的解，$(I)$ 的解也是 $(II)$ 的解}{B. $(II)$ 的解是 $(I)$ 的解，但 $(I)$ 的解不是 $(II)$ 的解}{C. $(I)$ 的解不是 $(II)$ 的解，$(II)$ 的解也不是 $(I)$ 的解}{D. $(I)$ 的解是 $(II)$ 的解，但 $(II)$ 的解不是 $(I)$ 的解}
+
+\par\vspace{3.17cm}
+
+\Q{4.3.2-49}{26押题王}设 $A$ 是 $m\times s$ 矩阵，$B$ 是 $s\times n$ 矩阵，则方程组 $ABX=0$ 与 $BX=0$ 同解的充分必要条件是（　）
+\opts{A. $r(A)=s$}{B. $r(AB)=r(B)$}{C. $r(A)=r(B)$}{D. $r(A)=m$}
+
+\par\vspace{3.17cm}
+
+\Q{4.3.2-50}{22数一}设 $A,B$ 为 $n$ 阶矩阵，$E$ 为 $n$ 阶单位矩阵，若方程组 $Ax=0$ 与 $Bx=0$ 同解，则（　）
+\opts{A. 方程组 $\begin{pmatrix}A&O\\ E&B\end{pmatrix}y=0$ 只有零解}{B. 方程组 $\begin{pmatrix}E&A\\ O&AB\end{pmatrix}y=0$ 只有零解}{C. 方程组 $\begin{pmatrix}A&B\\ O&B\end{pmatrix}y=0$ 与 $\begin{pmatrix}B&A\\ O&A\end{pmatrix}y=0$ 同解}{D. 方程组 $\begin{pmatrix}AB&B\\ O&A\end{pmatrix}y=0$ 与 $\begin{pmatrix}BA&A\\ O&B\end{pmatrix}y=0$ 同解}
+
+\par\vspace{3.44cm}
+
+\Q{4.3.2-51}{24余五}设 $A$ 为 $n$ 阶实矩阵，$E$ 为 $n$ 阶单位矩阵，则（　）
+\opts{A. 线性方程组 $\begin{pmatrix}E&O\\ O&A^{T}\end{pmatrix}x=0$ 与 $\begin{pmatrix}E&A^{T}\\ A&O\end{pmatrix}x=0$ 同解}{B. 线性方程组 $\begin{pmatrix}E&O\\ O&A\end{pmatrix}x=0$ 与 $\begin{pmatrix}E&A^{T}\\ A&O\end{pmatrix}x=0$ 同解}{C. 线性方程组 $\begin{pmatrix}E&O\\ O&A^{T}\end{pmatrix}x=0$ 与 $\begin{pmatrix}E&A^{T}\\ A&A^{T}\end{pmatrix}x=0$ 同解}{D. 线性方程组 $\begin{pmatrix}E&O\\ O&A\end{pmatrix}x=0$ 与 $\begin{pmatrix}E&A^{T}\\ A&A^{T}\end{pmatrix}x=0$ 同解}
+
+\par\vspace{3.70cm}
+
+\Q{4.3.2-52}{27李三套}设 $A$ 为 $n$ 阶矩阵，$b$ 为 $n$ 维非零列向量，$B=\begin{pmatrix}A&b\\ b^{T}&0\end{pmatrix}$。若 $r(A)=r(B)$，则（　）
+\opts{A. 方程组 $Ax=b$ 无解}{B. 方程组 $Ax=b$ 有解，方程组 $\begin{cases}Ax=b\\ b^{T}x=0\end{cases}$ 无解}{C. 方程组 $Ax=b$ 与方程组 $\begin{cases}Ax=b\\ b^{T}x=0\end{cases}$ 均有解且同解}{D. 方程组 $Ax=b$ 与方程组 $\begin{cases}Ax=b\\ b^{T}x=0\end{cases}$ 均有解但不同解}
+
+\par\vspace{3.70cm}
+
+\Q{4.3.2-53}{05数三}已知齐次线性方程组
+\[
+(I)\begin{cases}x_{1}+2x_{2}+3x_{3}=0\\ 2x_{1}+3x_{2}+5x_{3}=0\\ x_{1}+x_{2}+ax_{3}=0\end{cases}\quad\text{和}\quad(II)\begin{cases}x_{1}+bx_{2}+cx_{3}=0\\ 2x_{1}+b^{2}x_{2}+(c+1)x_{3}=0\end{cases}
+\]
+同解，求 $a,b,c$ 的值。
+
+\par\vspace{5.82cm}
+
+\Hthree{4.3.3　两个方程组其他解的关系}
+
+\Q{4.3.3-54}{03数一}设有齐次线性方程组 $Ax=0$ 和 $Bx=0$，其中 $A,B$ 均为 $m\times n$ 矩阵，现有 4 个命题：
+(1) 若 $Ax=0$ 的解均是 $Bx=0$ 的解，则 $r(A)\geqslant r(B)$；
+(2) 若 $r(A)\geqslant r(B)$，则 $Ax=0$ 的解均是 $Bx=0$ 的解；
+(3) 若 $Ax=0$ 与 $Bx=0$ 同解，则 $r(A)=r(B)$；
+(4) 若 $r(A)=r(B)$，则 $Ax=0$ 与 $Bx=0$ 同解。
+以上命题中正确的是（　）
+\opts{A. (1)(2)}{B. (1)(3)}{C. (2)(4)}{D. (3)(4)}
+
+\par\vspace{3.97cm}
+
+\Q{4.3.3-55}{21数二}设 3 阶矩阵 $A=(\alpha_{1},\alpha_{2},\alpha_{3}),B=(\beta_{1},\beta_{2},\beta_{3})$，若向量组 $\alpha_{1},\alpha_{2},\alpha_{3}$ 可以由向量组 $\beta_{1},\beta_{2},\beta_{3}$ 线性表出，则（　）
+\opts{A. $AX=0$ 的解均为 $BX=0$ 的解}{B. $A^{T}X=0$ 的解均为 $B^{T}X=0$ 的解}{C. $BX=0$ 的解均为 $AX=0$ 的解}{D. $B^{T}X=0$ 的解均为 $A^{T}X=0$ 的解}
+
+\par\vspace{3.44cm}
+
+\Q{4.3.3-56}{26数一}设 $A,B$ 为 $n$ 阶矩阵，$\beta$ 是 $n$ 维列向量。若 $A$ 的列向量组可由 $B$ 的列向量组线性表示，则（　）
+\opts{A. 当 $Ax=\beta$ 有解时，$Bx=\beta$ 有解}{B. 当 $A^{T}x=\beta$ 有解时，$B^{T}x=\beta$ 有解}{C. 当 $Bx=\beta$ 有解时，$Ax=\beta$ 有解}{D. 当 $B^{T}x=\beta$ 有解时，$A^{T}x=\beta$ 有解}
+
+\par\vspace{3.44cm}
+
+\Q{4.3.3-57}{24数二}设矩阵 $A=\begin{pmatrix}0&1&a\\1&0&1\end{pmatrix}$，$B=\begin{pmatrix}1&1\\1&1\\b&2\end{pmatrix}$，二次型 $f(x_{1},x_{2},x_{3})=x^{T}BAx$。已知方程组 $Ax=0$ 的解均是 $B^{T}x=0$ 的解，但这两个方程组不同解。
+(1) 求 $a,b$ 的值；
+(2) 求正交变换 $x=Qy$ 将 $f(x_{1},x_{2},x_{3})$ 化为标准形。
+
+\par\vspace{6.35cm}
+
+\Q{4.3.3-58}{姜150}设 $A,B$ 为 $n$ 阶方阵，若线性方程组 $Ax=0$ 的解均为 $Bx=0$ 的解，则下列方程组与 $Ax=0$ 同解的个数为（　）
+(1) $(A+B)x=0$；(2) $ABx=0$；(3) $BAx=0$；(4) $\begin{pmatrix}A-B\\ A+B\end{pmatrix}x=0$；(5) $\begin{pmatrix}A\\ B\end{pmatrix}x=0$
+\opts{A. 1}{B. 2}{C. 3}{D. 4}
+
+\par\vspace{3.70cm}
+
+\Q{4.3.3-59}{25押题王}设矩阵 $A=\begin{bmatrix}a&1&1\\0&a-1&0\\1&1&a\end{bmatrix}$ 不可逆，$\beta=\begin{pmatrix}b\\1\\1\end{pmatrix}$。已知方程组 $A^{T}X=0$ 的解均是 $\beta^{T}X=0$ 的解。
+(1) 求 $a,b$ 的值；
+(2) 求可逆矩阵 $P$，使得 $P^{-1}AP=\Lambda$。
+
+\par\vspace{6.08cm}
+
+\Q{4.3.3-60}{24数三}设矩阵 $A=\begin{pmatrix}1&-1&0&-1\\1&1&0&3\\2&1&2&6\end{pmatrix}$，$B=\begin{pmatrix}1&0&1&2\\1&-1&a&a-1\\2&-3&2&-2\end{pmatrix}$，向量 $\alpha=\begin{pmatrix}0\\2\\3\end{pmatrix}$，$\beta=\begin{pmatrix}1\\0\\-1\end{pmatrix}$。
+(1) 证明：方程组 $Ax=\alpha$ 的解均为方程组 $Bx=\beta$ 的解；
+(2) 若方程组 $Ax=\alpha$ 与方程组 $Bx=\beta$ 不同解，求 $a$ 的值。
+
+\par\vspace{6.35cm}
+
+\Q{4.3.3-61}{25数一}设矩阵 $A=\begin{pmatrix}4&2&-3\\a&3&-4\\b&5&-7\end{pmatrix}$，若方程组 $A^{2}X=0$ 与 $AX=0$ 不同解，则 $a-b=$ \bk。
+
+\par\vspace{3.70cm}
+
+\Q{4.3.3-62}{23李三套}设 $A$ 为 $n\ (n\geqslant 2)$ 阶矩阵，$B$ 为 $n$ 阶可逆矩阵，$b$ 为 $n$ 维列向量。下列命题中，错误的是（　）
+\opts{A. 若方程组 $Ax=b$ 有解，则方程组 $ABx=b$ 有解}{B. 若方程组 $Ax=b$ 有解，则方程组 $BAx=b$ 有解}{C. 若方程组 $Ax=0$ 有非零解，则方程组 $ABx=0$ 有非零解}{D. 若方程组 $Ax=0$ 有非零解，则方程组 $BAx=0$ 有非零解}
+
+\par\vspace{3.44cm}
+
+\Q{4.3.3-63}{25四套}设 $A$ 是秩为 2 的 $2\times 5$ 矩阵，$B$ 是秩为 3 的 $3\times 5$ 矩阵，若 $AB^{T}=O$，则对于齐次线性方程组 $Ax=0$ 的任一非零解 $b$ 有（　）
+\opts{A. $A^{T}y=b$ 有唯一解}{B. $A^{T}y=b$ 有无穷多解}{C. $B^{T}y=b$ 有唯一解}{D. $B^{T}y=b$ 有无穷多解}
+
+\par\vspace{3.44cm}
+
+\Htwo{4.4　矩阵方程}
+
+\Hthree{4.4.1　二阶}
+
+\Q{4.4.1-64}{13数一/二/三}设 $A=\begin{pmatrix}1&a\\1&0\end{pmatrix}$，$B=\begin{pmatrix}0&1\\1&b\end{pmatrix}$。当 $a,b$ 为何值时，存在矩阵 $C$ 使得 $AC-CA=B$，并求所有矩阵 $C$。
+
+\par\vspace{5.29cm}
+
+\Hthree{4.4.2　可逆}
+
+\Q{4.4.2-65}{90数一}设 4 阶矩阵 $B=\begin{pmatrix}1&-1&0&0\\0&1&-1&0\\0&0&1&-1\\0&0&0&1\end{pmatrix},C=\begin{pmatrix}2&1&3&4\\0&2&1&3\\0&0&2&1\\0&0&0&2\end{pmatrix}$，且矩阵 $A$ 满足关系式 $A(E-C^{-1}B)^{T}C^{T}=E$，其中 $E$ 为 4 阶单位矩阵，$C^{-1}$ 表示 $C$ 的逆矩阵，$C^{T}$ 表示 $C$ 的转置矩阵，将上述关系式化简并求矩阵 $A$。
+
+\par\vspace{6.35cm}
+
+\Q{4.4.2-66}{95数一}设 3 阶方阵 $A,B$ 满足关系式 $A^{-1}BA=6A+BA$，其中 $A=\begin{pmatrix}\frac{1}{3}&0&0\\0&\frac{1}{4}&0\\0&0&\frac{1}{7}\end{pmatrix}$，则 $B=$ \bk。
+
+\par\vspace{3.97cm}
+
+\Q{4.4.2-67}{98数三}设矩阵 $A,B$ 满足 $A^{*}BA=2BA-8E$，其中 $A=\begin{bmatrix}1&0&0\\0&-2&0\\0&0&1\end{bmatrix}$，$E$ 为单位矩阵，$A^{*}$ 为 $A$ 的伴随矩阵，则 $B=$ \bk。
+
+\par\vspace{3.97cm}
+
+\Q{4.4.2-68}{15数二/三}设矩阵 $A=\begin{pmatrix}a&1&0\\1&a&-1\\0&1&a\end{pmatrix}$，且 $A^{3}=O$。
+(1) 求 $a$ 的值；
+(2) 若矩阵 $X$ 满足 $X-XA^{2}-AX+AXA^{2}=E$，其中 $E$ 为 3 阶单位矩阵，求 $X$。
+
+\par\vspace{5.82cm}
+
+\Q{4.4.2-69}{姜强}设 $A=\begin{pmatrix}-1&0&1\\1&0&-1\\-2&0&2\end{pmatrix}$，矩阵 $X$ 满足 $AX+E=A^{100}+2X$，求矩阵 $X$。
+
+\par\vspace{5.29cm}
+
+\Hthree{4.4.3　不可逆}
+
+\Q{4.4.3-70}{14数一/二/三}设 $A=\begin{pmatrix}1&-2&3&-4\\0&1&-1&1\\1&2&0&-3\end{pmatrix}$，$E$ 为 3 阶单位矩阵。
+(1) 求方程组 $Ax=0$ 的一个基础解系；
+(2) 求满足 $AB=E$ 的所有矩阵 $B$。
+
+\par\vspace{6.08cm}
+
+\Q{4.4.3-71}{16数一}设矩阵 $A=\begin{pmatrix}1&-1&-1\\2&a&1\\-1&1&a\end{pmatrix},B=\begin{pmatrix}2&2\\1&a\\-a-1&-2\end{pmatrix}$。当 $a$ 为何值时，方程 $AX=B$ 无解、有唯一解、有无穷多解？在有解时，求解此方程。
+
+\par\vspace{6.35cm}
+
+\Q{4.4.3-72}{26数二/三}设矩阵 $A=\begin{pmatrix}1&0&1\\0&0&1\\1&1&3\\1&1&1\end{pmatrix},C=\begin{pmatrix}2&0\\1&1\\1&1\\a&b\end{pmatrix}$，若存在矩阵 $B$ 满足 $AB=C$，则（　）
+\opts{A. $a=-1,\ b=-1$}{B. $a=2,\ b=2$}{C. $a=-1,\ b=2$}{D. $a=2,\ b=-1$}
+
+\par\vspace{3.70cm}
+
+\Q{4.4.3-73}{18数一/二/三}已知 $a$ 是常数，且矩阵 $A=\begin{pmatrix}1&2&a\\1&3&0\\2&7&-a\end{pmatrix}$ 可经初等列变换化为矩阵 $B=\begin{pmatrix}1&a&2\\0&1&1\\-1&1&1\end{pmatrix}$。
+(1) 求 $a$；
+(2) 求满足 $AP=B$ 的可逆矩阵 $P$。
+
+\par\vspace{6.08cm}
+
+\Q{4.4.3-74}{26押题王}设 $A=\begin{bmatrix}0&2&3\\2&2&a\\2&3&4\end{bmatrix}$，3 阶实对称矩阵 $B$ 满足 $AB+B=A+E$，$B\neq E$，其中 $E$ 为单位矩阵，且 $r(A+B)=3$。
+(1) 求 $a$ 的值；
+(2) 求所有满足题干的矩阵 $B$；
+(3) 求可逆矩阵 $P$ 及对角矩阵 $\Lambda$，使得 $P^{-1}BP=\Lambda$。
+
+\par\vspace{6.61cm}
+
+\end{document}
